@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Enviar-Mail</title>
+</head>
+<body>
+    <form id="form">
+        <div class="field">
+            <label for="from_name">Nombre</label>
+            <input type="text" name="from_name" id="from_name" required/>
+        </div>
+        <div class="field">
+            <label for="email">Correo Electrónico</label>
+            <input type="email" name="email" id="email" required/>
+        </div>
+        <div class="field">
+            <label for="message">Mensaje</label>
+            <textarea name="message" id="message" required></textarea>
+        </div>
+        <input type="submit" id="button" value="Send Email"/>
+    </form>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // Inicializar EmailJS
+        (function(){
+            emailjs.init("u9H2nlSIFupF0at_5"); 
+        })();
+
+        const btn = document.getElementById("button");
+        document.getElementById("form")
+            .addEventListener("submit", function(event) {
+                event.preventDefault();
+                btn.value = "Enviando...";
+
+                const serviceID = "service_91vvjan"; 
+                const templateID = "template_67jfare"; 
+                emailjs.sendForm(serviceID, templateID, this)
+                    .then(() => {
+                        btn.value = "Send Mail";
+                        alert("Enviado!");
+                    })
+                    .catch((err) => {
+                        btn.value = "Send Mail";
+                        alert(JSON.stringify(err));
+                    });
+            });
+    </script>
+</body>
+</html>
