@@ -9,7 +9,7 @@
 export const config = {
     host :"",
     database:"tagygames",
-    user:"",
+    user:"default",
     password:"",
     port:5432,
     ssl: true
