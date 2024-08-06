@@ -3,3 +3,4 @@ button.type = "button";
 button.innerText = "button";
 document.body.appendChild(button);*/
 
+const nombre = document.getElementById("name")
