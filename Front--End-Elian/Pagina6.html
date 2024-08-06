@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Nueva Contraseña</title>
-    <link rel="stylesheet" href="">
-</head>
-<body>
-    <h3>Escriba la nueva contraseña</h3>
-<input type="password">
+    <link rel="stylesheet" href="Style(pagina6).css">
 
-<h3>Escriba nuevamente la contraseña</h3>
-<input type="password">
+    <head>
+        <body>
+            <div class="contenedor">
+                <form id="contraseñaform">
+                    <label for="contraseña">contraseña:</label>
+                    <input type="password" id="contraseña" name="contraseña" required>
 
-</div>
-<a class = "botonn" href="Pagina4.html">Confirmar</a>
-</body>
-</html>
+                    <label for="repetir">repetir contraseña:</label>
+                    <input type="password" id="confirmarcontraseña" name="confirmarcontraseña" required>
+
+                    <div id="error-message" class=""error-message></div>
+                    <a class = "boton" href="Pagina4.html">confirmar</a>
+                </form>
+            </div>  
+        </body>
+    </head>
