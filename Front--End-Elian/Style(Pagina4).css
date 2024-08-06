@@ -1,4 +1,26 @@
-.buton {
+.boton {
+    display: block;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: rgb(163, 40, 112);
+    color: white;
+    border-radius: 10px;
+    padding: 20px 30px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.boton1 {
+    display: block;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: rgb(163, 40, 112);
+    color: white;
+    border-radius: 10px;
+    padding: 20px 30px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.boton2 {
     display: block;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: rgb(163, 40, 112);
