@@ -7,21 +7,26 @@ box-sizing: border-box;
 font-family: "Monsterrat", sans-serif;
 }
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-size: cove;
-    background-repeat: no-repeat;
+margin: 0;
+padding: 0;
+font-family: montserrat;
+background: linear-gradient(red, black);
+height: 100vh;
 }
 
-.button {
-        display: block;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: rgb(212, 30, 30);
-    color: rgb(0, 0, 0);
+.formulario {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
     border-radius: 10px;
-    padding: 20px 30px;
-    text-decoration: none;
-    font-size: 20px;
+    background-color: white;
+    padding: 20px;
+}
+
+.formulario h2 {
+    text-align: center;
+    padding: 0 0 20px 0;
+
 }
