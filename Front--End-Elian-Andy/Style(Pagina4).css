@@ -1,4 +1,4 @@
-.boton {
+.botonCasa {
     display: block;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: rgb(163, 40, 112);
@@ -9,7 +9,7 @@
     font-size: 20px;
 }
 
-.boton1 {
+.botonCalle {
     display: block;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: rgb(163, 40, 112);
@@ -20,7 +20,7 @@
     font-size: 20px;
 }
 
-.boton2 {
+.botonColegio {
     display: block;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: rgb(163, 40, 112);
