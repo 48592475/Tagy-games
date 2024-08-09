@@ -7,21 +7,123 @@ box-sizing: border-box;
 font-family: "Monsterrat", sans-serif;
 }
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-size: cove;
-    background-repeat: no-repeat;
+margin: 0;
+padding: 0;
+font-family: montserrat;
+background: linear-gradient(150deg, red, black);
+height: 100vh;
+}
+
+.formulario {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    border-radius: 10px;
+    background-color: white;
+    padding: 15px; 
+}
+
+.formulario h2 {
+    text-align: center;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid silver;
+    margin: 25px 0;
+}
+
+.butom {
+    text-decoration: none;    
+    display: block;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: rgb(111, 111, 175);
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 6px;
+    margin: 5px 80px;
+    text-align: center;
+}
+.butom:hover{
+    transform: scale(1.1);
+}
+
+.information-childs {
+    padding: 20px;
+}
+
+.formulario p {
+    font-family: Monsterrat;
+    padding: 2px 0;
+    font-size: 17px;
+}
+
+.information-childs .username {
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 30px 0;
+}
+
+.username input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.username label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+}
+
+.username span::before {
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #6C3483;
+}
+
+.form-information {
+    text-align: center;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid silver;
+    margin: 25px 0;
 }
 
 .button {
-        display: block;
+    text-decoration: none;    
+    display: block;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: rgb(212, 30, 30);
-    color: rgb(0, 0, 0);
+    background-color: rgb(111, 111, 175);
+    color: white;
     border-radius: 10px;
-    padding: 20px 30px;
+    font-size: 20px;
+    padding: 6px;
+    margin: 5px 80px;
+    text-align: center;
+}
+
+.button:hover{
+    transform: scale(1.1);
+}
+
+.butomm {
     text-decoration: none;
     font-size: 20px;
+    color: blue ;
+}
+
+.butomm:hover{
+    text-transform: lowercase;
 }

@@ -2,13 +2,14 @@
  */
 .btn {
     display: block;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color: rgb(163, 40, 112);
     color: white;
     border-radius: 10px;
-    padding: 20px 30px;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 30px;
+    padding: 15px 40px;
+    text-align: center;
 }
 
 body {
@@ -17,4 +18,15 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background: linear-gradient(150deg, rgb(170, 107, 107), rgb(255, 255, 255));
+}
+
+h1 {
+    text-align: center;
+    font-size: 40px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h2 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
