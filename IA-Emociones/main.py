@@ -1,3 +1,8 @@
+#instalaciones necesarias (se hacen por consola): 
+#pip install opencv-python-headless
+#pip install numpy
+# en caso de error probar con --user o actualizar el pip install
+
 #importanciones
 import cv2
 import numpy as np
