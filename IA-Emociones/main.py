@@ -44,8 +44,9 @@ def obtener_ultimo_jpg(carpeta):
 def TomarFoto (carpeta, nombre):
     for (x, y, w, h) in faces:
         roi = frame[y:y+h, x:x+w]
+        roi_resized = cv2.resize(roi, (600, 600))
         ubicacion = os.path.join(carpeta, nombre)
-        cv2.imwrite(ubicacion, roi)
+        cv2.imwrite(ubicacion, roi_resized)
         print ("Se guardo en la carpeta" , carpeta , "con el nombre" , nombre)
         count =+ 1
         ultima_foto = os.path.join( "Fotos.Emociones", f"foto_{count}.jpg")
