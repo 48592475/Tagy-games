@@ -130,7 +130,7 @@
     background-color: rgb(250, 234, 6);
     padding: 15px; 
 }
-.botonimagenProblemacasa1{
+.botonimagenProblemacalle1{
     position: absolute;
     top: 35%;
     left: 50%;
@@ -141,7 +141,7 @@
     background-color: rgb(173, 28, 166);
     padding: 15px; 
 }
-.botonLecturaProblemacasa1{
+.botonLecturaProblemacalle1{
     position: absolute;
     top: 24%;
     left: 30%;
@@ -152,7 +152,7 @@
     background-color: rgb(250, 234, 6);
     padding: 15px; 
 }
-.botonAudioProblemacasa1{
+.botonAudioProblemacalle1{
     position: absolute;
     top: 26%;
     left: 70%;
@@ -163,7 +163,7 @@
     background-color: rgb(250, 6, 6);
     padding: 15px; 
 }
-.botonTextoProblemacasa1{
+.botonTextoProblemacalle1{
     position: absolute;
     top: 44.5%;
     left: 70%;
