@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/48592475/Tagy-games/issues"
   },
-  "homepage": "https://github.com/48592475/Tagy-games#readme"
+  "homepage": "https://github.com/48592475/Tagy-games#readme",
+  "dependencies": {
+    "@vercel/postgres": "^0.9.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "pg": "^8.12.0"
+  }
 }
