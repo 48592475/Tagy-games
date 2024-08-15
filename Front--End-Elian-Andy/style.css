@@ -125,7 +125,13 @@ height: 100vh;
 }
 
 .volver {
-    
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 100px;
+    background-color: grey;
+    padding: 10px;
+    margin: 10px 300px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .butomm:hover{
