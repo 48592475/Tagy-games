@@ -1,17 +1,26 @@
 {
-  "name": "masterclass-vercel",
+  "name": "tagy-games",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/48592475/Tagy-games.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/48592475/Tagy-games/issues"
+  },
+  "homepage": "https://github.com/48592475/Tagy-games#readme",
   "dependencies": {
+    "@vercel/postgres": "^0.9.0",
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "pg": "^8.12.0"
   }
