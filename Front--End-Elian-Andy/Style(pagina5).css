@@ -1,10 +1,26 @@
-.botonn {
-    display: block;
+
+
+
+.butom {
+    text-decoration: none;    
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: rgb(163, 40, 112);
+    background-color: rgb(111, 111, 175);
     color: white;
     border-radius: 10px;
-    padding: 20px 30px;
+    font-size: 20px;
+    padding: 6px;
+    margin: 5px 80px;
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.volver {
     text-decoration: none;
     font-size: 20px;
+    border-radius: 100px;
+    background-color: grey;
+    padding: 10px;
+    margin: 10px 300px;
+    font-family: Arial, Helvetica, sans-serif;
 }
