@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3012;  
+const port = 3014;  
 
 const pool = new Pool({
     user: 'default',       
@@ -41,6 +41,27 @@ app.post('/registrar', async (req, res) => {
         res.status(500).send(`Error al registrar el usuario: ${error.message}`);
     }
 });
+
+app.post('/iniciodesesion', async (req, res) => {
+    console.log(req.body); 
+    const { usuario, contraseña } = req.body;  
+
+    try {
+        const queryIniciodeSesion = `
+            SELECT * FROM usuario WHERE usuario = $1 AND contraseña = $2
+        `;
+        const resultado1 = await pool.query(queryIniciodeSesion, [usuario, contraseña]);
+        if (resultado1.rows.length > 0) {
+            res.status(200).send("Inicio de Sesion Correcto, Bienvenido");
+        } else {
+            res.status(401).send("Inicio de Sesion Incorrecto, Intente Nuevamente");
+        }
+    } catch (error) {
+        console.error(error);  
+        res.status(500).send("Error en el servidor, por favor intente más tarde");
+    }
+});
+
 
 app.listen(port, () => {
     console.log(`Servidor corriendo en el puerto ${port}`);
