@@ -15,7 +15,7 @@ height: 100vh;
 }
 
 .formulario {
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -34,7 +34,7 @@ height: 100vh;
 
 .butom {
     text-decoration: none;    
-    display: block;
+    display: flex;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: rgb(111, 111, 175);
     color: white;
@@ -75,7 +75,7 @@ height: 100vh;
 }
 
 .username label {
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 5px;
     color: #adadad;
@@ -86,7 +86,7 @@ height: 100vh;
 
 .username span::before {
     content: "";
-    position: absolute;
+    position: relative;
     top: 40px;
     left: 0;
     width: 100%;
@@ -103,7 +103,7 @@ height: 100vh;
 
 .button {
     text-decoration: none;    
-    display: block;
+    display: flex;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: rgb(111, 111, 175);
     color: white;
