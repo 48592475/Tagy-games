@@ -1,5 +1,5 @@
 .container-form {
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -27,7 +27,7 @@
 }
 
 .username label {
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 5px;
     color: #adadad;
@@ -38,7 +38,7 @@
 
 .username span::before {
     content: "";
-    position: absolute;
+    position: relative;
     top: 40px;
     left: 0;
     width: 100%;
@@ -63,7 +63,7 @@
 }
 
 .class label {
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 5px;
     color: #adadad;
@@ -74,7 +74,7 @@
 
 .class span::before {
     content: "";
-    position: absolute;
+    position: relative;
     top: 40px;
     left: 0;
     width: 100%;
@@ -99,7 +99,7 @@ body {
 
 .buton {
     text-decoration: none;    
-    display: block;
+    display: flex;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: violet;
     color: white;
@@ -112,7 +112,7 @@ body {
 
 .buton {
     text-decoration: none;    
-    display: block;
+    display: flex;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-color: violet;
     color: white;
