@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3025;  
+const port = 3031;  
 
 const pool = new Pool({
     user: 'default',       
@@ -82,6 +82,21 @@ app.post("/olvidastecontra", async (req, res) => {
         } else {
             res.status(400).send('Usuario No Encontrado, Verifique Que Sus Datos Sean Correctos');
         }
+    } catch (error) {
+        console.error('Error al actualizar datos:', error.message);
+        res.status(500).send(`Error al registrar el usuario: ${error.message}`);
+    }
+});
+app.post("/Informe", async (req, res) => {
+    console.log(req.body);
+    const {texto} = req.body;
+    try {
+        const queryInforme = `
+        INSERT INTO Informe (texto)
+        VALUES ($1)
+        `;
+        const resultado3 = await pool.query(queryInforme, [texto]);
+        res.status(200).send('Informe del Paciente Guardado Correctamente');
     } catch (error) {
         console.error('Error al actualizar datos:', error.message);
         res.status(500).send(`Error al registrar el usuario: ${error.message}`);
