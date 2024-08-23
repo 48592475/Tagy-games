@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3014;  
+const port = 3025;  
 
 const pool = new Pool({
     user: 'default',       
@@ -61,7 +61,32 @@ app.post('/iniciodesesion', async (req, res) => {
         res.status(500).send("Error en el servidor, por favor intente más tarde");
     }
 });
+app.post("/olvidastecontra", async (req, res) => {
+    console.log(req.body);
+    const { usuario, contraseña } = req.body;
+    try {
+        const queryUsuario1 = `
+            SELECT * FROM usuario WHERE usuario = $1
+        `;
+        const resultado = await pool.query(queryUsuario1, [usuario]);
 
+        if (resultado.rows.length > 0) {
+            const queryUpdate = `
+                UPDATE usuario 
+                SET contraseña = $2::varchar
+                WHERE usuario = $1::varchar
+            `;
+            const result = await pool.query(queryUpdate, [usuario, contraseña]);
+            console.log(result);
+            res.status(201).send('Usuario Correcto, Contraseña Actualizada de Forma Segura');
+        } else {
+            res.status(400).send('Usuario No Encontrado, Verifique Que Sus Datos Sean Correctos');
+        }
+    } catch (error) {
+        console.error('Error al actualizar datos:', error.message);
+        res.status(500).send(`Error al registrar el usuario: ${error.message}`);
+    }
+});
 
 app.listen(port, () => {
     console.log(`Servidor corriendo en el puerto ${port}`);
