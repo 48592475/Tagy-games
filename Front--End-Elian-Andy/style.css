@@ -6,6 +6,7 @@ margin: 0;
 box-sizing: border-box;
 font-family: "Monsterrat", sans-serif;
 }
+
 body {
 margin: 0;
 padding: 0;
@@ -30,6 +31,7 @@ height: 100vh;
     padding: 0 0 20px 0;
     border-bottom: 1px solid silver;
     margin: 25px 0;
+    display: flex;
 }
 
 .butom {
