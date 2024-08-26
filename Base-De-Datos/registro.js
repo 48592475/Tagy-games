@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3031;  
+const port = 3034;  
 
 const pool = new Pool({
     user: 'default',       
@@ -87,7 +87,7 @@ app.post("/olvidastecontra", async (req, res) => {
         res.status(500).send(`Error al registrar el usuario: ${error.message}`);
     }
 });
-app.post("/Informe", async (req, res) => {
+app.post("/informe", async (req, res) => {
     console.log(req.body);
     const {texto} = req.body;
     try {
