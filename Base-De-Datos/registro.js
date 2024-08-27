@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3034;  
+const port = 3036;  
 
 const pool = new Pool({
     user: 'default',       
@@ -92,16 +92,37 @@ app.post("/informe", async (req, res) => {
     const {texto} = req.body;
     try {
         const queryInforme = `
-        INSERT INTO Informe (texto)
+        INSERT INTO informe (texto)
         VALUES ($1)
         `;
         const resultado3 = await pool.query(queryInforme, [texto]);
-        res.status(200).send('Informe del Paciente Guardado Correctamente');
+        res.status(200).send("Informe del Paciente Guardado Correctamente");
     } catch (error) {
-        console.error('Error al actualizar datos:', error.message);
-        res.status(500).send(`Error al registrar el usuario: ${error.message}`);
+        console.error("Error al actualizar datos:", error.message);
+        res.status(500).send("Error al ingresar el informe del usuario: ${error.message}");
     }
 });
+app.post("/emociones", async(req,res)=>{
+    console.log(req.body);
+    const{tipo}=req.body;
+    try{
+        if(tipo!=="Feliz" || tipo!=="Triste"){
+            res.status(400).send("La Emocion No Es Correcta Para El Usuario");
+        }
+        else{
+            const queryEmociones=`
+            INSERT INTO emociones (tipo)
+            VALUES ($1)
+            `;
+            const resultado4=await pool.query(queryEmociones,[tipo]);
+            res.status(200).send("Emocion Del Usuario Guardada De Manera Correcta");
+        }
+    }
+    catch (error) {
+        console.error("Error al ingresar la emocion del usuario:", error.message);
+        res.status(500).send("Error al guardar la emocion del usuario: ${error.message}");
+    }
+})
 
 app.listen(port, () => {
     console.log(`Servidor corriendo en el puerto ${port}`);
