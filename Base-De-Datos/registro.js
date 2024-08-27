@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3050;  
+const port = 3052;  
 
 const pool = new Pool({
     user: 'default',       
@@ -106,16 +106,16 @@ app.post("/emociones", async(req,res)=>{
     console.log(req.body);
     const{tipo}=req.body;
     try{
-        if(tipo!=="Feliz" || tipo!=="Triste"){
-            res.status(400).send("La Emocion No Es Correcta Para El Usuario");
-        }
-        else{
+        if(tipo=="Feliz" || tipo=="Triste"){
             const queryEmociones=`
             INSERT INTO emociones (tipo)
             VALUES ($1)
             `;
             const resultado4=await pool.query(queryEmociones,[tipo]);
             res.status(200).send("Emocion Del Usuario Guardada De Manera Correcta");
+        }
+        else{
+            res.status(400).send("La Emocion No Es Correcta Para El Usuario");
         }
     }
     catch (error) {
