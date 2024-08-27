@@ -1,10 +1,10 @@
 document.getElementById('registroForm').addEventListener('submit', async function(event) {
     event.preventDefault(); 
-    const usuario = document.getElementById('RegistroUsuario').value;
-    const nombre = document.getElementById('NombreRegistro').value;
-    const apellido = document.getElementById('ApellidoRegistro').value;
-    const pregunta = document.getElementById('PreguntaRegistro').value;
-    const contraseña = document.getElementById('RegistroContraseña').value;
+    const usuario = document.getElementById('usuario').value;
+    const nombre = document.getElementById('nombre').value;
+    const apellido = document.getElementById('apellido').value;
+    const pregunta = document.getElementById('pregunta').value;
+    const contraseña = document.getElementById('contraseña').value;
     
     const datos = {
         usuario: usuario,
@@ -15,7 +15,7 @@ document.getElementById('registroForm').addEventListener('submit', async functio
     };
     
     try {
-        const respuesta = await fetch('http://localhost:3025/registrar', {
+        const respuesta = await fetch('http://localhost:3036/registrar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

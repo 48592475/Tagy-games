@@ -22,6 +22,7 @@
     "@vercel/postgres": "^0.9.0",
     "cors": "^2.8.5",
     "express": "^4.19.2",
+    "googleapis": "^142.0.0",
     "pg": "^8.12.0"
   },
   "devDependencies": {
