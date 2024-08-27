@@ -1,15 +1,15 @@
 #instalaciones necesarias (se hacen por consola): 
-#pip install opencv-python-headless
+#pip install opencv-python 
 #pip install numpy
 # en caso de error probar con --user o actualizar el pip install
-
+# si salta error al intentar usar deepface probar esto: pip install tf-keras --user
 #importanciones
 import cv2
 import numpy as np
 import os
 import glob
 import time
-#from deepface import DeepFace
+from deepface import DeepFace
 
 carpeta = "Fotos.Emociones"
 count = 0
@@ -20,15 +20,40 @@ print("NumPy version:", np.__version__)
 
 #abro la cámara
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("Error: No se puede abrir la cámara")
     exit()
 
-#def AnalizarFotos ():
- # foto = 'C:\Users\48113111\Documents\Juego 2\proyecto\Tagy-games\IA-Emociones\Fotos.Emociones'
-  #analisis = DeepFace.analyze(foto , actions=["emotion"])
- #print (analisis)
+def AnalizarFotos ():
+    foto = "C:/Users/gaetf/Documents/GitHub/Tagy-games/IA-Emociones/Fotos.Emociones/Foto_auto_1.jpg"
+    
+    try:
+        # Analiza la foto para detectar emociones
+        analisis = DeepFace.analyze(img_path=foto, actions=["emotion"], enforce_detection=False)
+        
+        # Verifica si se ha detectado una cara
+        if 'dominant_emotion' in analisis[0]:
+            # Guarda la emoción dominante y la confianza de la detección en variables
+            emocion_dominante = analisis[0]['dominant_emotion']
+            face_confidence = analisis[0].get('face_confidence', 0)
+            if emocion_dominante == "fear":
+                emocion_dominante = "neutral"
+                
+            # Solo imprime si la confianza de la detección de la cara es mayor a 0.3
+            if face_confidence > 0.3:
+                print(f"Emoción dominante: {emocion_dominante}, Confianza que detecte cara: {face_confidence:.2f}")
+            else:
+                print("La confianza en la detección de la cara es demasiado baja.")
+        else:
+            print("No se detectó una cara en la foto.")
+    
+    except Exception as e:
+        print(f"Ocurrió un error: {e}")
+    
+    
+
+
     
 def obtener_ultimo_jpg(carpeta):
     archivos_jpg = [f for f in os.listdir(carpeta) if f.endswith('.jpg')]
@@ -44,7 +69,7 @@ def obtener_ultimo_jpg(carpeta):
 def TomarFoto (carpeta, nombre):
     for (x, y, w, h) in faces:
         roi = frame[y:y+h, x:x+w]
-        roi_resized = cv2.resize(roi, (600, 600))
+        roi_resized = cv2.resize(roi, (720, 720))
         ubicacion = os.path.join(carpeta, nombre)
         cv2.imwrite(ubicacion, roi_resized)
         print ("Se guardo en la carpeta" , carpeta , "con el nombre" , nombre)
@@ -89,7 +114,7 @@ while True:
         nombre = f'Foto_auto_{count + 1}.jpg'
         TomarFoto(carpeta, nombre)
         time.sleep(1)
-       # AnalizarFotos() 
+        AnalizarFotos() 
       
     cv2.imshow('frame', frame)
     if cv2.waitKey(1) == ord('q'):         #para cerrar la camara tocar la letra q
