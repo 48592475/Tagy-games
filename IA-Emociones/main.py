@@ -1,6 +1,7 @@
 #instalaciones necesarias (se hacen por consola): 
 #pip install opencv-python 
 #pip install numpy
+#pip install deepface --user
 # en caso de error probar con --user o actualizar el pip install
 # si salta error al intentar usar deepface probar esto: pip install tf-keras --user
 #importanciones
@@ -15,8 +16,8 @@ carpeta = "Fotos.Emociones"
 count = 0
 
 #veo que version son
-print("OpenCV version:", cv2.__version__)
-print("NumPy version:", np.__version__)
+#print("OpenCV version:", cv2.__version__)
+#print("NumPy version:", np.__version__)
 
 #abro la cámara
 
@@ -26,7 +27,10 @@ if not cap.isOpened():
     exit()
 
 def AnalizarFotos ():
-    foto = "C:/Users/gaetf/Documents/GitHub/Tagy-games/IA-Emociones/Fotos.Emociones/Foto_auto_1.jpg"
+       # Ruta relativa a la ubicación del script
+    script_dir = os.path.dirname(__file__)  # Obtiene el directorio del script
+    foto = os.path.join(script_dir, 'Fotos.Emociones', 'Foto_auto_1.jpg')
+
     
     try:
         # Analiza la foto para detectar emociones
@@ -37,9 +41,7 @@ def AnalizarFotos ():
             # Guarda la emoción dominante y la confianza de la detección en variables
             emocion_dominante = analisis[0]['dominant_emotion']
             face_confidence = analisis[0].get('face_confidence', 0)
-            if emocion_dominante == "fear":
-                emocion_dominante = "neutral"
-                
+             
             # Solo imprime si la confianza de la detección de la cara es mayor a 0.3
             if face_confidence > 0.3:
                 print(f"Emoción dominante: {emocion_dominante}, Confianza que detecte cara: {face_confidence:.2f}")
