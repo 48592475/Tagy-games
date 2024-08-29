@@ -21,6 +21,7 @@ count = 0
 
 #abro la cámara
 
+#función para mejorar como se ve las fotos:
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("Error: No se puede abrir la cámara")
@@ -102,7 +103,7 @@ while True:
         print("Error: Frame está vacío")
         break
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=6, minSize=(50, 50))
     for (x, y, w, h) in faces:    #hago un rectangulo que se ponga encima de las caras detectadas
         cv2.rectangle(frame, (x, y), (x + w, y + h), (103, 46, 1), 3)
         roi_gray = gray[y:y+h, x:x+w]
