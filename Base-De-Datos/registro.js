@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3052;  
+const port = 3000;  
 
 const pool = new Pool({
     user: 'default',       
@@ -63,12 +63,12 @@ app.post('/iniciodesesion', async (req, res) => {
 });
 app.post("/olvidastecontra", async (req, res) => {
     console.log(req.body);
-    const { usuario, contraseña } = req.body;
+    const { usuario, contraseña, pregunta } = req.body;
     try {
         const queryUsuario1 = `
-            SELECT * FROM usuario WHERE usuario = $1
+            SELECT * FROM usuario WHERE usuario = $1 AND pregunta=$2
         `;
-        const resultado = await pool.query(queryUsuario1, [usuario]);
+        const resultado = await pool.query(queryUsuario1, [usuario, pregunta]);
 
         if (resultado.rows.length > 0) {
             const queryUpdate = `
@@ -89,24 +89,32 @@ app.post("/olvidastecontra", async (req, res) => {
 });
 app.post("/informe", async (req, res) => {
     console.log(req.body);
-    const {texto} = req.body;
+    const { usuario, texto } = req.body; 
     try {
-        const queryInforme = `
-        INSERT INTO informe (texto)
-        VALUES ($1)
-        `;
-        const resultado3 = await pool.query(queryInforme, [texto]);
-        res.status(200).send("Informe del Paciente Guardado Correctamente");
+        const queryUsuario = `SELECT * FROM usuario WHERE usuario = $1`;
+        const resultado = await pool.query(queryUsuario, [usuario]);
+
+        if (resultado.rows.length > 0) {
+            const queryInforme = `
+                INSERT INTO informe (usuario, texto)
+                VALUES ($1, $2)
+            `;
+            await pool.query(queryInforme, [usuario, texto]);
+            res.status(200).send("Informe del Paciente Guardado Correctamente");
+        } else {
+            res.status(400).send("Usuario no encontrado, verifique sus datos.");
+        }
     } catch (error) {
-        console.error("Error al actualizar datos:", error.message);
-        res.status(500).send("Error al ingresar el informe del usuario: ${error.message}");
+        console.error("Error al guardar el informe:", error.message);
+        res.status(500).send(`Error al guardar el informe del usuario: ${error.message}`);
     }
 });
+
 app.post("/emociones", async(req,res)=>{
     console.log(req.body);
     const{tipo}=req.body;
     try{
-        if(tipo=="Feliz" || tipo=="Triste"){
+        if(tipo==="Feliz" || tipo==="Triste"){
             const queryEmociones=`
             INSERT INTO emociones (tipo)
             VALUES ($1)
