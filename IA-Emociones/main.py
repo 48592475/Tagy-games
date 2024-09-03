@@ -1,9 +1,10 @@
-#instalaciones necesarias (se hacen por consola): 
-#pip install opencv-python 
+#instalaciones necesarias (se hacen por consola):
+#pip install opencv-python
 #pip install numpy
 #pip install deepface --user
-# en caso de error probar con --user o actualizar el pip install
-# si salta error al intentar usar deepface probar esto: pip install tf-keras --user
+#pip install tf-keras --user
+# en caso de error ctualizar el pip install
+
 #importanciones
 import cv2
 import numpy as np
@@ -14,15 +15,8 @@ from deepface import DeepFace
 
 carpeta = "Fotos.Emociones"
 count = 0
-
-#veo que version son
-#print("OpenCV version:", cv2.__version__)
-#print("NumPy version:", np.__version__)
-
 #abro la cámara
-
-#función para mejorar como se ve las fotos:
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)  
 if not cap.isOpened():
     print("Error: No se puede abrir la cámara")
     exit()
@@ -31,12 +25,11 @@ def AnalizarFotos ():
        # Ruta relativa a la ubicación del script
     script_dir = os.path.dirname(__file__)  # Obtiene el directorio del script
     foto = os.path.join(script_dir, 'Fotos.Emociones', 'Foto_auto_1.jpg')
-
-    
+   
     try:
         # Analiza la foto para detectar emociones
         analisis = DeepFace.analyze(img_path=foto, actions=["emotion"], enforce_detection=False)
-        
+       
         # Verifica si se ha detectado una cara
         if 'dominant_emotion' in analisis[0]:
             # Guarda la emoción dominante y la confianza de la detección en variables
@@ -50,23 +43,20 @@ def AnalizarFotos ():
                 print("La confianza en la detección de la cara es demasiado baja.")
         else:
             print("No se detectó una cara en la foto.")
-    
+   
     except Exception as e:
         print(f"Ocurrió un error: {e}")
-    
-    
-
-
-    
+   
+       
 def obtener_ultimo_jpg(carpeta):
     archivos_jpg = [f for f in os.listdir(carpeta) if f.endswith('.jpg')]
-    
+   
     if not archivos_jpg:
         return None  # No hay archivos JPG en la carpeta
 
     archivos_jpg.sort(key=lambda f: os.path.getctime(os.path.join(carpeta, f)))
     ultimo_jpg = archivos_jpg[-1]
-    
+   
     return os.path.join(carpeta, ultimo_jpg)
 
 def TomarFoto (carpeta, nombre):
@@ -81,11 +71,9 @@ def TomarFoto (carpeta, nombre):
         return(ultima_foto)
 
 
-
 #importo el reconocedor de caras
 cascade_path = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
 face_cascade = cv2.CascadeClassifier(cascade_path)
-
 
 # Bucle principal
 inicio = time.time()
@@ -117,8 +105,8 @@ while True:
         nombre = f'Foto_auto_{count + 1}.jpg'
         TomarFoto(carpeta, nombre)
         time.sleep(1)
-        AnalizarFotos() 
-      
+        AnalizarFotos()
+     
     cv2.imshow('frame', frame)
     if cv2.waitKey(1) == ord('q'):         #para cerrar la camara tocar la letra q
         break
@@ -127,6 +115,7 @@ while True:
         ListaDeFotos = glob.glob(os.path.join("Fotos.Emociones", '*'))
         count = len(ListaDeFotos) + 1
         TomarFoto("Fotos.Emociones", f'Foto nro{count}.jpg')
-    
+   
 cap.release()
 cv2.destroyAllWindows()
+
