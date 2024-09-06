@@ -1,9 +1,12 @@
 const express = require('express');
 const { Pool } = require('pg');
 const bodyParser = require('body-parser');
-
+const bcrypt = require("bcryptjs");
+const jwt=require("jsonwebtoken");
 const app = express();
-const port = 3000;  
+const port = 3001;  
+const cors = require('cors');
+app.use(cors());
 
 const pool = new Pool({
     user: 'default',       
@@ -29,11 +32,12 @@ app.post('/registrar', async (req, res) => {
         if (resultado.rows.length > 0) {
             res.status(400).send('El nombre de usuario ya existe. Por favor, elige otro.');
         } else {
+            const hashedcontra = await bcrypt.hash(contraseña, 10);
             const queryregistro = `
                 INSERT INTO usuario (usuario, nombre, apellido, pregunta, contraseña)
                 VALUES ($1, $2, $3, $4, $5)
             `;
-            const result = await pool.query(queryregistro, [usuario, nombre, apellido, pregunta, contraseña]);
+            const result = await pool.query(queryregistro, [usuario, nombre, apellido, pregunta, hashedcontra]);
             res.status(201).send('Usuario registrado correctamente');
         }
     } catch (error) {
@@ -43,24 +47,33 @@ app.post('/registrar', async (req, res) => {
 });
 
 app.post('/iniciodesesion', async (req, res) => {
-    console.log(req.body); 
-    const { usuario, contraseña } = req.body;  
-
-    try {
-        const queryIniciodeSesion = `
-            SELECT * FROM usuario WHERE usuario = $1 AND contraseña = $2
-        `;
-        const resultado1 = await pool.query(queryIniciodeSesion, [usuario, contraseña]);
-        if (resultado1.rows.length > 0) {
-            res.status(200).send("Inicio de Sesion Correcto, Bienvenido");
-        } else {
-            res.status(401).send("Inicio de Sesion Incorrecto, Intente Nuevamente");
+        console.log(req.body); 
+        const { usuario, contraseña } = req.body;  
+    
+        try {
+            const queryIniciodeSesion = `
+                SELECT * FROM usuario WHERE usuario = $1
+            `;
+            const resultado1 = await pool.query(queryIniciodeSesion, [usuario]);
+                if (resultado1.rows.length > 0) {
+                const usuarioE= resultado1.rows[0];
+                const contrahashed = usuarioE.contraseña;
+                const contraCorrecta = await bcrypt.compare(contraseña, contrahashed);
+    
+                if (contraCorrecta) {
+                    res.status(200).send("Inicio de Sesión Correcto, Bienvenido");
+                } else {
+                    res.status(401).send("Inicio de Sesión Incorrecto, Intente Nuevamente");
+                }
+            } else {
+                res.status(401).send("Inicio de Sesión Incorrecto, Intente Nuevamente");
+            }
+        } catch (error) {
+            console.error(error);  
+            res.status(500).send("Error en el servidor, por favor intente más tarde");
         }
-    } catch (error) {
-        console.error(error);  
-        res.status(500).send("Error en el servidor, por favor intente más tarde");
-    }
-});
+    });
+    
 app.post("/olvidastecontra", async (req, res) => {
     console.log(req.body);
     const { usuario, contraseña, pregunta } = req.body;
@@ -69,14 +82,14 @@ app.post("/olvidastecontra", async (req, res) => {
             SELECT * FROM usuario WHERE usuario = $1 AND pregunta=$2
         `;
         const resultado = await pool.query(queryUsuario1, [usuario, pregunta]);
-
         if (resultado.rows.length > 0) {
+            const hashedcontra = await bcrypt.hash(contraseña, 10);
             const queryUpdate = `
                 UPDATE usuario 
                 SET contraseña = $2::varchar
                 WHERE usuario = $1::varchar
             `;
-            const result = await pool.query(queryUpdate, [usuario, contraseña]);
+            const result = await pool.query(queryUpdate, [usuario, hashedcontra]);
             console.log(result);
             res.status(201).send('Usuario Correcto, Contraseña Actualizada de Forma Segura');
         } else {
@@ -131,6 +144,26 @@ app.post("/emociones", async(req,res)=>{
         res.status(500).send("Error al guardar la emocion del usuario: ${error.message}");
     }
 })
+
+app.get('/cancion/:id', async (req, res) => {
+    const { id } = req.params;
+    const idBusqueda = id === '1' ? 1 : 2;
+  
+    try {
+      const querycanciones = 'SELECT * FROM canciones WHERE id = $1';
+      const resultado5 = await pool.query(querycanciones, [idBusqueda]);
+  
+      if (resultado5.rows.length > 0) {
+        res.status(200).json(resultado5.rows[0]);
+      } else {
+        res.status(404).send('Canción no encontrada');
+      }
+    } catch (error) {
+      console.error(`Error al encontrar la canción: ${error.message}`);
+      res.status(500).send(`Error al encontrar la canción: ${error.message}`);
+    }
+  });
+  
 
 app.listen(port, () => {
     console.log(`Servidor corriendo en el puerto ${port}`);

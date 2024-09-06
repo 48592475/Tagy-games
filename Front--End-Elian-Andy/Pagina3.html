@@ -3,66 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de sesion</title>
+    <title>Inicio de sesión</title>
     <link rel="stylesheet" href="style.(pagina3).css">
 </head>
 <body>
-    <!--     <a  class="btn"href="file:///C:/Users/48366467/Downloads/Proyecto%20Tagy-1/index.html">Enlaces</a> 
- -->
 
- <div class="container-form">
+<div class="container-form">
     <div class="form-information">
         <div class="information-childs">
-            <a class = "volver" href="Pagina2.html">volver</a>
-<p>
-    
-</p>
+            <a class="volver" href="Pagina2.html">Volver</a>
             <h1>Registrarse</h1>
-            <form>
-            </label>
-        <div class="class">
-        <input type="text" placeholder="Usuario" id="RegistroUsuario">
-        </label></div>
-        <p>
-            
-        </p>
-                <label></label>
+            <form id="registroForm"> <!-- Agregado ID para el formulario -->
                 <div class="class">
-                <input type="text" placeholder="Nombre Completo" id="NombreRegistro">
-                </label></div>
-                <p>
-
-                </p>
-                <label></label>
+                    <input type="text" placeholder="Usuario" id="RegistroUsuario" name="usuario">
+                </div>
                 <div class="class">
-                <input type="text" placeholder="Apellido" id="ApellidoRegistro">
-                </label></div>
-                <p>
-
-                </p>
-            </label>
-            <div class="class">
-            <input type="text" placeholder="Nombre del progenitor/Tutor legal" id="PreguntaRegistro">
-            </label></div>
-            <p>
-
-            </p>
-
-        <p>
-
-        </p>
-                <label>
-                    <div class="class">
-                    <input type="password" placeholder="Contraseña" id="RegistroCotraseña">
-                </label></div>
-                <p>
-                    
-                </p>
-                <a class = "buton" href="Pagina4.html">Registrarse</a>
-            </form> 
+                    <input type="text" placeholder="Nombre Completo" id="NombreRegistro" name="nombre">
+                </div>
+                <div class="class">
+                    <input type="text" placeholder="Apellido" id="ApellidoRegistro" name="apellido">
+                </div>
+                <div class="class">
+                    <input type="text" placeholder="Nombre del progenitor/Tutor legal" id="PreguntaRegistro" name="pregunta">
+                </div>
+                <div class="class">
+                    <input type="password" placeholder="Contraseña" id="RegistroContraseña" name="contraseña">
+                </div>
+                <button type="submit">Registrarse</button> <!-- Botón para enviar el formulario -->
+            </form>
         </div>
     </div>
- </div>
- <script src="/Base-De-Datos/script.js"></script>
+</div>
+
+<script>
+    document.getElementById('registroForm').addEventListener('submit', async function (event) {
+        event.preventDefault();
+        const formData = {
+            usuario: document.getElementById('RegistroUsuario').value,
+            nombre: document.getElementById('NombreRegistro').value,
+            apellido: document.getElementById('ApellidoRegistro').value,
+            pregunta: document.getElementById('PreguntaRegistro').value,
+            contraseña: document.getElementById('RegistroContraseña').value,
+        };
+
+        try {
+            const response = await fetch('http://localhost:3001/registrar', { // Cambiado a puerto 3001
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                alert('Usuario registrado correctamente');
+                window.location.href = 'Pagina4.html'; // Redirigir después del registro
+            } else {
+                alert('Error al registrar el usuario');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error al conectar con el servidor');
+        }
+    });
+</script>
+
 </body>
 </html>
