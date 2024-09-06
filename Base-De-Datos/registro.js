@@ -147,7 +147,6 @@ app.post("/emociones", async(req,res)=>{
 
 app.get('/cancion/:id', async (req, res) => {
     const { id } = req.params;
-    const idBusqueda = id === '1' ? 1 : 2;
   
     try {
       const querycanciones = 'SELECT * FROM canciones WHERE id = $1';
