@@ -7,6 +7,8 @@ const app = express();
 const port = 3001;  
 const cors = require('cors');
 app.use(cors());
+const crypto=require("crypto");
+const Secret="hola comp estras";
 
 const pool = new Pool({
     user: 'default',       
@@ -46,26 +48,32 @@ app.post('/registrar', async (req, res) => {
     }
 });
 
+
 app.post('/iniciodesesion', async (req, res) => {
         console.log(req.body); 
         const { usuario, contraseña } = req.body;  
-    
         try {
             const queryIniciodeSesion = `
                 SELECT * FROM usuario WHERE usuario = $1
             `;
             const resultado1 = await pool.query(queryIniciodeSesion, [usuario]);
-                if (resultado1.rows.length > 0) {
-                const usuarioE= resultado1.rows[0];
-                const contrahashed = usuarioE.contraseña;
+            if (resultado1.rows.length > 0) {
+                const usuario= resultado1.rows[0];
+                const contrahashed = usuario.contraseña;
                 const contraCorrecta = await bcrypt.compare(contraseña, contrahashed);
-    
+            
                 if (contraCorrecta) {
-                    res.status(200).send("Inicio de Sesión Correcto, Bienvenido");
+                    const token=jwt.sign(
+                        {id:usuario.id,usuario:usuario.usuario},
+                        Secret,
+                        {expiresIn:"1h"}
+                    );
+                    console.log("token:",token);
+                    res.send("Inicio de Sesión Correcto, Bienvenido");                
                 } else {
                     res.status(401).send("Inicio de Sesión Incorrecto, Intente Nuevamente");
                 }
-            } else {
+            }else {
                 res.status(401).send("Inicio de Sesión Incorrecto, Intente Nuevamente");
             }
         } catch (error) {
@@ -147,7 +155,6 @@ app.post("/emociones", async(req,res)=>{
 
 app.get('/cancion/:id', async (req, res) => {
     const { id } = req.params;
-  
     try {
       const querycanciones = 'SELECT * FROM canciones WHERE id = $1';
       const resultado5 = await pool.query(querycanciones, [idBusqueda]);
