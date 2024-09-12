@@ -31,6 +31,7 @@ app.post('/registrar', async (req, res) => {
         `;
         const resultado = await pool.query(queryUsuario, [usuario]);
 
+        console.log("result len:",resultado.rows.length)
         if (resultado.rows.length > 0) {
             res.status(400).send('El nombre de usuario ya existe. Por favor, elige otro.');
         } else {
