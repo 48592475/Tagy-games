@@ -13,6 +13,9 @@ from deepface import DeepFace
 carpeta = "Fotos.Emociones"
 count = 0
 
+# Inicializa un diccionario para contar las emociones
+emociones_contador = {}
+
 # Verificar si la carpeta existe, si no, crearla
 if not os.path.exists(carpeta):
     os.makedirs(carpeta)
@@ -39,6 +42,18 @@ def AnalizarFotos():
             # Solo imprime si la confianza de la detección de la cara es mayor a 0.3
             if face_confidence > 0.3:
                 print(f"Emoción dominante: {emocion_dominante}, Confianza que detecte cara: {face_confidence:.2f}")
+
+                 # Actualiza el conteo de la emoción
+                if emocion_dominante in emociones_contador:
+                    emociones_contador[emocion_dominante] += 1
+                else:
+                    emociones_contador[emocion_dominante] = 1
+                
+                # Verifica si la emoción se ha detectado por segunda vez
+                if emociones_contador[emocion_dominante] == 2:
+                    print(f"La emoción '{emocion_dominante}' ha sido detectada por segunda vez.")
+                    # Reinicia el diccionario después de la detección
+                    emociones_contador.clear()
             else:
                 print("La confianza en la detección de la cara es demasiado baja.")
         else:
