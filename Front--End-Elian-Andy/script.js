@@ -18,6 +18,21 @@ document.getElementById('botonTextoProblemacasa1').addEventListener('click', fun
     toggleTextBox('textBox4');
 });
 
+document.getElementById('botonLecturaSolución1').addEventListener('click', function() {
+    toggleTextBox('textBox5');
+});
+
+document.getElementById('botonLecturaSolución2').addEventListener('click', function() {
+    toggleTextBox('textBox6');
+});
+
+document.getElementById('botonLecturaSolución3').addEventListener('click', function() {
+    toggleTextBox('textBox7');
+});
+
+document.getElementById('botonLecturaProblemacasa1').addEventListener('click', function() {
+    toggleTextBox('textBox8');
+});
 function toggleTextBox(id) {
     var textBox = document.getElementById(id);
     if (textBox.classList.contains('expanded')) {

@@ -305,6 +305,26 @@
    margin: 250px 650px;
    transform: translate(-50%, -50%);
 }
+#textBox5 {
+    text-align: center;
+   margin: 250px 650px;
+   transform: translate(-50%, -50%);
+}
+#textBox6 {
+    text-align: center;
+   margin: 250px 650px;
+   transform: translate(-50%, -50%);
+}
+#textBox7 {
+    text-align: center;
+   margin: 250px 650px;
+   transform: translate(-50%, -50%);
+}
+#textBox8 {
+    text-align: center;
+   margin: 250px 650px;
+   transform: translate(-50%, -50%);
+}
 
 .hidden {
     display: none;
