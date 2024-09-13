@@ -2,10 +2,11 @@
   "name": "tagy-games",
   "version": "1.0.0",
   "description": "",
-  "main": "registro.js",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node registro.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
