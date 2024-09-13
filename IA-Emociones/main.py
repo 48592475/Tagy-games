@@ -9,10 +9,11 @@ import numpy as np
 import os
 import time
 from deepface import DeepFace
-
+import threading
 carpeta = "Fotos.Emociones"
 count = 0
 
+EscuchandoMusica = False
 # Inicializa un diccionario para contar las emociones
 emociones_contador = {}
 
@@ -25,6 +26,28 @@ cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("Error: No se puede abrir la cámara")
     exit()
+
+def detener_musica():
+    global EscuchandoMusica
+    EscuchandoMusica = False
+    print("Deteniendo la música después de 60 segundos.")
+    #agregar codigo para frenar musica
+
+
+def ManejarPlaylist(emocion_dominante):
+ global EscuchandoMusica          #si no hay musica pone la musica acorde a la emocion dominante detectada
+ if not EscuchandoMusica:
+    if emocion_dominante in ["disgust", "angry"]:
+      print("poner playlist relajante")   #poner codigo para poner la musica, puedo hacer una función
+    elif emocion_dominante in ["sad", "fear"]:
+     print ("poner playlist alegre") #poner codigo para poner la musica, puedo hacer una función
+     
+                        
+    EscuchandoMusica = True                    
+    emociones_contador.clear()
+            # Inicia un temporizador que tras 60 segundos detiene la musica
+    timer = threading.Timer(60.0, detener_musica)
+    timer.start()
 
 # Función para analizar emociones de la foto
 def AnalizarFotos():
@@ -43,17 +66,28 @@ def AnalizarFotos():
             if face_confidence > 0.3:
                 print(f"Emoción dominante: {emocion_dominante}, Confianza que detecte cara: {face_confidence:.2f}")
 
-                 # Actualiza el conteo de la emoción
-                if emocion_dominante in emociones_contador:
-                    emociones_contador[emocion_dominante] += 1
-                else:
-                    emociones_contador[emocion_dominante] = 1
-                
-                # Verifica si la emoción se ha detectado por segunda vez
-                if emociones_contador[emocion_dominante] == 2:
-                    print(f"La emoción '{emocion_dominante}' ha sido detectada por segunda vez.")
-                    # Reinicia el diccionario después de la detección
-                    emociones_contador.clear()
+                 # Solo agrega al contador si la emoción es 'fear', 'sad'  'angry', o 'disgust'
+                if emocion_dominante in ["fear", "sad", "angry", "disgust"]:
+                    if emocion_dominante in emociones_contador:
+                        emociones_contador[emocion_dominante] += 1
+                    else:
+                        emociones_contador[emocion_dominante] = 1
+                        
+                    if emociones_contador[emocion_dominante] == 2:  #si detecto dos veces la misma emocion
+                     print(f"La emoción '{emocion_dominante}' ha sido detectada por segunda vez.")
+                     if emocion_dominante in ["disgust", "angry"] and not EscuchandoMusica:
+                         print(f"Reproduciendo playlist relajante por la emoción: {emocion_dominante}")
+                         #llamar función poner musica relajante
+                         ManejarPlaylist(emocion_dominante)
+                         emociones_contador.clear()
+
+                     elif emocion_dominante in ["sad", "fear"] and not EscuchandoMusica:
+                        
+                        print(f"Reproduciendo playlist alegre por la emoción: {emocion_dominante}")
+                        #llamar función poner musica relajante
+                        ManejarPlaylist(emocion_dominante)
+                        emociones_contador.clear()
+                            
             else:
                 print("La confianza en la detección de la cara es demasiado baja.")
         else:
