@@ -33,6 +33,7 @@ def detener_musica():
     print("Deteniendo la música después de 60 segundos.")
     #agregar codigo para frenar musica
 
+#def RendimientoMusica():
 
 def ManejarPlaylist(emocion_dominante):
  global EscuchandoMusica          #si no hay musica pone la musica acorde a la emocion dominante detectada
@@ -80,13 +81,11 @@ def AnalizarFotos():
                          #llamar función poner musica relajante
                          ManejarPlaylist(emocion_dominante)
                          emociones_contador.clear()
-
                      elif emocion_dominante in ["sad", "fear"] and not EscuchandoMusica:
-                        
-                        print(f"Reproduciendo playlist alegre por la emoción: {emocion_dominante}")
-                        #llamar función poner musica relajante
-                        ManejarPlaylist(emocion_dominante)
-                        emociones_contador.clear()
+                         print(f"Reproduciendo playlist alegre por la emoción: {emocion_dominante}")
+                          #llamar función poner musica relajante
+                         ManejarPlaylist(emocion_dominante)
+                         emociones_contador.clear()
                             
             else:
                 print("La confianza en la detección de la cara es demasiado baja.")
