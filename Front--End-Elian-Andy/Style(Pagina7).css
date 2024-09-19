@@ -235,40 +235,6 @@
     background-position: center; 
     background-repeat: no-repeat; 
 }
-.botonSelectSolución1{
-    position: absolute;
-    top: 65%;
-    left: 15%;
-    transform: translate(-50%, -50%);
-    width:150px;
-    height: 30px;
-    border-radius: 10px;
-    background-color: rgb(10, 6, 250);
-    padding: 15px;
-}
-
-.botonSelectSolución2{
-    position: absolute;
-    top: 65%;
-    left: 45%;
-    transform: translate(-50%, -50%);
-    width:150px;
-    height: 30px;
-    border-radius: 10px;
-    background-color: rgb(10, 6, 250);
-    padding: 15px;
-}
-.botonSelectSolución3{
-    position: absolute;
-    top: 65%;
-    left: 80%;
-    transform: translate(-50%, -50%);
-    width:150px;
-    height: 30px;
-    border-radius: 10px;
-    background-color: rgb(10, 6, 250);
-    padding: 15px;
-}
 /*--------------------------------------------------------------------------------------------------*/
 .text-box {
     position: absolute;
