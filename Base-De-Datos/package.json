@@ -2,10 +2,11 @@
   "name": "tagy-games",
   "version": "1.0.0",
   "description": "",
-  "main": "registro.js",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node registro.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -20,8 +21,14 @@
   "homepage": "https://github.com/48592475/Tagy-games#readme",
   "dependencies": {
     "@vercel/postgres": "^0.9.0",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.4.0",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "express": "^4.19.2",
+    "googleapis": "^142.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
     "pg": "^8.12.0"
   },
   "devDependencies": {

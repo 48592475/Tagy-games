@@ -1,176 +1,149 @@
-.botonSolucion1 {
-    position: absolute;
-    top: 80%;
-    left: 15%;
-    transform: translate(-50%, -50%);
-    width: 150px;
-    height: 100px;
-    border-radius: 10px;
-    background-color: rgb(173, 28, 166);
-    padding: 15px; 
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f5f5f5;
 }
-.botonSolucion2 {
-    position: absolute;
-    top: 80%;
-    left: 45%;
-    transform: translate(-50%, -50%);
-    width: 150px;
-    height: 100px;
-    border-radius: 10px;
-    background-color: rgb(173, 28, 166);
-    padding: 15px; 
+
+.contenedor-principal {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+    max-width: 1100px; /* Limita el ancho máximo */
 }
-.botonSolucion3 {
-    position: absolute;
-    top: 80%;
-    left: 80%;
-    transform: translate(-50%, -50%);
-    width: 150px;
-    height: 100px;
-    border-radius: 10px;
-    background-color: rgb(173, 28, 166);
-    padding: 15px; 
+
+/* Estilos de la situación */
+.situacion {
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 20px;
 }
-.botonAudioSolución1{
-    position: absolute;
-    top: 75.4%;
-    left: 25%;
-    transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background-color: rgb(250, 6, 6);
-    padding: 15px; 
+
+.etiqueta-situacion {
+    font-weight: bold;
+    margin-bottom: 20px;
 }
-.botonAudioSolución2{
-    position: absolute;
-    top: 75.4%;
-    left: 55%;
-    transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background-color: rgb(250, 6, 6);
-    padding: 15px; 
+
+.elementos-principales {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: nowrap; /* Evita que los elementos se muevan a nuevas líneas */
 }
-.botonAudioSolución3{
-    position: absolute;
-    top: 75.4%;
-    left: 90%;
-    transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background-color: rgb(250, 6, 6);
-    padding: 15px; 
+
+.grupo-iconos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
 }
-.botonTextoSolución1{
-    position: absolute;
-    top: 84.7%;
-    left: 25%;
-    transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background-color: rgb(6, 250, 39);
-    padding: 15px; 
+
+.contenedor-icono {
+    padding: 0; /* Elimina el relleno adicional */
+    margin: 0;  /* Elimina el margen adicional */
+    text-align: center;
 }
-.botonTextoSolución2{
-    position: absolute;
-    top: 84.7%;
-    left: 55%;
-    transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background-color: rgb(6, 250, 39);
-    padding: 15px; 
+
+.imagen-principal {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: lightgrey;
+    text-align: center;
+    gap: 10px;
+    margin: 0px;
 }
-.botonTextoSolución3{
-    position: absolute;
-    top: 84.7%;
-    left: 90%;
-    transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background-color: rgb(6, 250, 39);
-    padding: 15px; 
+
+/* Autolayout para las respuestas */
+.posibles-respuestas {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 10px;
+    flex-wrap: wrap; /* Permite que las respuestas se ajusten en múltiples líneas si es necesario */
 }
-.botonLecturaSolución1{
-    position: absolute;
-    top: 75.4%;
-    left: 5%;
-    transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background-color: rgb(250, 234, 6);
-    padding: 15px; 
+
+.respuesta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 20px;
+    background-color: lightgrey;
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 200px; /* Limita el ancho máximo */
+    flex-grow: 1; /* Permite que se estiren si hay espacio */
+    margin-bottom: 20px; /* Espacio inferior entre las respuestas cuando se ajusten a varias líneas */
 }
-.botonLecturaSolución2{
-    position: absolute;
-    top: 75.4%;
-    left: 35%;
-    transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background-color: rgb(250, 234, 6);
-    padding: 15px; 
+
+.grupo-izquierda, .grupo-derecha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
-.botonLecturaSolución3{
-    position: absolute;
-    top: 75.4%;
-    left: 70%;
-    transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background-color: rgb(250, 234, 6);
-    padding: 15px; 
+
+.imagen-principal {
+    width: 150px; /* Ajusta el ancho de la imagen */
+    height: auto; /* Mantiene la proporción */
+    margin: 10px; /* Mantén el margen reducido */
+    padding: 20px; /* Puedes reducir o ajustar el relleno según lo prefieras */
+    background-color: lightgrey;
+    text-align: center;
 }
-.botonimagenProblemacolegio1{
-    position: absolute;
-    top: 35%;
+
+
+/* Alineación centrada para botones */
+.botonImagenSolucion1, .botonImagenSolucion2, .botonImagenSolucion3 {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Medios adaptativos */
+@media (max-width: 768px) {
+    .respuesta {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .imagen-principal {
+        margin: 20px; /* Ajusta el margen para la vista móvil */
+    }
+}
+.icono-boton {
+    width: 40px;  /* Ajusta el ancho a un tamaño más pequeño */
+    height: 40px; /* Ajusta la altura a un tamaño más pequeño */
+    object-fit: cover; /* Asegura que la imagen se ajuste bien al tamaño */
+}
+/*--------------------------------------------------------------------------------------------------*/
+.hidden {
+    display: none;
+}
+
+.text-box {
+    position: fixed;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
-    height: 200px;
-    border-radius: 10px;
-    background-color: rgb(173, 28, 166);
-    padding: 15px; 
+    padding: 20px;
+    border: 1px solid rgb(236, 0, 0);
+    background-color: #f9f9f9;
+    width: 300px;
+    max-width: 80%;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
 }
-.botonLecturaProblemacolegio1{
-    position: absolute;
-    top: 24%;
-    left: 30%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    border-radius: 10px;
-    background-color: rgb(250, 234, 6);
-    padding: 15px; 
-}
-.botonAudioProblemacolegio1{
-    position: absolute;
-    top: 26%;
-    left: 70%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 80px;
-    border-radius: 10px;
-    background-color: rgb(250, 6, 6);
-    padding: 15px; 
-}
-.botonTextoProblemacolegio1{
-    position: absolute;
-    top: 44.5%;
-    left: 70%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 80px;
-    border-radius: 10px;
-    background-color: rgb(6, 250, 39);
-    padding: 15px;
+
+.text-box.expanded {
+    display: block;
 }

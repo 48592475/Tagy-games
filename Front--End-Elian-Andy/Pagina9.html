@@ -1,29 +1,154 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Situacion Colegio 1</title>
+    <title>Situación Colegio 1</title>
     <link rel="stylesheet" href="Style(Pagina9).css">
-
 </head>
 <body>
-    <a class="botonSolucion1" href="">Rta 1</a> 
-    <a class="botonSolucion2" href="">Rta 2</a> 
-    <a class="botonSolucion3" href="">Rta 3</a> 
-    <a class="botonAudioSolución1" href="">Audio1</a> 
-    <a class="botonAudioSolución2" href="">Audio2</a> 
-    <a class="botonAudioSolución3" href="">Audio3</a> 
-    <a class="botonTextoSolución1" href="">T1</a> 
-    <a class="botonTextoSolución2" href="">T2</a> 
-    <a class="botonTextoSolución3" href="">T3</a> 
-    <a class="botonLecturaSolución1" href="">Lect</a> 
-    <a class="botonLecturaSolución2" href="">Lect</a> 
-    <a class="botonLecturaSolución3" href="">Lect</a> 
-    <a class="botonimagenProblemacolegio1" href="">Imagen problema</a> 
-    <a class="botonLecturaProblemacolegio1" href="">Lect</a> 
-    <a class="botonAudioProblemacolegio1" href="">Audio</a> 
-    <a class="botonTextoProblemacolegio1" href="">T</a> 
+    <div class="contenedor-principal">
+        <div class="situacion">
+            <div class="etiqueta-situacion">SITUACIÓN</div>
+            <div class="elementos-principales">
+                <div class="grupo-iconos">
+                    <!-- Botón de lectura con imagen (ahora a la izquierda) -->
+                    <div class="contenedor-icono">
+                        <a class="botonLecturaProblemaColegio1" id="botonLecturaProblema1" href="javascript:void(0);">
+                            <img src="image 16.png" alt="Lectura" class="icono-boton">
+                        </a>
+                        <!-- Cuadro de lectura -->
+                        <div id="textBox2" class="text-box hidden">
+                            Este es el texto de lectura correspondiente al problema.
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="imagen-principal">
+                    <a class="botonImagenProblemaColegio1" href="">Imagen del problema</a>
+                </div>
+            
+                <div class="grupo-iconos">
+                    <!-- Botón de audio con imagen -->
+                    <div class="contenedor-icono">
+                        <a class="botonAudioProblemaColegio1" href="">
+                            <img src="image 7.png" alt="Audio" class="icono-boton">
+                        </a>
+                    </div>
+                    <!-- Botón de texto con imagen -->
+                    <div class="contenedor-icono">
+                        <a class="botonTextoProblemaColegio1" id="botonTextoProblema1" href="javascript:void(0);">
+                            <div id="textBox1" class="text-box hidden">
+                                Este es el texto correspondiente al problema.
+                            </div>    
+                            <img src="image 13.png" alt="Texto" class="icono-boton">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="posibles-respuestas">
+            <div class="respuesta">
+                <div class="grupo-izquierda">
+                    <!-- Botón de lectura con imagen -->
+                    <div class="contenedor-icono">
+                        <a class="botonLecturaSolucion1" id="botonLecturaSolucion1" href="javascript:void(0);">
+                            <img src="image 16.png" alt="Lectura" class="icono-boton">
+                        </a>
+                        <div id="textBox3" class="text-box hidden">
+                            Este es el texto de lectura de la solución 1.
+                        </div>
+                    </div>
+                </div>
+                <div class="imagen-principal">
+                    <a class="botonImagenSolucion1" href="">Respuesta 1</a>
+                </div>
+                <div class="grupo-derecha">
+                    <!-- Botón de audio con imagen -->
+                    <div class="contenedor-icono">
+                        <a class="botonAudioSolucion1" href="">
+                            <img src="image 7.png" alt="Audio" class="icono-boton">
+                        </a>
+                    </div>
+                    <!-- Botón de texto con imagen -->
+                    <div class="contenedor-icono">
+                        <a class="botonTextoSolucion1" id="botonTextoSolucion1" href="javascript:void(0);">
+                            <div id="textBox4" class="text-box hidden">
+                                Este es el texto de texto de la solución 1.
+                            </div>    
+                            <img src="image 13.png" alt="Texto" class="icono-boton">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="respuesta">
+                <div class="grupo-izquierda">
+                    <div class="contenedor-icono">
+                        <a class="botonLecturaSolucion2" id="botonLecturaSolucion2" href="javascript:void(0);">
+                            <img src="image 16.png" alt="Lectura" class="icono-boton">
+                        </a>
+                        <div id="textBox5" class="text-box hidden">
+                            Este es el texto de lectura de la solución 2.
+                        </div>
+                    </div>
+                </div>
+                <div class="imagen-principal">
+                    <a class="botonImagenSolucion2" href="">Respuesta 2</a>
+                </div>
+                <div class="grupo-derecha">
+                    <div class="contenedor-icono">
+                        <a class="botonAudioSolucion2" href="">
+                            <img src="image 7.png" alt="Audio" class="icono-boton">
+                        </a>
+                    </div>
+                    <div class="contenedor-icono">
+                        <a class="botonTextoSolucion2" id="botonTextoSolucion2" href="javascript:void(0);">
+                            <img src="image 13.png" alt="Texto" class="icono-boton">
+                        </a>
+                        <div id="textBox6" class="text-box hidden">
+                            Este es el texto de la solución 2.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="respuesta">
+                <div class="grupo-izquierda">
+                    <div class="contenedor-icono">
+                        <a class="botonLecturaSolucion3" id="botonLecturaSolucion3" href="javascript:void(0);">
+                            <img src="image 16.png" alt="Lectura" class="icono-boton">
+                        </a>
+                        <div id="textBox7" class="text-box hidden">
+                            Este es el texto de lectura de la solución 3.
+                        </div>
+                    </div>
+                </div>
+                <div class="imagen-principal">
+                    <a class="botonImagenSolucion3" href="">Respuesta 3</a>
+                </div>
+                <div class="grupo-derecha">
+                    <div class="contenedor-icono">
+                        <a class="botonAudioSolucion3" href="">
+                            <img src="image 7.png" alt="Audio" class="icono-boton">
+                        </a>
+                    </div>
+                    <div class="contenedor-icono">
+                        <a class="botonTextoSolucion3" id="botonTextoSolucion3" href="javascript:void(0);">
+                            <img src="image 13.png" alt="Texto" class="icono-boton">
+                        </a>
+                        <div id="textBox8" class="text-box hidden">
+                            Este es el texto de la solución 3.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="Pagina 9.js"></script>
 </body>
 </html>

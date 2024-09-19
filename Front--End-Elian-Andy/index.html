@@ -12,7 +12,6 @@
  -->
 
 
-
 <div class="container-form">
     <div class="form-information">
         <div class="form-information-childs">
@@ -35,5 +34,19 @@
     </div>
 </div>
 
+<<<<<<< HEAD
+=======
+<script>
+    async function solicitarCamara() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                console.log('Cámara habilitada correctamente.');
+            } catch (error) {
+                alert('Debe habilitar la cámara para continuar usando esta aplicación.');
+            }
+        }
+        window.onload = solicitarCamara;
+</script>
+>>>>>>> 5609baf8f9ac54c493b38a24d4fca73b9a387b86
 </body>
 </html>
