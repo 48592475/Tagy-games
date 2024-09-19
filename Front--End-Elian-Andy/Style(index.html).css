@@ -1,7 +1,53 @@
+.information-childs {
+    width: 55vw;
+    margin: 0;
+    margin-top: 120px;
+
+}
+
+
+#foto {
+    margin-left: 200px;
+}
+
+#img2{
+    margin-top: 790px;
+    rotate: 180deg;
+    margin-left: 100px;
+    position: relative;
+}
+
+.container-form {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
 .btn {
- color: white;
- font-size: 80px;
- font-family: Inter;
- font-weight: 400;
- word-wrap: break-word
+    width: 611px;
+    height: 99px;
+    top: 644px;
+    left: 654px;
+    border-radius: 45px;
+    background-color: #BF1D79;
+    font-size: 80px;
+    font-style: inter;
+    color: #FFFFFF;
+    text-align: center;
+    border-color: #BF1D79;
+}
+
+body {
+    display: flex;
+    position: relative;
+}
+
+h1 {
+    font-size: 110px;
+    color: #a51767;
+}
+
+h3 {
+    font-size: 50px;
+    color: #a51767;
 }
