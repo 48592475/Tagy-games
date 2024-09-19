@@ -3,6 +3,7 @@
 # pip install numpy
 # pip install deepface --user
 # pip install tf-keras --user
+#pip install matplotlib --user
 
 import cv2
 import numpy as np
@@ -10,12 +11,15 @@ import os
 import time
 from deepface import DeepFace
 import threading
+import matplotlib.pyplot as plt
+
 carpeta = "Fotos.Emociones"
 count = 0
 
 EscuchandoMusica = False
 # Inicializa un diccionario para contar las emociones
 emociones_contador = {}
+emociones_totales ={}
 
 # Verificar si la carpeta existe, si no, crearla
 if not os.path.exists(carpeta):
@@ -35,6 +39,27 @@ def detener_musica():
 
 #def RendimientoMusica():
 
+def HacerInforme():
+    global emociones_totales
+    if not emociones_totales:
+        print("No hay datos de emociones para generar un informe.")
+        return
+    print("Informe de Emociones")
+    for emocion, cantidad in emociones_totales.items():
+        print(f"La Emoción: {emocion}, Fue detectada un Total de {cantidad}, veces")
+   
+    emociones = list(emociones_totales.keys())
+    cantidad = list(emociones_totales.values())  
+
+    plt.figure(figsize=(10, 5))                         #grafico de cuantas veces fue detectada cada emocion
+    plt.bar(emociones, cantidad, color='navy')
+    plt.xlabel('Emociones')
+    plt.ylabel('Cuantas veces fue detectada')
+    plt.title('Emociones y cuantas veces fueron detectadas')
+    plt.show()
+
+timer = threading.Timer(60.0, HacerInforme)
+timer.start()
 def ManejarPlaylist(emocion_dominante):
  global EscuchandoMusica          #si no hay musica pone la musica acorde a la emocion dominante detectada
  if not EscuchandoMusica:
@@ -66,7 +91,10 @@ def AnalizarFotos():
             # Solo imprime si la confianza de la detección de la cara es mayor a 0.3
             if face_confidence > 0.3:
                 print(f"Emoción dominante: {emocion_dominante}, Confianza que detecte cara: {face_confidence:.2f}")
-
+                if emocion_dominante in emociones_totales:
+                    emociones_totales[emocion_dominante] += 1
+                else:
+                    emociones_totales[emocion_dominante] = 1
                  # Solo agrega al contador si la emoción es 'fear', 'sad'  'angry', o 'disgust'
                 if emocion_dominante in ["fear", "sad", "angry", "disgust"]:
                     if emocion_dominante in emociones_contador:
@@ -91,9 +119,9 @@ def AnalizarFotos():
                 print("La confianza en la detección de la cara es demasiado baja.")
         else:
             print("No se detectó una cara en la foto.")
-   
     except Exception as e:
         print(f"Ocurrió un error: {e}")
+        
    
 
 # Función para tomar una foto y sobreescribir si es necesario
@@ -117,6 +145,8 @@ def TomarFoto(carpeta, nombre, faces, frame):
     else:
         print("No se detectaron caras.")
         return None  # Devuelve None si no se detectan caras
+    
+    
 
 # Importo el reconocedor de caras
 cascade_path = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
