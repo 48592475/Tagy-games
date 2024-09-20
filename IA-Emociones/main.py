@@ -56,9 +56,10 @@ def HacerInforme():
     plt.xlabel('Emociones')
     plt.ylabel('Cuantas veces fue detectada')
     plt.title('Emociones y cuantas veces fueron detectadas')
-    plt.show()
+    #plt.show()
+    plt.savefig('informe_emociones.png')  # guardo como png el informe
 
-timer = threading.Timer(60.0, HacerInforme)
+timer = threading.Timer(60.0, HacerInforme) # cada 60 segundo llamo a la funcion de hacer informe
 timer.start()
 def ManejarPlaylist(emocion_dominante):
  global EscuchandoMusica          #si no hay musica pone la musica acorde a la emocion dominante detectada
