@@ -24,53 +24,50 @@ const registrar = async (req, res) => {
         return res.status(500).json({ message: error.message });
     }
 };
-const iniciodesesion=async(req,res)=>{
-    const {usuario, contraseña}=req.body;
-    if(!usuario || !contraseña){
+const iniciodesesion = async (req, res) => {
+    const { usuario, contraseña } = req.body;
+    if (!usuario || !contraseña) {
         return res.status(400).json({ message: "Hay campos sin completar" });
     }
-    try{
-        const user=await usuariosService.getUsuarioByUsuarios(usuario);
-        if(!user){
-            return res.status(400).json({ message: "No hay ningun usuario, porfavor verifique sus datos" });
+    try {
+        const user = await usuariosService.getUsuarioByUsuarios(usuario);
+        if (!user) {
+            return res.status(400).json({ message: "No hay ningun usuario, por favor verifique sus datos" });
         }
-        const contraseñaCorrecta=await bcrypt.compare(contraseña,user.contraseña);
-        if(!contraseñaCorrecta){
-            return res.status(400).json({message:"Contraseña incorrecta, intente nuevamente"});
+        const contraseñaCorrecta = await bcrypt.compare(contraseña, user.contraseña);
+        if (!contraseñaCorrecta) {
+            return res.status(400).json({ message: "Contraseña incorrecta, intente nuevamente" });
         }
-        const token=jwt.sign({id:user.id},"Hola como estas",{expiresIn:"1h"});
-        return res.status(200).json({user, token})
-    }catch(error){
-        return res.status(500).json({message:error.message});
-    } 
-}
-const olvidastecontra=async(req,res)=>{
+        const token = jwt.sign({ id: user.id }, "Hola como estas", { expiresIn: "1h" });
+        return res.status(200).json({ message: "Inicio de sesión exitoso", user, token });
+    } catch (error) {
+        console.error("Error al iniciar sesión:", error);
+        return res.status(500).json({ message: error.message });
+    }
+};
+
+const olvidastecontra = async (req, res) => {
     const { usuario, contraseña, pregunta } = req.body;
-    if(!usuario||!contraseña||!pregunta){
+    if (!usuario || !contraseña || !pregunta) {
         return res.status(400).json({ message: "Hay campos sin completar" });
     }
-    try{
-        const user=await usuariosService.getUsuarioByUsuarios(usuario);
-        if(!user){
-            return res.status(400).json({ message: "No hay ningun usuario, porfavor verifique sus datos" });
+
+    try {
+        const user = await usuariosService.getUsuarioByUsuarios(usuario);
+        if (!user) {
+            return res.status(400).json({ message: "No hay ningun usuario, por favor verifique sus datos" });
         }
-        const resultado=await usuariosService.actualizarContraseña(usuario, contraseña,)
-        if (resultado.rows.length > 0) {
-            const hashedcontra = await bcrypt.hash(contraseña, 10);
-      
-            const queryUpdate = `
-              UPDATE usuario 
-              SET contraseña = $2::varchar
-              WHERE usuario = $1::varchar
-            `;
-            await pool.query(queryUpdate, [usuario, hashedcontra]);
-      
-            return true;
-          } else {
-            return false;
-          }
-        } catch (error) {
-            return res.status(500).json({message:error.message});
+
+        if (user.pregunta !== pregunta) {
+            return res.status(400).json({ message: "Pregunta de seguridad incorrecta, intente nuevamente" });
         }
-}
+        const hashedContra = await bcrypt.hash(contraseña, 10);
+        await usuariosService.actualizarContraseña(usuario, hashedContra);
+
+        return res.status(200).json({ message: "Contraseña actualizada de forma correcta" });
+    } catch (error) {
+        console.error("Error al actualizar la contraseña:", error);
+        return res.status(500).json({ message: error.message });
+    }
+};
 export default { registrar, iniciodesesion,olvidastecontra};
