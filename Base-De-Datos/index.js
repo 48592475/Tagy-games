@@ -14,6 +14,6 @@ app.get("/", (_, res) => res.send("TagyGames API is running..."));
 app.use("/auth", AuthRouter); 
 app.use("/informe", InformeRouter);
 app.use("/cancion",CancionRouter);
-app.listen(process.env.PORT || 9000, () =>
-    console.log(`Server is running on port ${process.env.PORT || 9000}`)
+app.listen(process.env.PORT || 3000, () =>
+    console.log(`Server is running on port ${process.env.PORT || 3000}`)
 );
