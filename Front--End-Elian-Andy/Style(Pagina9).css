@@ -1,4 +1,4 @@
-/* Estilos generales */
+
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -13,11 +13,10 @@ body {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
-    max-width: 1100px; /* Limita el ancho máximo */
+    width: 100%; 
+    max-width: 1100px; 
 }
 
-/* Estilos de la situación */
 .situacion {
     padding: 10px;
     text-align: center;
@@ -34,7 +33,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    flex-wrap: nowrap; /* Evita que los elementos se muevan a nuevas líneas */
+    flex-wrap: nowrap; 
 }
 
 .grupo-iconos {
@@ -45,8 +44,8 @@ body {
 }
 
 .contenedor-icono {
-    padding: 0; /* Elimina el relleno adicional */
-    margin: 0;  /* Elimina el margen adicional */
+    padding: 0; 
+    margin: 0;  
     text-align: center;
 }
 
@@ -60,15 +59,15 @@ body {
     margin: 0px;
 }
 
-/* Autolayout para las respuestas */
+
 .posibles-respuestas {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 10px;
+    gap: 30px;
     margin-top: 20px;
     padding: 10px;
-    flex-wrap: wrap; /* Permite que las respuestas se ajusten en múltiples líneas si es necesario */
+    flex-wrap: wrap; 
 }
 
 .respuesta {
@@ -78,10 +77,10 @@ body {
     flex-direction: row;
     padding: 20px;
     background-color: lightgrey;
-    width: 100%; /* Ocupa todo el ancho disponible */
-    max-width: 200px; /* Limita el ancho máximo */
-    flex-grow: 1; /* Permite que se estiren si hay espacio */
-    margin-bottom: 20px; /* Espacio inferior entre las respuestas cuando se ajusten a varias líneas */
+    width: 100%; 
+    max-width: 300px;
+    flex-grow: 1;
+    margin-bottom: 20px; 
 }
 
 .grupo-izquierda, .grupo-derecha {
@@ -92,22 +91,23 @@ body {
 }
 
 .imagen-principal {
-    width: 150px; /* Ajusta el ancho de la imagen */
-    height: auto; /* Mantiene la proporción */
-    margin: 10px; /* Mantén el margen reducido */
-    padding: 20px; /* Puedes reducir o ajustar el relleno según lo prefieras */
+    width: 150px; 
+    height: auto; 
+    margin: 10px; 
+    padding: 20px; 
     background-color: lightgrey;
     text-align: center;
 }
 
 
-/* Alineación centrada para botones */
+
 .botonImagenSolucion1, .botonImagenSolucion2, .botonImagenSolucion3 {
-    display: block;
+    display: center;
     margin: 0 auto;
+    
 }
 
-/* Medios adaptativos */
+
 @media (max-width: 768px) {
     .respuesta {
         flex-direction: column;
@@ -115,13 +115,13 @@ body {
     }
 
     .imagen-principal {
-        margin: 20px; /* Ajusta el margen para la vista móvil */
+        margin: 20px; 
     }
 }
 .icono-boton {
-    width: 40px;  /* Ajusta el ancho a un tamaño más pequeño */
-    height: 40px; /* Ajusta la altura a un tamaño más pequeño */
-    object-fit: cover; /* Asegura que la imagen se ajuste bien al tamaño */
+    width: 40px;  
+    height: 40px; 
+    object-fit: cover; 
 }
 /*--------------------------------------------------------------------------------------------------*/
 .hidden {

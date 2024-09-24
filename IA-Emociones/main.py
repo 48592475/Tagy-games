@@ -31,13 +31,19 @@ if not cap.isOpened():
     print("Error: No se puede abrir la cámara")
     exit()
 
-def detener_musica():
+def detener_musica(emocion_dominante):
+    EmocionDesp = emocion_dominante
     global EscuchandoMusica
     EscuchandoMusica = False
     print("Deteniendo la música después de 60 segundos.")
+    return(EmocionDesp)
     #agregar codigo para frenar musica
 
-#def RendimientoMusica():
+def RendimientoMusica(EmocionAnt ,EmocionDesp):
+    if EmocionAnt is not None and EmocionDesp is not None:
+       #hacer grafico comparando las dos emociones 
+    else:
+      print ("Alguna de las emociones es nula")
 
 def HacerInforme():
     global emociones_totales
@@ -56,11 +62,13 @@ def HacerInforme():
     plt.xlabel('Emociones')
     plt.ylabel('Cuantas veces fue detectada')
     plt.title('Emociones y cuantas veces fueron detectadas')
-    plt.show()
+    #plt.show()
+    plt.savefig('informe_emociones.png')  # guardo como png el informe
 
-timer = threading.Timer(60.0, HacerInforme)
+timer = threading.Timer(60.0, HacerInforme) # cada 60 segundo llamo a la funcion de hacer informe
 timer.start()
 def ManejarPlaylist(emocion_dominante):
+ EmocionAnt = emocion_dominante
  global EscuchandoMusica          #si no hay musica pone la musica acorde a la emocion dominante detectada
  if not EscuchandoMusica:
     if emocion_dominante in ["disgust", "angry"]:
@@ -74,6 +82,7 @@ def ManejarPlaylist(emocion_dominante):
             # Inicia un temporizador que tras 60 segundos detiene la musica
     timer = threading.Timer(60.0, detener_musica)
     timer.start()
+    return (EmocionAnt)
 
 # Función para analizar emociones de la foto
 def AnalizarFotos():

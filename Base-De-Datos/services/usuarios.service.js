@@ -35,30 +35,21 @@ const createUsuario = async (usuario) => {
     }
 };
 
-const actualizarContraseña = async (usuario, pregunta, contraseña) => {
+const actualizarContraseña = async (usuario, contraseña) => {
     const client = new Client(config);
     await client.connect();
     try {
-        const queryUsuario1 = `
-            SELECT * FROM usuario WHERE usuario = $1 AND pregunta = $2
+        const queryUpdate = `
+            UPDATE usuario 
+            SET contraseña = $2
+            WHERE usuario = $1
         `;
-        const resultado = await client.query(queryUsuario1, [usuario, pregunta]);
-        if (resultado.rows.length > 0) {
-            const hashedcontra = await bcrypt.hash(contraseña, 10);
-            const queryUpdate = `
-                UPDATE usuario 
-                SET contraseña = $2::varchar
-                WHERE usuario = $1::varchar
-            `;
-            await client.query(queryUpdate, [usuario, hashedcontra]);
-            return true;
-        } else {
-            return false;
-        }
+        await client.query(queryUpdate, [usuario, contraseña]);
+        return true; // No es necesario comprobar la longitud aquí ya que el UPDATE no devuelve filas
     } catch (error) {
         throw error;
     } finally {
-        await client.end(); 
+        await client.end();
     }
 };
 
