@@ -31,19 +31,18 @@ if not cap.isOpened():
     print("Error: No se puede abrir la cámara")
     exit()
 
-def detener_musica(emocion_dominante):
-    EmocionDesp = emocion_dominante
+def detener_musica():
     global EscuchandoMusica
     EscuchandoMusica = False
     print("Deteniendo la música después de 60 segundos.")
-    return(EmocionDesp)
+    return()
     #agregar codigo para frenar musica
 
-def RendimientoMusica(EmocionAnt ,EmocionDesp):
+def RendimientoMusica(EmocionAnt, EmocionDesp):
     if EmocionAnt is not None and EmocionDesp is not None:
-       #hacer grafico comparando las dos emociones 
+        print(f" Las emoción anterior era: {EmocionAnt} y la emoción ahora es {EmocionDesp}")
     else:
-      print ("Alguna de las emociones es nula")
+        print("Alguna de las emociones es nula")
 
 def HacerInforme():
     global emociones_totales
@@ -64,6 +63,7 @@ def HacerInforme():
     plt.title('Emociones y cuantas veces fueron detectadas')
     #plt.show()
     plt.savefig('informe_emociones.png')  # guardo como png el informe
+    plt.close('all')  # Cerrar las figuras activas
 
 timer = threading.Timer(60.0, HacerInforme) # cada 60 segundo llamo a la funcion de hacer informe
 timer.start()
