@@ -46,20 +46,13 @@
         font-style: normal;
         font-weight: 800;
         line-height: normal;
-        width: 125px;
-        height: 47px;
-        flex-shrink: 0;
         border-radius: 45px;
         background: linear-gradient(180deg, #89426A -21.21%, #795368 67.19%);
         width: 431px;
         height: 55px;
         flex-shrink: 0;
-
+        margin-left: 80px;
     }
-    .butom:hover{
-        transform: scale(1.1);
-    }
-    
     
     .information-childs {
         padding: 20px;
@@ -73,9 +66,14 @@
     
     
     .information-childs .username {
-        position: relative;
         border-bottom: 2px solid #adadad;
         margin: 30px 0;
+        color: rgba(0, 0, 0, 0.30);
+        font-family: Inter;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
     
     
@@ -145,4 +143,39 @@
         -webkit-text-fill-color: transparent;
         margin-left: 210px;
     }
-    
+
+    #Olvidaste {
+        color: #A91BDC;
+        font-family: Poppins;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-decoration-line: underline;
+    }
+
+    #Crear {
+        color: #000;
+        font-family: Poppins;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-decoration-line: underline;
+    }
+
+    #nocuenta {
+        margin: 10px 0;
+        color: #000;
+        font-family: Poppins;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    #nocuenta, #Crear {
+        display: inline-block;
+        margin-right: 10px; /* Ajusta el espaciado entre los elementos si es necesario */
+        vertical-align: middle; /* Alinea verticalmente los elementos en el mismo nivel */
+    }
