@@ -3,19 +3,26 @@
 # pip install numpy
 # pip install deepface --user
 # pip install tf-keras --user
+<<<<<<< Updated upstream
 #pip install matplotlib --user
+=======
+>>>>>>> Stashed changes
 
 import cv2
 import numpy as np
 import os
 import time
 from deepface import DeepFace
+<<<<<<< Updated upstream
 import threading
 import matplotlib.pyplot as plt
+=======
+>>>>>>> Stashed changes
 
 carpeta = "Fotos.Emociones"
 count = 0
 
+<<<<<<< Updated upstream
 EmocionAnt = None
 EmocionDesp = None
 
@@ -28,12 +35,19 @@ emociones_totales ={}
 if not os.path.exists(carpeta):
     os.makedirs(carpeta)
 
+=======
+# Verificar si la carpeta existe, si no, crearla
+if not os.path.exists(carpeta):
+    os.makedirs(carpeta)
+
+>>>>>>> Stashed changes
 # Abrir la cámara
 cap = cv2.VideoCapture(0)  
 if not cap.isOpened():
     print("Error: No se puede abrir la cámara")
     exit()
 
+<<<<<<< Updated upstream
 def detener_musica():
     global EscuchandoMusica, EmocionDesp
     EscuchandoMusica = False
@@ -166,6 +180,33 @@ def AnalizarFotos():
     except Exception as e:
         print(f"Ocurrió un error: {e}")
         
+=======
+# Función para analizar emociones de la foto
+def AnalizarFotos():
+    foto = os.path.join(carpeta, 'Foto_auto_1.jpg')
+    
+    try:
+        # Analiza la foto para detectar emociones
+        analisis = DeepFace.analyze(img_path=foto, actions=["emotion"], enforce_detection=False)
+       
+        # Verifica si se ha detectado una cara
+        if 'dominant_emotion' in analisis[0]:
+            emocion_dominante = analisis[0]['dominant_emotion']
+            face_confidence = analisis[0].get('face_confidence', 0)
+             
+            # Solo imprime si la confianza de la detección de la cara es mayor a 0.3
+            if face_confidence > 0.3:
+                print(f"Emoción dominante: {emocion_dominante}, Confianza que detecte cara: {face_confidence:.2f}")
+            else:
+                print("La confianza en la detección de la cara es demasiado baja.")
+        else:
+            print("No se detectó una cara en la foto.")
+   
+    except Exception as e:
+        print(f"Ocurrió un error: {e}")
+   
+
+>>>>>>> Stashed changes
 # Función para tomar una foto y sobreescribir si es necesario
 def TomarFoto(carpeta, nombre, faces, frame):
     if len(faces) > 0:  # Si hay caras detectadas
@@ -187,8 +228,12 @@ def TomarFoto(carpeta, nombre, faces, frame):
     else:
         print("No se detectaron caras.")
         return None  # Devuelve None si no se detectan caras
+<<<<<<< Updated upstream
     
     
+=======
+
+>>>>>>> Stashed changes
 # Importo el reconocedor de caras
 cascade_path = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
 face_cascade = cv2.CascadeClassifier(cascade_path)

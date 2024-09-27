@@ -1,0 +1,198 @@
+.pantalla-log-in {
+    background-color: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.pantalla-log-in .div {
+    background-color: rgba(255, 255, 255, 1);
+    background: linear-gradient(
+        180deg,
+        rgb(224.19, 123.3, 180.6) 0%,
+        rgb(172, 91, 137) 50%,
+        rgb(90.31, 12.79, 56.82) 100%
+    );
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+}
+
+.pantalla-log-in .overlap {
+    position: absolute;
+    width: 814px;
+    height: 582px;
+    top: 221px;
+    left: 948px;
+    border-radius: 55px;
+    background: linear-gradient(180deg, rgba(217, 217, 217, 0.1) 25%, rgb(217, 217, 217) 100%);
+}
+
+.pantalla-log-in .group {
+    position: absolute;
+    width: 640px;
+    height: 500px;
+    top: 54px;
+    left: 93px;
+}
+
+.pantalla-log-in .overlap-group {
+    position: relative;
+    width: 628px;
+    height: 500px;
+    background-color: #d9d9d9;
+    border-radius: 40px;
+}
+
+.pantalla-log-in .text-wrapper {
+    position: absolute;
+    width: 186px;
+    top: 53px;
+    left: 236px;
+    background: linear-gradient(180deg, rgb(199, 123, 166) 0%, rgb(102, 102, 102) 65.55%);
+    -webkit-background-clip: text !important;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: "Poppins-ExtraBold", Helvetica;
+    font-weight: 800;
+    color: transparent;
+    font-size: 50px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.pantalla-log-in .overlap-2 {
+    position: absolute;
+    width: 431px;
+    height: 43px;
+    top: 178px;
+    left: 98px;
+}
+
+.pantalla-log-in .line {
+    top: 29px;
+    position: absolute;
+    width: 431px;
+    height: 1px;
+    left: 0;
+    object-fit: cover;
+}
+
+.pantalla-log-in .p {
+    /* ... */
+    padding: 10px; /* Agregar relleno */
+    border-radius: 10px; /* Agregar borde redondeado */
+    border: 1px solid #ccc; /* Agregar borde */
+}
+
+.pantalla-log-in .overlap-3 {
+    position: absolute;
+    width: 431px;
+    height: 43px;
+    top: 261px;
+    left: 98px;
+}
+
+.pantalla-log-in .img {
+    top: 31px;
+    position: absolute;
+    width: 431px;
+    height: 1px;
+    left: 0;
+    object-fit: cover;
+}
+
+
+.pantalla-log-in .text-wrapper-2 {
+    /* ... */
+    padding: 10px; /* Agregar relleno */
+    border-radius: 10px; /* Agregar borde redondeado */
+    border: 1px solid #ccc; /* Agregar borde */
+}
+
+
+.pantalla-log-in .div-wrapper {
+    position: absolute;
+    width: 431px;
+    height: 55px; 
+    top: 327px;
+    left: 98px;
+    border-radius: 45px;
+    background: linear-gradient(180deg, rgb(137, 66, 106) 0%, rgb(121, 83, 104) 72.93%);
+}
+
+.pantalla-log-in .text-wrapper-3 {
+    position: absolute;
+    width: 125px;
+    top: 4px;
+    left: 153px;
+    font-family: "Poppins-ExtraBold", Helvetica;
+    font-weight: 800;
+    color: #ffffff;
+    font-size: 30px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.pantalla-log-in .no-tenes-cuenta {
+    position: absolute;
+    width: 250px;
+    top: 438px;
+    left: 108px;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 15px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.pantalla-log-in .span {
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 15px;
+    letter-spacing: 0;
+}
+
+.pantalla-log-in .text-wrapper-4 {
+    font-family: "Poppins-Bold", Helvetica;
+    font-weight: 700;
+}
+
+.pantalla-log-in .text-wrapper-6 {
+    /* ... */
+    background-color: transparent; /* Hacer que el fondo sea transparente */
+    border: none; /* Eliminar borde */
+    padding: 10px; /* Agregar relleno */
+    border-radius: 10px; /* Agregar borde redondeado */
+    cursor: pointer; /* Agregar cursor de mano */
+    color: #a81bdb; /* Color del texto */
+}
+
+.pantalla-log-in .text-wrapper-5 {
+    /* ... */
+    background-color: transparent; /* Hacer que el fondo sea transparente */
+    border: none; /* Eliminar borde */
+    padding: 10px; /* Agregar relleno */
+    border-radius: 10px; /* Agregar borde redondeado */
+    cursor: pointer; /* Agregar cursor de mano */
+    color: #a81bdb; /* Color del texto */
+}
+
+.pantalla-log-in .eye-visible {
+    position: absolute;
+    width: 39px;
+    height: 39px;
+    top: 311px;
+    left: 581px;
+}
+
+.pantalla-log-in .group-2 {
+    position: absolute;
+    width: 713px;
+    height: 417px;
+    top: 296px;
+    left: 137px;
+}

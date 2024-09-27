@@ -5,6 +5,7 @@
 
 }
 
+<<<<<<< Updated upstream
 
 #foto {
     margin-left: 200px;
@@ -15,6 +16,11 @@
     rotate: 180deg;
     margin-left: 100px;
     position: relative;
+=======
+#img2{
+    margin-top: 790px;
+    rotate: 180deg;
+>>>>>>> Stashed changes
 }
 
 .container-form {
@@ -39,7 +45,12 @@
 
 body {
     display: flex;
+<<<<<<< Updated upstream
     position: relative;
+=======
+    width: 1920px;
+    height: 1080px;
+>>>>>>> Stashed changes
 }
 
 h1 {

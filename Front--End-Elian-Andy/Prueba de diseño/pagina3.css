@@ -1,0 +1,201 @@
+.pantalla-registrase {
+    background-color: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.pantalla-registrase .div {
+    background-color: rgba(255, 255, 255, 1);
+    background: linear-gradient(
+        180deg,
+        rgb(224.19, 123.3, 180.6) 0%,
+        rgb(172, 91, 137) 50%,
+        rgb(90.31, 12.79, 56.82) 100%
+    );
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+}
+
+.pantalla-registrase .overlap {
+    position: absolute;
+    width: 761px;
+    height: 722px;
+    top: 221px;
+    left: 229px;
+    border-radius: 55px;
+    filter: blur(11.6px);
+    background: linear-gradient(180deg, rgba(217, 217, 217, 0.1) 25%, rgb(217, 217, 217) 100%);
+}
+
+.pantalla-registrase .rectangle {
+    position: absolute;
+    width: 628px;
+    height: 639px;
+    top: 41px;
+    left: 67px;
+    background-color: #d9d9d9;
+    border-radius: 40px;
+}
+
+.pantalla-registrase .group {
+    position: absolute;
+    width: 545px;
+    height: 601px;
+    top: 65px;
+    left: 116px;
+}
+
+.pantalla-registrase .text-wrapper {
+    position: absolute;
+    width: 347px;
+    top: 0;
+    left: 97px;
+    background: linear-gradient(180deg, rgb(168.94, 33.08, 110.24) 0%, rgb(102, 102, 102) 65.55%);
+    -webkit-background-clip: text !important;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: "Poppins-ExtraBold", Helvetica;
+    font-weight: 800;
+    color: transparent;
+    font-size: 48px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.pantalla-registrase .overlap-group {
+    position: absolute;
+    width: 431px;
+    height: 43px;
+    top: 108px;
+    left: 55px;
+}
+
+.pantalla-registrase .line {
+    position: absolute;
+    width: 431px;
+    height: 1px;
+    top: 29px;
+    left: 0;
+    object-fit: cover;
+}
+
+.pantalla-registrase .text-wrapper-2 {
+    position: absolute;
+    width: 379px;
+    top: 0;
+    left: 10px;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    color: #6f6f6fdb;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.pantalla-registrase .overlap-group-2 {
+    position: absolute;
+    width: 431px;
+    height: 43px;
+    top: 179px;
+    left: 55px;
+}
+
+.pantalla-registrase .img {
+    position: absolute;
+    width: 431px;
+    height: 1px;
+    top: 31px;
+    left: 0;
+    object-fit: cover;
+}
+
+.pantalla-registrase .div-wrapper {
+    position: absolute;
+    width: 431px;
+    height: 55px;
+    top: 497px;
+    left: 53px;
+    border-radius: 45px;
+    background: linear-gradient(180deg, rgb(137, 66, 106) 0%, rgb(121, 83, 104) 72.93%);
+}
+
+.pantalla-registrase .text-wrapper-3 {
+    position: absolute;
+    width: 231px;
+    top: 4px;
+    left: 97px;
+    font-family: "Poppins-ExtraBold", Helvetica;
+    font-weight: 800;
+    color: #ffffff;
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.pantalla-registrase .text-wrapper-4 {
+    position: absolute;
+    width: 226px;
+    top: 575px;
+    left: 0;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    text-decoration: underline;
+}
+
+.pantalla-registrase .overlap-2 {
+    position: absolute;
+    width: 431px;
+    height: 43px;
+    top: 258px;
+    left: 55px;
+}
+
+.pantalla-registrase .line-2 {
+    position: absolute;
+    width: 431px;
+    height: 1px;
+    top: 30px;
+    left: 0;
+    object-fit: cover;
+}
+
+.pantalla-registrase .overlap-3 {
+    position: absolute;
+    width: 431px;
+    height: 43px;
+    top: 336px;
+    left: 55px;
+}
+
+.pantalla-registrase .overlap-4 {
+    position: absolute;
+    width: 431px;
+    height: 43px;
+    top: 419px;
+    left: 55px;
+}
+
+.pantalla-registrase .image {
+    position: absolute;
+    width: 43px;
+    height: 52px;
+    top: 172px;
+    left: 486px;
+    object-fit: cover;
+}
+
+.pantalla-registrase .group-2 {
+    position: absolute;
+    width: 713px;
+    height: 417px;
+    top: 331px;
+    left: 1084px;
+}
