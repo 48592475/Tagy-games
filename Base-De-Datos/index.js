@@ -4,7 +4,8 @@ import InformeRouter from "./routes/informe.router.js";
 import CancionRouter from "./routes/cancion.router.js"
 import cors from "cors";
 import "dotenv/config";
-
+import dotenv from 'dotenv';
+dotenv.config();
 const app = express();
 
 app.use(express.json());
