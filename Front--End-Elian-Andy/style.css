@@ -22,7 +22,6 @@
         padding: 20px;
     }
 
-<<<<<<< Updated upstream
     .formulario {
         width: 628px;
         height: 500px;
@@ -52,7 +51,7 @@
         width: 431px;
         height: 55px;
         flex-shrink: 0;
-        margin-left: 80px;
+        justify-content: center;
     }
     
     .information-childs {
@@ -123,7 +122,7 @@
         margin: 10px 300px;
         font-family: Arial, Helvetica, sans-serif;
     }
-=======
+
 body {
 margin: 0;
 padding: 0;
@@ -131,7 +130,6 @@ font-family: montserrat;
 background: linear-gradient(150deg,rgb(240, 163, 217), rgb(124, 5, 124) );
 height: 100vh;
 }
->>>>>>> Stashed changes
 
     #gruop5 {
         width: 712.999px;
@@ -151,7 +149,7 @@ height: 100vh;
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin-left: 210px;
+        
     }
 
     #Olvidaste {
@@ -175,7 +173,6 @@ height: 100vh;
     }
 
     #nocuenta {
-        margin: 10px 0;
         color: #000;
         font-family: Poppins;
         font-size: 15px;
@@ -184,17 +181,21 @@ height: 100vh;
         line-height: normal;
     }
 
-<<<<<<< Updated upstream
     #nocuenta, #Crear {
         display: inline-block;
-        margin-right: 10px; /* Ajusta el espaciado entre los elementos si es necesario */
+        margin-right: 5px; /* Ajusta el espaciado entre los elementos si es necesario */
         vertical-align: middle; /* Alinea verticalmente los elementos en el mismo nivel */
     }
-=======
+
 .information-childs .username {
     position: relative;
     border-bottom: 2px solid #adadad;
     margin: 30px 0;
+}
+
+.information-childs h1{
+    text-align: center;
+    justify-content: center;
 }
 
 .username input {
@@ -227,11 +228,9 @@ height: 100vh;
     background: #6C3483;
 }
 
-.form-information {
-    text-align: center;
+.form-information, #Olvidaste.butomm, h3, #Crear.button{
     padding: 0 0 20px 0;
-    border-bottom: 1px solid silver;
-    margin: 25px 0;
+    margin: 10px 0;
 }
 
 .butomm {
@@ -257,4 +256,3 @@ height: 100vh;
     color: black;
     font-weight: bold;
 }
->>>>>>> Stashed changes

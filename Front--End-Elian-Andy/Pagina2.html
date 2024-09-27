@@ -6,71 +6,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesion Y Registro</title>
     <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-    <div class="container">
-        <img src="./Group 5.png" id="gruop5">
-        <div class="formulario">
-            <div class="form-information">
-                <div class="information-childs">
-                    <h1>LOGIN</h1>
-                    <form>
-                        <div class="username">
-                            <input type="text" placeholder="Usuario" id="UsuarioInicio">
-                        </div>
-                        <div class="username">
-                            <input type="password" placeholder="Contraseña" id="ContraseñaInicio">
-<<<<<<< Updated upstream
-
-                        </div>
-                        <button class="butom" href="Pagina4.html">ENTRAR</button>
-                    </form>
-                    <div class="container-form">
-                        <div class="form-information">
-                            <div class="info-childs">
-                                <a class="butomm" href="Pagina5.html">Olvidaste La Contraseña?</a>
-                                <div><h4>No tenes cuenta?</h4> <a class="button" href="Pagina3.html">Crear cuenta</a>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Iniciar Sesion Y Registro</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <img src="./Group 5.png" id="gruop5">
+        <div class="Fondo-formulario">
+            <div class="formulario">        
+                <div class="form-information">     
+                    <div class="information-childs">  
+                        <h1>LOGIN</h1>       
+                        <form>
+                            <div class="username">
+                                <input type="text" placeholder="Ingrese su usuario" id="UsuarioInicio">
+                            </div>
+                            <div class="username">
+                                <input type="password" placeholder="Ingresa su contraseña" id="ContraseñaInicio">
+    
+                            </div>
+                            <button type="submit" class="butom" id="buttonLogin" onclick="">ENTRAR</button>
+                        </form>          
+                        <a class="butomm" href="Pagina5.html" id="Olvidaste">Olvidaste La Contraseña?</a>
+    
+                        <div class="container-form">
+                            <div class="form-information">
+                                <div class="info-childs">
+                                    <h3 id="nocuenta">No tenes cuenta?</h3>
+                                    <a class="button" href="Pagina3.html" id="Crear">Crear cuenta</a>
+            
                                 </div>
                             </div>
-                        </div>
+                        </div>  
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
-=======
-                            </label>
-                         </div>
-                    <p>
-                    </p>
-                    <a class = "butom" href="Pagina4.html">Iniciar Sesion</a>
-                </form> 
-            </div>
-        </div>
-        <div class="container-form">
-            <div class="form-information">
-                 <div class="info-childs">     
-               <a class = "butomm" href="Pagina5.html">Olvidaste La Contraseña?</a>
-                    <h4>No tenes cuenta?</h4> <a class = "button" href="Pagina3.html">Crear cuenta</a>
-
-
-        </div>
-    </div>
-
+        <!--     <a  class="button"href="file:///C:/Users/48366467/Downloads/Proyecto%20Tagy-1/index.html">Enlaces</a>
+     -->
     
 
->>>>>>> Stashed changes
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function (event) {
+            event.preventDefault(); 
 
             const usuario = document.getElementById('UsuarioInicio').value;
             const contraseña = document.getElementById('ContraseñaInicio').value;
 
             const url = 'http://localhost:3000/auth/iniciodesesion'; 
-            const data = { usuario, contrasena };
+            const data = { usuario, contraseña }; 
 
             try {
                 const response = await fetch(url, {
