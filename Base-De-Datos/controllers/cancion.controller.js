@@ -1,21 +1,22 @@
 import cancionService from "../services/cancion.service.js"; 
 
-const obtenerCancion = async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        const canciones = await cancionService.obtenerCancionesPorId(id);
-
-        if (canciones.length > 0) {
-            const cancionAleatoria = cancionService.seleccionarCancionAleatoria(canciones);
-            return res.status(200).json(cancionAleatoria);
-        } else {
-            return res.status(404).send('Canción no encontrada');
-        }
-    } catch (error) {
-        console.error(`Error al encontrar la canción: ${error.message}`);
-        return res.status(500).send(`Error al encontrar la canción: ${error.message}`);
+const handleEmocion = async (req, res) => {
+  try {
+    const ultimaEmocion = await cancionService.getLastEmocion();
+    
+    if (ultimaEmocion === 'alegre') {
+      return res.redirect('/alegre');
+    } else if (ultimaEmocion === 'relajante') {
+      return res.redirect('/relajante');
+    } else {
+      return res.status(400).json({ message: 'Emoción no reconocida' });
     }
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 };
 
-export default { obtenerCancion };
+
+
+
+export default {handleEmocion}

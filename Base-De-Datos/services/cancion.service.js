@@ -2,20 +2,17 @@ import { config } from "../db.js";
 import pkg from "pg";
 const { Client } = pkg;
 
-const obtenerCancionesPorId = async (id) => {
+const getLastEmocion = async () => {
     const client = new Client(config);
     await client.connect();
     try {
-        const queryCanciones = 'SELECT * FROM canciones WHERE id = $1';
-        const { rows } = await client.query(queryCanciones, [id]);
-        return rows; 
+      const result = await client.query('SELECT tipo FROM emociones ORDER BY id DESC LIMIT 1');
+      return result.rows[0].tipo;
     } catch (error) {
-        throw error;
-    } finally {
-        await client.end(); 
+      throw new Error('Error al obtener la última emoción: ' + error.message);
     }
-};
+  };
 
 
 
-export default { obtenerCancionesPorId };
+export default { getLastEmocion };
