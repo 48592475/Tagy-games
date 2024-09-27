@@ -16,6 +16,9 @@ import matplotlib.pyplot as plt
 carpeta = "Fotos.Emociones"
 count = 0
 
+EmocionAnt = None
+EmocionDesp = None
+
 EscuchandoMusica = False
 # Inicializa un diccionario para contar las emociones
 emociones_contador = {}
@@ -31,19 +34,45 @@ if not cap.isOpened():
     print("Error: No se puede abrir la cámara")
     exit()
 
-def detener_musica(emocion_dominante):
-    EmocionDesp = emocion_dominante
-    global EscuchandoMusica
+def detener_musica():
+    global EscuchandoMusica, EmocionDesp
     EscuchandoMusica = False
     print("Deteniendo la música después de 60 segundos.")
-    return(EmocionDesp)
+    
+     # Saco una nueva foto para ver la emocion al terminar la musica
+    nombre = 'Foto_auto_1.jpg'
+    foto_tomada = TomarFoto(carpeta, nombre, faces, frame)  # saco la foto
+    if foto_tomada is not None:
+        # Analiza la emoción de la foto tomada
+        analisis = DeepFace.analyze(img_path=foto_tomada, actions=["emotion"], enforce_detection=False)
+        
+        if 'dominant_emotion' in analisis[0]:
+            face_confidence = analisis[0].get('face_confidence', 0)
+            # Verifica que la confianza en la detección de la cara sea mayor a 0.3
+            if face_confidence > 0.3: # si hay la suficiente confianza
+                EmocionDesp = analisis[0]['dominant_emotion']
+                print(f"Emoción después de la música: {EmocionDesp}, Confianza en la detección de la cara: {face_confidence:.2f}")
+            else:
+                print(f"Confianza en la detección de la cara demasiado baja: {face_confidence:.2f}")
+                EmocionDesp = "No detectada" # la foto no es precisa para determinar una emocion
+        else:
+            print("No se pudo detectar una emoción después de la música.")
+    
+    # Comparo la emoción antes y después de la música
+    RendimientoMusica(EmocionAnt, EmocionDesp)
     #agregar codigo para frenar musica
+    return()
 
-def RendimientoMusica(EmocionAnt ,EmocionDesp):
-    if EmocionAnt is not None and EmocionDesp is not None:
-       #hacer grafico comparando las dos emociones 
+def RendimientoMusica(EmocionAnt, EmocionDesp):
+    if EmocionAnt is None or EmocionDesp is None:
+     print(f"Alguna de las emociones es nula. EmocionAnt: {EmocionAnt}, EmocionDesp: {EmocionDesp}")
+     EmocionAnt = None #actualizo para que despues funcione
+     EmocionDesp = None#actualizo para que despues funcione
     else:
-      print ("Alguna de las emociones es nula")
+     print(f"Emoción antes: {EmocionAnt}, Emoción después: {EmocionDesp}")
+     EmocionAnt = None #actualizo para que despues funcione
+     EmocionDesp = None #actualizo para que despues funcione
+
 
 def HacerInforme():
     global emociones_totales
@@ -64,11 +93,13 @@ def HacerInforme():
     plt.title('Emociones y cuantas veces fueron detectadas')
     #plt.show()
     plt.savefig('informe_emociones.png')  # guardo como png el informe
+    plt.close('all')  # Cerrar las figuras activas
 
 timer = threading.Timer(60.0, HacerInforme) # cada 60 segundo llamo a la funcion de hacer informe
 timer.start()
 def ManejarPlaylist(emocion_dominante):
  EmocionAnt = emocion_dominante
+ print("la emocion ant es" , EmocionAnt) 
  global EscuchandoMusica          #si no hay musica pone la musica acorde a la emocion dominante detectada
  if not EscuchandoMusica:
     if emocion_dominante in ["disgust", "angry"]:
@@ -87,7 +118,6 @@ def ManejarPlaylist(emocion_dominante):
 # Función para analizar emociones de la foto
 def AnalizarFotos():
     foto = os.path.join(carpeta, 'Foto_auto_1.jpg')
-    
     try:
         # Analiza la foto para detectar emociones
         analisis = DeepFace.analyze(img_path=foto, actions=["emotion"], enforce_detection=False)
@@ -118,11 +148,13 @@ def AnalizarFotos():
                          #llamar función poner musica relajante
                          ManejarPlaylist(emocion_dominante)
                          emociones_contador.clear()
+                         return
                      elif emocion_dominante in ["sad", "fear"] and not EscuchandoMusica:
                          print(f"Reproduciendo playlist alegre por la emoción: {emocion_dominante}")
                           #llamar función poner musica relajante
                          ManejarPlaylist(emocion_dominante)
                          emociones_contador.clear()
+                         return
                             
             else:
                 print("La confianza en la detección de la cara es demasiado baja.")
@@ -131,8 +163,6 @@ def AnalizarFotos():
     except Exception as e:
         print(f"Ocurrió un error: {e}")
         
-   
-
 # Función para tomar una foto y sobreescribir si es necesario
 def TomarFoto(carpeta, nombre, faces, frame):
     if len(faces) > 0:  # Si hay caras detectadas
@@ -156,7 +186,6 @@ def TomarFoto(carpeta, nombre, faces, frame):
         return None  # Devuelve None si no se detectan caras
     
     
-
 # Importo el reconocedor de caras
 cascade_path = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
 face_cascade = cv2.CascadeClassifier(cascade_path)

@@ -11,28 +11,26 @@
 <body>
     <div class="container">
         <img src="./Group 5.png" id="gruop5">
-    <div class="Fondo-formulario">
-        <div class="formulario">        
-            <div class="form-information">     
-                <div class="information-childs">  
-                    <h1>LOGIN</h1>       
+        <div class="formulario">
+            <div class="form-information">
+                <div class="information-childs">
+                    <h1>LOGIN</h1>
                     <form>
                         <div class="username">
-                            <input type="text" placeholder="Ingrese su usuario" id="UsuarioInicio">
+                            <input type="text" placeholder="Usuario" id="UsuarioInicio">
                         </div>
                         <div class="username">
-                            <input type="password" placeholder="Ingresa su contraseña" id="ContraseñaInicio">
+                            <input type="password" placeholder="Contraseña" id="ContraseñaInicio">
 
                         </div>
-                        <button type="submit" class="butom" id="buttonLogin" onclick="">ENTRAR</button>
-                    </form>          
-                    <a class="butomm" href="Pagina5.html" id="Olvidaste">Olvidaste La Contraseña?</a>
-
+                        <button class="butom" href="Pagina4.html">ENTRAR</button>
+                    </form>
                     <div class="container-form">
                         <div class="form-information">
                             <div class="info-childs">
-                                <h3 id="nocuenta">No tenes cuenta?</h3>
-                                <a class="button" href="Pagina3.html" id="Crear">Crear cuenta</a>
+                                <a class="butomm" href="Pagina5.html">Olvidaste La Contraseña?</a>
+                                <div><h4>No tenes cuenta?</h4> <a class="button" href="Pagina3.html">Crear cuenta</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -40,6 +38,42 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const usuario = document.getElementById('UsuarioInicio').value;
+            const contraseña = document.getElementById('ContraseñaInicio').value;
+
+            const url = 'http://localhost:3000/auth/iniciodesesion'; 
+            const data = { usuario, contrasena };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('Login exitoso:', result);
+                    alert('Inicio de sesión exitoso'); 
+                    window.location.href = 'Pagina7.html'; 
+                } else {
+                    const errorData = await response.json(); 
+                    console.error('Error en el inicio de sesión:', errorData);
+                    alert('Error en el inicio de sesión. Por favor verifica tus credenciales. Detalles: ' + errorData.mensaje);
+                }
+            } catch (error) {
+                console.error('Error en la solicitud:', error);
+                alert('Ocurrió un error al intentar iniciar sesión. Detalles: ' + error.message);
+            }
+        });
+    </script>
 </body>
 
 </html>
