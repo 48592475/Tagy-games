@@ -47,45 +47,8 @@
                 </div>
             </div>
         </div>
-        <!--     <a  class="button"href="file:///C:/Users/48366467/Downloads/Proyecto%20Tagy-1/index.html">Enlaces</a>
-     -->
-    
-
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', async function (event) {
-            event.preventDefault(); 
-
-            const usuario = document.getElementById('UsuarioInicio').value;
-            const contraseña = document.getElementById('ContraseñaInicio').value;
-
-            const url = 'http://localhost:3000/auth/iniciodesesion'; 
-            const data = { usuario, contraseña }; 
-
-            try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    console.log('Login exitoso:', result);
-                    alert('Inicio de sesión exitoso'); 
-                    window.location.href = 'Pagina7.html'; 
-                } else {
-                    const errorData = await response.json(); 
-                    console.error('Error en el inicio de sesión:', errorData);
-                    alert('Error en el inicio de sesión. Por favor verifica tus credenciales. Detalles: ' + errorData.mensaje);
-                }
-            } catch (error) {
-                console.error('Error en la solicitud:', error);
-                alert('Ocurrió un error al intentar iniciar sesión. Detalles: ' + error.message);
-            }
-        });
-    </script>
+        
+    <script src="pagina2.js"></script>
 </body>
 
 </html>
