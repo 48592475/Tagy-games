@@ -98,7 +98,7 @@ def HacerInforme():
 timer = threading.Timer(60.0, HacerInforme) # cada 60 segundo llamo a la funcion de hacer informe
 timer.start()
 def ManejarPlaylist(emocion_dominante):
- EmocionAnt = emocion_dominante
+ #EmocionAnt = emocion_dominante
  print("la emocion ant es" , EmocionAnt) 
  global EscuchandoMusica          #si no hay musica pone la musica acorde a la emocion dominante detectada
  if not EscuchandoMusica:
@@ -118,6 +118,7 @@ def ManejarPlaylist(emocion_dominante):
 # Función para analizar emociones de la foto
 def AnalizarFotos():
     foto = os.path.join(carpeta, 'Foto_auto_1.jpg')
+    global EmocionAnt
     try:
         # Analiza la foto para detectar emociones
         analisis = DeepFace.analyze(img_path=foto, actions=["emotion"], enforce_detection=False)
@@ -144,12 +145,14 @@ def AnalizarFotos():
                     if emociones_contador[emocion_dominante] == 2:  #si detecto dos veces la misma emocion
                      print(f"La emoción '{emocion_dominante}' ha sido detectada por segunda vez.")
                      if emocion_dominante in ["disgust", "angry"] and not EscuchandoMusica:
+                         EmocionAnt = emocion_dominante
                          print(f"Reproduciendo playlist relajante por la emoción: {emocion_dominante}")
                          #llamar función poner musica relajante
                          ManejarPlaylist(emocion_dominante)
                          emociones_contador.clear()
                          return
                      elif emocion_dominante in ["sad", "fear"] and not EscuchandoMusica:
+                         EmocionAnt = emocion_dominante
                          print(f"Reproduciendo playlist alegre por la emoción: {emocion_dominante}")
                           #llamar función poner musica relajante
                          ManejarPlaylist(emocion_dominante)
