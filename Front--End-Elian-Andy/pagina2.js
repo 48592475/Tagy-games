@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 console.log(data);
                 alert("Inicio de Sesion exitoso");
-                window.location.href = "./pagina4.html"
+                window.location.href = "./Pagina4.html"
             })
             .catch(error => console.error('Error:', error));
     });

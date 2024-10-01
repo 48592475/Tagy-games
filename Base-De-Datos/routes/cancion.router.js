@@ -5,5 +5,5 @@ import cancionController from "../controllers/cancion.controller.js";
 import {verifyToken } from "../middlewares/auth.middleware.js";
 
 
-router.get('/emocion', cancionController.handleEmocion);
+router.get('/emocion', cancionController.cancionEmocion);
 export default router;
