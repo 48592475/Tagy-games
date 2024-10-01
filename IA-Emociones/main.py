@@ -43,7 +43,8 @@ def detener_musica():
     print("Deteniendo la música después de 60 segundos.")
     PlayRelajante = False
     PlayAlegre = False
-     # Saco una nueva foto para ver la emocion al terminar la musica
+    #conectar con back o front para que detengan la musica
+    # Saco una nueva foto para ver la emocion al terminar la musica
     nombre = 'Foto_auto_1.jpg'
     foto_tomada = TomarFoto(carpeta, nombre, faces, frame)  # saco la foto
     if foto_tomada is not None:
@@ -64,7 +65,7 @@ def detener_musica():
     
     # Comparo la emoción antes y después de la música
     RendimientoMusica(EmocionAnt, EmocionDesp)
-    #agregar codigo para frenar musica
+    
     return()
 
 def RendimientoMusica(EmocionAnt, EmocionDesp):
