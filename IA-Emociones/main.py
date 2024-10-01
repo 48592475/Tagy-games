@@ -16,6 +16,9 @@ import matplotlib.pyplot as plt
 carpeta = "Fotos.Emociones"
 count = 0
 
+PlayRelajante = False
+PlayAlegre = False      #booleanos para activar la musica
+
 EmocionAnt = None
 EmocionDesp = None
 
@@ -35,10 +38,11 @@ if not cap.isOpened():
     exit()
 
 def detener_musica():
-    global EscuchandoMusica, EmocionDesp
+    global EscuchandoMusica, EmocionDesp, PlayAlegre, PlayRelajante
     EscuchandoMusica = False
     print("Deteniendo la música después de 60 segundos.")
-    
+    PlayRelajante = False
+    PlayAlegre = False
      # Saco una nueva foto para ver la emocion al terminar la musica
     nombre = 'Foto_auto_1.jpg'
     foto_tomada = TomarFoto(carpeta, nombre, faces, frame)  # saco la foto
@@ -94,18 +98,24 @@ def HacerInforme():
     #plt.show()
     plt.savefig('informe_emociones.png')  # guardo como png el informe
     plt.close('all')  # Cerrar las figuras activas
+    #pasarle el informe a la base de datos
 
 timer = threading.Timer(60.0, HacerInforme) # cada 60 segundo llamo a la funcion de hacer informe
 timer.start()
 def ManejarPlaylist(emocion_dominante):
  #EmocionAnt = emocion_dominante
  print("la emocion ant es" , EmocionAnt) 
- global EscuchandoMusica          #si no hay musica pone la musica acorde a la emocion dominante detectada
+ global EscuchandoMusica, PlayAlegre, PlayRelajante          #si no hay musica pone la musica acorde a la emocion dominante detectada
  if not EscuchandoMusica:
     if emocion_dominante in ["disgust", "angry"]:
       print("poner playlist relajante")   #poner codigo para poner la musica, puedo hacer una función
+      PlayRelajante = True
+      #ver de pasarle esto a la base de datos para que ponga la musica
+      
     elif emocion_dominante in ["sad", "fear"]:
      print ("poner playlist alegre") #poner codigo para poner la musica, puedo hacer una función
+     PlayAlegre = True
+     #ver de pasarle esto a la base de datos para que ponga la musica
      
                         
     EscuchandoMusica = True                    
