@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!response.ok) {  // Si el servidor responde con un código de error
                 throw new Error("Usuario o contraseña incorrectos");  // Lanzar un error
             }
+            const token=response.data.token
             return response.json();
         })
         .then(data => {
