@@ -1,11 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     const buttonLogin = document.getElementById("buttonLogin");
 
-    // Eliminar el paréntesis extra después de function(event)
     buttonLogin.addEventListener("click", function (event) {
         event.preventDefault();  // Prevenir el comportamiento por defecto del formulario
 
-        // Cambiar ariaValueMax a value para obtener el valor del campo
         const usuario = document.getElementById("UsuarioInicio").value;
         const contraseña = document.getElementById("ContraseñaInicio").value;
 
@@ -26,13 +24,20 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: JSON.stringify(infoPersona)
         })
-
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                alert("Inicio de Sesion exitoso");
-                window.location.href = "./Pagina4.html"
-            })
-            .catch(error => console.error('Error:', error));
+        .then(response => {
+            if (!response.ok) {  // Si el servidor responde con un código de error
+                throw new Error("Usuario o contraseña incorrectos");  // Lanzar un error
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            alert("Inicio de sesión exitoso");
+            window.location.href = "./pagina4.html";
+        })
+        .catch(error => {
+            alert(error.message);  // Mostrar el mensaje de error en caso de fallo
+            console.error('Error:', error);
+        });
     });
 });
