@@ -1,17 +1,57 @@
-.container-form {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    border-radius: 10px;
-    background-color: white;
-    padding: 15px; 
-    text-align: center;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-.information-childs .username {
-    position: relative;
+body {
+    margin: 0;
+    padding: 0;
+    font-family: montserrat;
+    background: linear-gradient(180deg, #E07BB5 0%, #AC5B89 50%, #5A0D39 100%);
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+#gruop5 {
+    width: 713px;
+    height: 417px;
+    margin-top: 150px;
+}
+
+.Fondo-formulario {
+    flex-shrink: 0;
+}
+
+.formulario {
+    width: 628px;
+    height: 639px;
+    flex-shrink: 0;
+    border-radius: 40px;
+    background: #D9D9D9;
+}
+
+.form-information {
+    padding: 30px;
+}
+
+h1 {
+    text-align: center;
+    font-family: Poppins;
+    font-size: 50px;
+    font-weight: 800;
+    background: linear-gradient(177deg, #A9216E -29.93%, #666 108.65%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.username {
     border-bottom: 2px solid #adadad;
     margin: 30px 0;
 }
@@ -26,109 +66,34 @@
     outline: none;
 }
 
-.username label {
-    position: relative;
-    top: 50%;
-    left: 5px;
-    color: #adadad;
-    transform: translateY(-50%);
-    font-size: 16px;
-    pointer-events: none;
-}
-
-.username span::before {
-    content: "";
-    position: relative;
-    top: 40px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #6C3483;
-}
-
-.information-childs .class {
-    position: relative;
-    border-bottom: 2px solid #adadad;
-    margin: 30px 0;
-}
-
-.class input {
-    width: 100%;
-    padding: 0 5px;
-    height: 40px;
-    font-size: 16px;
-    border: none;
-    background: none;
-    outline: none;
-}
-
-.class label {
-    position: relative;
-    top: 50%;
-    left: 5px;
-    color: #adadad;
-    transform: translateY(-50%);
-    font-size: 16px;
-    pointer-events: none;
-}
-
-.class span::before {
-    content: "";
-    position: relative;
-    top: 40px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #6C3483;
-}
-
-.form-information {
-    text-align: center;
-    padding: 0 0 20px 0;
-    border-bottom: 1px solid silver;
-    margin: 25px 0;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: montserrat;
-    background: linear-gradient(150deg, violet, yellow);
-    height: 100vh; 
-}
-
-.buton {
-    text-decoration: none;    
-    display: flex;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: violet;
-    color: white;
-    border-radius: 10px;
-    font-size: 20px;
-    padding: 6px;
-    margin: 5px 80px;
-    text-align: center;
-}
-
-.buton {
-    text-decoration: none;    
-    display: flex;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: violet;
-    color: white;
-    border-radius: 10px;
-    font-size: 20px;
-    padding: 6px;
-    margin: 5px 80px;
-    text-align: center;
+.butom {
+    color: #FFF;
+    font-family: Poppins;
+    font-size: 30px;
+    font-weight: 800;
+    border-radius: 45px;
+    background: linear-gradient(180deg, #89426A -21.21%, #795368 67.19%);
+    width: 431px;
+    height: 55px;
+    margin: 10px 0;
+    display: block;
+    margin: 20px auto;
 }
 
 .volver {
-    text-decoration: none;
-    font-size: 20px;
-    border-radius: 100px;
-    background-color: grey;
-    padding: 10px;
-    margin: 10px 300px;
+    display: inline-block;
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #6C3483; 
+    color: white; 
+    text-decoration: none; 
+    border-radius: 25px;
     font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    transition: background-color 0.3s ease; 
+}
+
+.volver:hover {
+    background-color: #5A0D39; 
+    cursor: pointer;
 }
