@@ -35,6 +35,14 @@ document.getElementById('botonTextoSolucion3').addEventListener('click', functio
     toggleTextBox('textBox8');
 });
 
+document.getElementById('botontextoSolucion1calle1').addEventListener('click', function() {
+    toggleTextBox('textBox9');
+});
+
+document.getElementById('botonlecturaSolucion1calle1').addEventListener('click', function() {
+    toggleTextBox('textBox10');
+});
+
 function toggleTextBox(id) {
     var textBox = document.getElementById(id);
     if (textBox.classList.contains('expanded')) {
