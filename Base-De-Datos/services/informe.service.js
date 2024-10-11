@@ -29,5 +29,9 @@ const crearInforme = async (usuario, texto) => {
     await client.query(queryInforme, [usuario, texto]);
     await client.end(); 
 };
+const obtenerInformes = async () => {
+    const resultados = await db.query("SELECT texto FROM informe"); 
+    return resultados.rows; 
+};
 
-export default { crearInforme, getUsuarioByUsuarios }; 
+export default { crearInforme, getUsuarioByUsuarios, obtenerInformes }; 

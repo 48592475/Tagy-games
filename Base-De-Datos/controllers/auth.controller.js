@@ -61,6 +61,7 @@ const olvidastecontra = async (req, res) => {
         if (user.pregunta !== pregunta) {
             return res.status(400).json({ message: "Pregunta de seguridad incorrecta, intente nuevamente" });
         }
+
         const hashedContra = await bcrypt.hash(contraseña, 10);
         await usuariosService.actualizarContraseña(usuario, hashedContra);
 

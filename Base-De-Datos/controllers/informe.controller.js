@@ -22,4 +22,14 @@ export const guardarInforme = async (req, res) => {
     }
 };
 
-export default { guardarInforme };
+export const obtenerInforme = async (req, res) => {
+    try {
+        const informes = await informeService.obtenerInformes();
+        return res.status(200).json(informes);
+    } catch (error) {
+        console.error("Error al obtener los informes:", error.message);
+        return res.status(500).send(`Error al obtener los informes: ${error.message}`);
+    }
+};
+
+export default { guardarInforme, obtenerInforme };

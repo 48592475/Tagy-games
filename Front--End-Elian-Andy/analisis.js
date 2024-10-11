@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const buttonLogin = document.getElementById("buttonLogin");
+    const mostrarInformes = document.getElementById("mostrarInformes");
 
-    buttonLogin.addEventListener("click", function (event) {
+    mostrarInformes.addEventListener("click", function (event) {
         event.preventDefault(); 
 
-        const usuario = document.getElementById("UsuarioInicio").value;
-        const contraseña = document.getElementById("ContraseñaInicio").value;
+        const texto = document.getElementById("informesContainer").value;
+
 
         if (!usuario || !contraseña) {
             alert("Por favor, complete los campos");
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
             contraseña: contraseña
         };
 
-        fetch("http://localhost:3000/auth/iniciodesesion", {
+        fetch("http://localhost:3000/informe", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error("Error en el inicio de sesión"); 
+                throw new Error("Error al traer los informes"); 
             }
             return response.json(); 
         })
@@ -35,8 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const { token } = data; 
             if (token) {
                 localStorage.setItem("token", token);
-                alert("Inicio de sesión exitoso");
-                window.location.href = "./pagina4.html"; 
             } else {
                 throw new Error("No se recibió token");
             }
