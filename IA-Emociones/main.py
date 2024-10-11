@@ -1,10 +1,9 @@
 # instalaciones necesarias (se hacen por consola):
 # pip install opencv-python
-# pip install numpy
 # pip install deepface --user
 # pip install tf-keras --user
-#pip install matplotlib --user
-
+# pip install matplotlib --user
+# pip install requests
 import cv2
 import numpy as np
 import os
@@ -12,6 +11,7 @@ import time
 from deepface import DeepFace
 import threading
 import matplotlib.pyplot as plt
+import requests
 
 carpeta = "Fotos.Emociones"
 count = 0
@@ -85,8 +85,9 @@ def HacerInforme():
         print("No hay datos de emociones para generar un informe.")
         return
     print("Informe de Emociones")
+    informe_texto = ""
     for emocion, cantidad in emociones_totales.items():
-        print(f"La Emoción: {emocion}, Fue detectada un Total de {cantidad}, veces")
+        informe_texto += f"La emoción: {emocion}, fue detectada un total de {cantidad} veces\n"
    
     emociones = list(emociones_totales.keys())
     cantidad = list(emociones_totales.values())  
@@ -100,6 +101,26 @@ def HacerInforme():
     plt.savefig('informe_emociones.png')  # guardo como png el informe
     plt.close('all')  # Cerrar las figuras activas
     #pasarle el informe a la base de datos
+     # Llamo a la API para guardar el informe en la base de datos
+    url = "http://localhost:3000/informe"  # URL backend
+    headers = {'Content-Type': 'application/json'}
+
+    payload = {
+        "usuario": "usuario1", 
+        "texto": informe_texto  
+    }
+
+    try:
+        response = requests.post(url, json=payload, headers=headers)
+        if response.status_code == 200:
+            print("Informe enviado y guardado correctamente en la base de datos.")
+        else:
+            print(f"Error al enviar el informe: {response.status_code}, {response.text}")
+    except Exception as e:
+        print(f"Error en la solicitud HTTP para guardar el informe: {e}")
+
+    # Reinicio las emociones para el próximo informe
+    emociones_totales.clear()
 
 timer = threading.Timer(60.0, HacerInforme) # cada 60 segundo llamo a la funcion de hacer informe
 timer.start()
