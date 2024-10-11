@@ -1,47 +1,57 @@
 document.addEventListener("DOMContentLoaded", function () {
     const mostrarInformes = document.getElementById("mostrarInformes");
+    const informesContainer = document.getElementById("informesContainer");
+
+    const codigoIngreso = prompt("Por favor, ingrese el código de ingreso:");
+
+    if (codigoIngreso !== "1234") {
+        alert("Código incorrecto. Acceso denegado.");
+        return; 
+    }
+    mostrarInformes.style.display = "block";
 
     mostrarInformes.addEventListener("click", function (event) {
         event.preventDefault(); 
 
-        const texto = document.getElementById("informesContainer").value;
+        const token = localStorage.getItem("token");
 
-
-        if (!usuario || !contraseña) {
-            alert("Por favor, complete los campos");
+        if (!token) {
+            alert("No se encontró el token. Debe iniciar sesión primero.");
             return;
         }
 
-        const loginInfo = {
-            usuario: usuario,
-            contraseña: contraseña
-        };
 
         fetch("http://localhost:3000/informe", {
-            method: "POST",
+            method: "GET", 
             headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(loginInfo)
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}` 
+            }
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error("Error al traer los informes"); 
+                throw new Error("Error al obtener los informes");
             }
-            return response.json(); 
+            return response.json();
         })
         .then(data => {
-            console.log(data);
-            const { token } = data; 
-            if (token) {
-                localStorage.setItem("token", token);
-            } else {
-                throw new Error("No se recibió token");
-            }
+            console.log("Informes obtenidos:", data);
+            informesContainer.innerHTML = ""; 
+
+            data.forEach((informe, index) => {
+                const informeElement = document.createElement("div");
+                informeElement.classList.add("informe-item");
+                informeElement.innerHTML = `
+                    <h3>Informe ${index + 1}</h3>
+                    <p><strong>Usuario:</strong> ${informe.usuario}</p>
+                    <p><strong>Texto:</strong> ${informe.texto}</p>
+                `;
+                informesContainer.appendChild(informeElement);
+            });
         })
         .catch(error => {
-            alert(error.message);
-            console.error('Error:', error);
+            alert("Error: " + error.message);
+            console.error("Error:", error);
         });
     });
 });
