@@ -16,6 +16,8 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 20px;
+    align-items: center;
+    margin-top: 100px ;
 }
 
 #gruop5 {
@@ -29,6 +31,7 @@ body {
 }
 
 .formulario {
+    margin-top: 50px;
     width: 628px;
     height: 639px;
     flex-shrink: 0;

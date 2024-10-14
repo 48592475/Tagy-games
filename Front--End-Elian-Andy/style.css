@@ -16,9 +16,12 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 20px;
+    align-items: center;
+    margin-top: 100px;
 }
 
 .formulario {
+    margin-top: 50px;
     width: 628px;
     height: 500px;
     flex-shrink: 0;
