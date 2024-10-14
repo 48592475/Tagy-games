@@ -3,25 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./Imagenes/Logo.png" type="image/x-icon">
     <title>Recupero de contraseña</title>
     <link rel="stylesheet" href="Style(pagina5).css">
 </head>
-<body>
-
-    <div class="container-form">
-        <div class="form-information">
+<body>  
+    <div class="container">
+        <img src="./Group 5.png" id="gruop5">
+        <div class="formulario">   
             <div class="information-childs">
-                <a class="volver" href="Pagina2.html">volver</a>
-                <input type="text" placeholder="Nombre de usuario" id="UsuarioOlvido">
-                <input type="password" placeholder="Nueva contraseña" id="ContraseñaOlvido">
-                <h3>Pregunta de seguridad:</h3>
-                <input type="text" placeholder="Nombre del progenitor/tutor legal" id="PreguntaOlvido">
-                <button type="submit" class="butom" id="buttonLost">Cambiar Contraseña</button>
+                <a class="volver" href="Pagina2.html">Volver</a>
+                <form>
+                    <h2>RECUPERAR CONTRASEÑA</h2>
+
+                    <div class="username">
+                        <input type="text" placeholder="Ingrese su nombre de usuario" id="UsuarioOlvido">
+                    </div>
+                    <h3>Pregunta de seguridad:</h3>
+                    <div class="username">
+                        <input type="text" placeholder="Nombre del progenitor/tutor legal" id="PreguntaOlvido">
+                    </div>   
+                    <div class="username">
+                        <input type="password" placeholder="Nueva contraseña" id="ContraseñaOlvido">
+                    </div>
+                    <button type="submit" class="butom">ENTRAR</button>
+                    <div>
+                        <a class="button" href="Pagina3.html" id="Crear">Crear cuenta</a>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
-    
-    <script src="pagina5.js"></script>
+    </div> 
+       <script src="pagina5.js"></script>
+
 </body>
 </html>
+
+    
+
