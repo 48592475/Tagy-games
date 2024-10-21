@@ -10,6 +10,7 @@ body {
     font-family: montserrat;
     background: linear-gradient(180deg, #E07BB5 0%, #AC5B89 50%, #5A0D39 100%);
     height: 100vh;
+    overflow: hidden;
 }
 
 .container {
@@ -17,10 +18,12 @@ body {
     justify-content: space-between;
     padding: 20px;
     align-items: center;
+    
 }
 
 .formulario {
-    margin-top: 50px;
+    margin-top: 80px;
+    margin-left: 60px;
     width: 628px;
     height: 500px;
     flex-shrink: 0;
@@ -62,8 +65,9 @@ body {
 }
 
 .butom {
+    cursor: pointer;
     color: #FFF;
-    font-family: Poppins;
+    font-family: Poppins, sans-serif;
     font-size: 30px;
     font-weight: 800;
     border-radius: 45px;
@@ -72,9 +76,11 @@ body {
     height: 55px;
     flex-shrink: 0;
     margin: 10px 0;
+    margin-left: 60px;
 }
 
 #gruop5 {
+    margin-left: 100px;
     width: 712.999px;
     height: 416.596px;
     margin-top: 150px;
@@ -82,7 +88,7 @@ body {
 }
 
 .formulario h1 {
-    font-family: Poppins;
+    font-family: Poppins, sans-serif;
     font-size: 50px;
     font-weight: 800;
     background: linear-gradient(177deg, #A9216E -29.93%, #666 108.65%);
@@ -90,4 +96,23 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-align: center;
+}
+
+.Fondo-formulario {
+    width: 814px;
+    height: 582px;
+    flex-shrink: 0;
+} 
+
+.formulario h3{
+    font-family: Poppins, sans-serif;
+}
+
+.button{
+    font-family: Poppins, sans-serif;
+}
+
+.butomm{
+    color: #A91BDC;
+    font-weight: bold;
 }
