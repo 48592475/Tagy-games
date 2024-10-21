@@ -8,3 +8,10 @@
     text-decoration: none;
     font-size: 20px;
 }
+
+.libreria {
+    width: 1920px;
+    height: 1080px;
+    flex-shrink: 0;
+    background: url(image\ 29.png) lightgray 50% / cover no-repeat;
+}
