@@ -1,17 +1,11 @@
-.boton {
-    display: flex;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: rgb(163, 40, 112);
-    color: white;
-    border-radius: 10px;
-    padding: 20px 30px;
-    text-decoration: none;
-    font-size: 20px;
+body{
+    margin: 0;
+    padding: 0;
+    font-family: montserrat;
+    background-image: url("image\ 29.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
 
-.libreria {
-    width: 1920px;
-    height: 1080px;
-    flex-shrink: 0;
-    background: url(image\ 29.png) lightgray 50% / cover no-repeat;
-}

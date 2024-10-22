@@ -83,13 +83,14 @@ body {
 }
 
 .formulario h2 {
-    font-family: Poppins;
-    font-size: 36px;
+    font-family: Poppins, sans-serif;
+    font-size: 30px;
     font-weight: 800;
     background: linear-gradient(177deg, #A9216E -29.93%, #666 108.65%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-align: center;
 }
 
 .formualrio h3 {
