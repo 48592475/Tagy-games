@@ -57,4 +57,3 @@ function toggleTextBox(id) {
         }, 10); 
     }
 }
-
