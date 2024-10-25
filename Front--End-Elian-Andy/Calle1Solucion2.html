@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./Imagenes/Logo.png" type="image/x-icon">
     <title>Solución 2 Calle 1</title>
-    <link rel="stylesheet" href="Calle1Solucion1.css">
+    <link rel="stylesheet" href="Solucion.css">
 </head>
 <body>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img src="Imagenes/Rtaperfecto.png" alt="Imagen Modal" class="modal-img">
+        </div>
+    </div>
     <div class="contenedor-principal">
         <div class="elementos-principales">
             <!-- Botón de lectura a la izquierda -->
@@ -44,5 +50,31 @@
         </div>
     </div>
     <script src="ProblemaCalle1.js"></script>
+
+    <script>
+        // Obtener el modal
+        var modal = document.getElementById("myModal");
+
+        // Obtener el elemento <span> que cierra el modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // Mostrar el modal al cargar la página
+        window.onload = function() {
+            modal.style.display = "block";
+        };
+
+        // Cuando el usuario hace clic en <span> (x), cerrar el modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        };
+
+        // Cuando el usuario hace clic fuera del modal, también se cierra
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+
 </body>
 </html>

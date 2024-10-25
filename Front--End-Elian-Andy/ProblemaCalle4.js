@@ -35,11 +35,11 @@ document.getElementById('botonTextoSolucion3').addEventListener('click', functio
     toggleTextBox('textBox8');
 });
 
-document.getElementById('botontextosolucion1calle1').addEventListener('click', function() {
+document.getElementById('botontextoSolucion1calle1').addEventListener('click', function() {
     toggleTextBox('textBox9');
 });
 
-document.getElementById('botonlecturasolucion1calle1').addEventListener('click', function() {
+document.getElementById('botonlecturaSolucion1calle1').addEventListener('click', function() {
     toggleTextBox('textBox10');
 });
 
@@ -57,3 +57,4 @@ function toggleTextBox(id) {
         }, 10); 
     }
 }
+
