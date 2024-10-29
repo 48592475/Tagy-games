@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./Imagenes/Logo.png" type="image/x-icon">
+    <title>Solución 1 Colegio 4</title>
+    <link rel="stylesheet" href="Solucion.css">
+</head>
+<body>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img src="Imagenes/Rtamal.png" alt="Imagen Modal" class="modal-img">
+        </div>
+    </div>
+    <div class="contenedor-principal">
+        <div class="elementos-principales">
+            <div class="contenedor-icono izquierda">
+                <a class="botonlecturaSolucion1calle1" id="botonlecturasolucion1calle1" href="javascript:void(0);">
+                    <img src="Imagenes/lectura.png" alt="Lectura" class="icono-boton">
+                </a>
+                <div id="textBox10" class="text-box hidden">
+                    Este corresponde a la lectura de la respuesta 1.
+                </div>
+            </div>
+            <div class="imagen-principal">
+                <a class="botonImagenProblemaColegio1" href="">
+                    <img src="Imagenes/solucion1Colegio4.png" alt="Imagen del problema" class="imagen-problema">
+                </a>
+            </div>
+            <div class="contenedor-icono derecha">
+                <a class="botonAudioProblemaColegio1" href="">
+                    <img src="Imagenes/audio.png" alt="Audio" class="icono-boton">
+                </a>
+                <a class="botontextoSolucion1calle1" id="botontextosolucion1calle1" href="javascript:void(0);">
+                    <img src="Imagenes/texto.png" alt="Texto" class="icono-boton">
+                </a>
+                <div id="textBox9" class="text-box hidden">
+                    Este corresponde al texto de la respuesta 1.
+                </div>
+            </div>
+        </div>
+        <div class="contenedor-boton">
+            <a class="boton" href="Pagina4.html">CONTINUAR</a>
+        </div>
+    </div>
+
+    <script src="ProblemaColegio4.js"></script>
+    
+    <script>
+        // Obtener el modal
+        var modal = document.getElementById("myModal");
+
+        // Obtener el elemento <span> que cierra el modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // Mostrar el modal al cargar la página
+        window.onload = function() {
+            modal.style.display = "block";
+        };
+
+        // Cuando el usuario hace clic en <span> (x), cerrar el modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        };
+
+        // Cuando el usuario hace clic fuera del modal, también se cierra
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    </script>
+
+</body>
+</html>
