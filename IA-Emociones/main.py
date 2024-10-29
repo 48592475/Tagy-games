@@ -104,9 +104,9 @@ def HacerInforme():
      # Llamo a la API para guardar el informe en la base de datos
     url = "http://localhost:3000/informe"  # URL backend
     headers = {'Content-Type': 'application/json'}
-
+    
     payload = {
-        "usuario": "usuario1", 
+        "usuario": "Prit",  #falta cambiar a variable
         "texto": informe_texto  
     }
 
@@ -133,11 +133,13 @@ def ManejarPlaylist(emocion_dominante):
       print("poner playlist relajante")   #poner codigo para poner la musica, puedo hacer una función
       PlayRelajante = True
       #ver de pasarle esto a la base de datos para que ponga la musica
+      requests.get("http://localhost:3000/cancion?playRelajante=true")
       
     elif emocion_dominante in ["sad", "fear"]:
      print ("poner playlist alegre") #poner codigo para poner la musica, puedo hacer una función
      PlayAlegre = True
-     #ver de pasarle esto a la base de datos para que ponga la musica
+     #ver de pasarle esto a la base de datos para que ponga la musica 
+     requests.get("http://localhost:3000/cancion?playAlegre=true")
      
                         
     EscuchandoMusica = True                    

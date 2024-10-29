@@ -2,15 +2,15 @@ import cancionService from "../services/cancion.service.js";
 
 const cancionEmocion = async (req, res) => {
   try {
-    const ultimaEmocion = await cancionService.ultimaEmocion();
+    const { playRelajante, playAlegre } = req.query; // Leer parámetros desde la consulta
     let cancion;
-
-    if (ultimaEmocion === 'alegre') {
-      cancion = await cancionService.cancionAleatoria(1, 7);
-      return res.status(200).json({ emocion: 'alegre', cancion });
-    } else if (ultimaEmocion === 'relajante') {
-      cancion = await cancionService.cancionService(8, 13);
+    console.log(playAlegre,playRelajante)
+    if (playRelajante === 'true') {
+      cancion = await cancionService.cancionAleatoria(8, 13);
       return res.status(200).json({ emocion: 'relajante', cancion });
+    } else if (playAlegre === 'true') {
+      cancion = await cancionService.cancionAleatoria(1, 7); 
+      return res.status(200).json({ emocion: 'alegre', cancion });
     } else {
       return res.status(400).json({ message: 'Emoción no reconocida' });
     }
@@ -19,7 +19,4 @@ const cancionEmocion = async (req, res) => {
   }
 };
 
-
-
-
-export default {cancionEmocion}
+export default { cancionEmocion };

@@ -9,7 +9,7 @@ export const guardarInforme = async (req, res) => {
 
     try {
         const usuarioExistente = await informeService.getUsuarioByUsuarios(usuario);
-
+        console.log(usuario, usuarioExistente)
         if (usuarioExistente) {
             await informeService.crearInforme(usuario, texto);
             return res.status(200).send({message:"Informe del Paciente Guardado Correctamente"});

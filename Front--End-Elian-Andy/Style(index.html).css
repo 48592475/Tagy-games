@@ -25,6 +25,7 @@
 }
 
 .btn {
+    cursor: pointer;
     width: 611px;
     height: 99px;
     top: 644px;
