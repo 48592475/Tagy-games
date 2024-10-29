@@ -69,6 +69,7 @@ h1 {
 }
 
 .butom {
+    cursor: pointer;
     color: #FFF;
     font-family: Poppins;
     font-size: 30px;
