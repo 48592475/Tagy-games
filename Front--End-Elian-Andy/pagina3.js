@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
             console.log(data);
             alert("Registro exitoso");
-            window.location.href = "./pagina4.html";
+            window.location.href = "./pagina2.html";
         })
         .catch(error => {
             alert(error.message);
