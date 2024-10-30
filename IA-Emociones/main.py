@@ -12,6 +12,7 @@ from deepface import DeepFace
 import threading
 import matplotlib.pyplot as plt
 import requests
+import sqlite3
 
 carpeta = "Fotos.Emociones"
 count = 0
@@ -111,7 +112,7 @@ def HacerInforme():
     }
 
     try:
-        response = requests.post(url, json=payload, headers=headers)
+        response = requests.get(url, json=payload, headers=headers)
         if response.status_code == 200:
             print("Informe enviado y guardado correctamente en la base de datos.")
         else:
@@ -125,29 +126,74 @@ def HacerInforme():
 timer = threading.Timer(60.0, HacerInforme) # cada 60 segundo llamo a la funcion de hacer informe
 timer.start()
 def ManejarPlaylist(emocion_dominante):
- #EmocionAnt = emocion_dominante
- print("la emocion ant es" , EmocionAnt) 
- global EscuchandoMusica, PlayAlegre, PlayRelajante          #si no hay musica pone la musica acorde a la emocion dominante detectada
- if not EscuchandoMusica:
-    if emocion_dominante in ["disgust", "angry"]:
-      print("poner playlist relajante")   #poner codigo para poner la musica, puedo hacer una función
-      PlayRelajante = True
-      #ver de pasarle esto a la base de datos para que ponga la musica
-      requests.get("http://localhost:3000/cancion?playRelajante=true")
+    global EscuchandoMusica, PlayAlegre, PlayRelajante, EmocionAnt
+
+    
+    EmocionAnt = emocion_dominante
+    print("Emoción antes de reproducir música:", EmocionAnt)
+
+    if not EscuchandoMusica:
+        tipo_playlist = ""
+        if emocion_dominante in ["disgust", "angry"]:
+            print("Iniciando playlist relajante.")
+            PlayRelajante = True
+            tipo_playlist = "relajante"
+
+        elif emocion_dominante in ["sad", "fear"]:
+            print("Iniciando playlist alegre.")
+            PlayAlegre = True
+            tipo_playlist = "alegre"  
+
+        try:
+            
+            if PlayRelajante:
+                response = requests.post(
+                    "http://localhost:3000/emocion",
+                    params={"playRelajante": "true"}
+                )
+                if response.status_code == 200:
+                    print("Playlist relajante activada:", response.json())
+                else:
+                    print("Error al activar la playlist relajante:", response.text)
+
+                PlayRelajante = False 
+
+            if PlayAlegre:
+                response = requests.post(
+                    "http://localhost:3000/emocion",
+                    params={"playAlegre": "true"}
+                )
+                if response.status_code == 200:
+                    print("Playlist alegre activada:", response.json())
+                else:
+                    print("Error al activar la playlist alegre:", response.text)
+
+                PlayAlegre = False  
+            
+            if tipo_playlist != "":
+                print(f"Guardando tipo de playlist: {tipo_playlist}")  # Añadido para depuración
+                # Conexión a la base de datos
+                conn = sqlite3.connect('db.js')  #
+                cursor = conn.cursor()
+
+                # Inserta el tipo de playlist en la tabla
+                cursor.execute("INSERT INTO Playlist (Tipo) VALUES (?)", (tipo_playlist,))  # Asegúrate de que tipo_playlist sea un texto
+
+                # Guarda los cambios y cierra la conexión
+                conn.commit()
+                conn.close()
+                tipo_playlist= "" #reinicio
+        except requests.RequestException as e:
+            print("Error al conectar con el backend:", e)
+
+       
+        EscuchandoMusica = True
+        emociones_contador.clear()
+
       
-    elif emocion_dominante in ["sad", "fear"]:
-     print ("poner playlist alegre") #poner codigo para poner la musica, puedo hacer una función
-     PlayAlegre = True
-     #ver de pasarle esto a la base de datos para que ponga la musica 
-     requests.get("http://localhost:3000/cancion?playAlegre=true")
-     
-                        
-    EscuchandoMusica = True                    
-    emociones_contador.clear()
-            # Inicia un temporizador que tras 60 segundos detiene la musica
-    timer = threading.Timer(60.0, detener_musica)
-    timer.start()
-    return (EmocionAnt)
+        timer = threading.Timer(60.0, detener_musica)
+        timer.start()
+
 
 # Función para analizar emociones de la foto
 def AnalizarFotos():
