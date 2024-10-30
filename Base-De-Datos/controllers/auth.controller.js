@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 const registrar = async (req, res) => {
     const user = req.body;
     if (!user) {
-        return res.status(400).json({ message: "No hay ningun usuario" });
+        return res.status(400).json({ message: "No hay ningún usuario" });
     }
     if (!user.usuario || !user.nombre || !user.apellido || !user.pregunta || !user.contraseña) {
         return res.status(400).json({ message: "Hay 1 campo o más sin completar" });
@@ -13,7 +13,7 @@ const registrar = async (req, res) => {
     try {
         const usuarioExistente = await usuariosService.getUsuarioByUsuarios(user.usuario);
         if (usuarioExistente) {
-            return res.status(400).json({ message: "Ese nombre de usuario ya existe, por favor inserte otro" });
+            return res.status(400).json({ message: "Ese nombre de usuario ya existe, por favor ingrese otro" });
         }
         const hashedContra = await bcrypt.hash(user.contraseña, 10);
         user.contraseña = hashedContra;
@@ -32,11 +32,11 @@ const iniciodesesion = async (req, res) => {
     try {
         const user = await usuariosService.getUsuarioByUsuarios(usuario);
         if (!user) {
-            return res.status(400).json({ message: "No hay ningun usuario, por favor verifique sus datos" });
+            return res.status(400).json({ message: "No hay ningún usuario, por favor verifique sus credenciales" });
         }
         const contraseñaCorrecta = await bcrypt.compare(contraseña, user.contraseña);
         if (!contraseñaCorrecta) {
-            return res.status(400).json({ message: "Contraseña incorrecta, intente nuevamente" });
+            return res.status(400).json({ message: "Contraseña incorrecta, verifique sus credenciales" });
         }
         const token = jwt.sign({ id: user.id }, "Hola como estas", { expiresIn: "1h" });
         return res.status(200).json({ message: "Inicio de sesión exitoso", user, token });
@@ -55,7 +55,7 @@ const olvidastecontra = async (req, res) => {
     try {
         const user = await usuariosService.getUsuarioByUsuarios(usuario);
         if (!user) {
-            return res.status(400).json({ message: "No hay ningun usuario, por favor verifique sus datos" });
+            return res.status(400).json({ message: "No hay ningún usuario, por favor verifique sus credenciales" });
         }
 
         if (user.pregunta !== pregunta) {

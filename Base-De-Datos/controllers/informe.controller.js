@@ -14,7 +14,7 @@ export const guardarInforme = async (req, res) => {
             await informeService.crearInforme(usuario, texto);
             return res.status(200).send({message:"Informe del Paciente Guardado Correctamente"});
         } else {
-            return res.status(400).send({message:"Usuario no encontrado, verifique sus datos."});
+            return res.status(400).send({message:"Usuario no encontrado, verifique sus credenciales."});
         }
     } catch (error) {
         console.error("Error al guardar el informe:", error.message);

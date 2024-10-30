@@ -2,7 +2,7 @@ import cancionService from "../services/cancion.service.js";
 
 const cancionEmocion = async (req, res) => {
   try {
-    const { playRelajante, playAlegre } = req.query; // Leer parámetros desde la consulta
+    const { playRelajante, playAlegre } = req.query; 
     let cancion;
     console.log(playAlegre,playRelajante)
     if (playRelajante === 'true') {
