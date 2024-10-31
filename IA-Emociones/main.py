@@ -12,7 +12,6 @@ from deepface import DeepFace
 import threading
 import matplotlib.pyplot as plt
 import requests
-import sqlite3 #si saco lo de tipo_playlist esto lo puedo sacar también
 
 carpeta = "Fotos.Emociones"
 count = 0
@@ -31,6 +30,7 @@ emociones_totales ={}
 # Verificar si la carpeta existe, si no, crearla
 if not os.path.exists(carpeta):
     os.makedirs(carpeta)
+
 
 # Abrir la cámara
 cap = cv2.VideoCapture(0)  
@@ -133,24 +133,19 @@ def ManejarPlaylist(emocion_dominante):
     print("Emoción antes de reproducir música:", EmocionAnt)
 
     if not EscuchandoMusica:
-        tipo_playlist = ""
+    
         if emocion_dominante in ["disgust", "angry"]:
             print("Iniciando playlist relajante.")
             PlayRelajante = True
-           # tipo_playlist = "relajante"
 
         elif emocion_dominante in ["sad", "fear"]:
             print("Iniciando playlist alegre.")
             PlayAlegre = True
-            #tipo_playlist = "alegre"  
 
-        #try:
-            
             if PlayRelajante:
-                response = requests.post(
-                    "http://localhost:3000/emocion",
-                    params={"playRelajante": "true"}
-                )
+                url = "http://localhost:3000/emocion"
+                data={"playRelajante": "true"}
+                response = requests.post( url,json=data)
                 if response.status_code == 200:
                     print("Playlist relajante activada:", response.json())
                 else:
@@ -159,34 +154,16 @@ def ManejarPlaylist(emocion_dominante):
                 PlayRelajante = False #reinicio
 
             if PlayAlegre:
-                response = requests.post(
-                    "http://localhost:3000/emocion",
-                    params={"playAlegre": "true"}
-                )
+                url = "http://localhost:3000/emocion"
+                data={"playAlegre": "true"}
+                response = requests.post( url, json=data)
                 if response.status_code == 200:
                     print("Playlist alegre activada:", response.json())
                 else:
                     print("Error al activar la playlist alegre:", response.text)
 
                 PlayAlegre = False  #reinicio
-            
-            """if tipo_playlist != "": #aca intente pasarle el tipo, porque pasando lo de arriba a la base de datos le llegaba un null
-                print(f"Guardando tipo de playlist: {tipo_playlist}")  
-                # Conexión a la base de datos
-                conn = sqlite3.connect('db.js')  #
-                cursor = conn.cursor()
-
-                # Inserta el tipo de playlist en la tabla
-                cursor.execute("INSERT INTO Playlist (Tipo) VALUES (?)", (tipo_playlist,)) 
-
-                # Guarda los cambios y cierra la conexión
-                conn.commit()
-                conn.close()
-                tipo_playlist= "" #reinicio
-        except requests.RequestException as e:
-            print("Error al conectar con el backend:", e)
-             """
-       
+                
         EscuchandoMusica = True
         emociones_contador.clear()
 

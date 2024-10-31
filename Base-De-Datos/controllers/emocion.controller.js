@@ -6,6 +6,7 @@ const guardarEmocion = async (req, res) => {
 
     try {
         await emocionService.crearEmocion(tipo);
+        console.log(tipo)
         return res.status(200).send({ message: "Emoción guardada" });
     } catch (error) {
         console.error("Error al guardar la emoción:", error.message);
