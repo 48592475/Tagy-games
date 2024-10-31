@@ -142,27 +142,29 @@ def ManejarPlaylist(emocion_dominante):
             print("Iniciando playlist alegre.")
             PlayAlegre = True
 
-            if PlayRelajante:
-                url = "http://localhost:3000/emocion"
-                data={"playRelajante": "true"}
-                response = requests.post( url,json=data)
-                if response.status_code == 200:
-                    print("Playlist relajante activada:", response.json())
-                else:
-                    print("Error al activar la playlist relajante:", response.text)
+        if PlayRelajante:
+            url = "http://localhost:3000/emocion"
+            tipo = "playRelajante"
+            data = {"tipo": tipo} 
+            response = requests.post( url,json=data)  #le mando playRelajante
+            if response.status_code == 200:
+              print("Playlist relajante activada:", response.json())
+            else:
+                 print("Error al activar la playlist relajante:", response.text)
 
-                PlayRelajante = False #reinicio
+            PlayRelajante = False #reinicio
 
-            if PlayAlegre:
-                url = "http://localhost:3000/emocion"
-                data={"playAlegre": "true"}
-                response = requests.post( url, json=data)
-                if response.status_code == 200:
-                    print("Playlist alegre activada:", response.json())
-                else:
-                    print("Error al activar la playlist alegre:", response.text)
+        if PlayAlegre:
+          url = "http://localhost:3000/emocion"
+          tipo = "playAlegre"   #le mando playAlegre
+          data = {"tipo": tipo} 
+          response = requests.post( url, json=data)
+          if response.status_code == 200:
+             print("Playlist alegre activada:", response.json())
+          else:
+             print("Error al activar la playlist alegre:", response.text)
 
-                PlayAlegre = False  #reinicio
+          PlayAlegre = False  #reinicio
                 
         EscuchandoMusica = True
         emociones_contador.clear()
