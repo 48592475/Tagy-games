@@ -2,13 +2,13 @@ import cancionService from "../services/cancion.service.js";
 
 const cancionEmocion = async (req, res) => {
   try {
-    const { playRelajante, playAlegre } = req.query; 
+    const ultimaEmocion = await cancionService.ultimaEmocion();
+
     let cancion;
-    console.log(playAlegre,playRelajante)
-    if (playRelajante === 'true') {
+    if (ultimaEmocion === 'playRelajante') {
       cancion = await cancionService.cancionAleatoria(8, 13);
       return res.status(200).json({ emocion: 'relajante', cancion });
-    } else if (playAlegre === 'true') {
+    } else if (ultimaEmocion === 'playAlegre') {
       cancion = await cancionService.cancionAleatoria(1, 7); 
       return res.status(200).json({ emocion: 'alegre', cancion });
     } else {

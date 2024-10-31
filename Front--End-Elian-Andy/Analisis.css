@@ -20,6 +20,7 @@ h1 {
 }
 
 #mostrarInformes {
+    cursor: pointer;
     width: 752px;
     height: 135px;
     margin: 100px;
