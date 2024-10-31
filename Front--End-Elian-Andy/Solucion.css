@@ -51,7 +51,7 @@ body {
 }
 
 .imagen-problema {
-    width: 200px; /* Tamaño de la imagen */
+    width: 600px; /* Tamaño de la imagen */
     height: auto;
     margin: 0; /* Eliminar márgenes alrededor de la imagen */
 }
