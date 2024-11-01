@@ -78,23 +78,29 @@ body {
     display: block;
 }
 
-/* Botón de continuar */
-.contenedor-boton {
-    margin-top: 20px;
+.boton {
+    background-color: #6a35ff; /* Color de fondo púrpura */
+    color: white; /* Color del texto */
+    padding: 15px 40px; /* Espaciado interno */
+    font-size: 20px; /* Tamaño de fuente */
+    font-weight: bold; /* Texto en negrita */
+    border: none; /* Sin borde */
+    border-radius: 30px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Sombra del botón */
+    outline: none; /* Sin borde de enfoque */
+    text-decoration: none; /* Sin subrayado */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animación al hacer hover */
 }
 
-.boton-continuar {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #6200ea;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.boton:hover {
+    transform: scale(1.05); /* Aumenta el tamaño en hover */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4); /* Intensifica la sombra */
 }
 
-.boton-continuar:hover {
-    background-color: #3700b3;
+.boton:active {
+    transform: scale(0.98); /* Reduce ligeramente el tamaño al hacer clic */
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2); /* Sombra más tenue al presionar */
 }
 
 /* Media queries para responsividad */
