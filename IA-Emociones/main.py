@@ -123,7 +123,7 @@ def HacerInforme():
     # Reinicio las emociones para el próximo informe
     emociones_totales.clear()
 
-timer = threading.Timer(60.0, HacerInforme) # cada 60 segundo llamo a la funcion de hacer informe
+timer = threading.Timer(20.0, HacerInforme) # cada 20 segundos llamo a la funcion de hacer informe
 timer.start()
 def ManejarPlaylist(emocion_dominante):
     global EscuchandoMusica, PlayAlegre, PlayRelajante, EmocionAnt
