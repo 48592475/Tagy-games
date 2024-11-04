@@ -4,6 +4,9 @@
 # pip install tf-keras --user
 # pip install matplotlib --user
 # pip install requests
+# pip install fastapi uvicorn
+# para correr poner: uvicorn main:app --host 127.0.0.1 --port 8000 --reload
+
 import cv2
 import numpy as np
 import os
@@ -12,6 +15,25 @@ from deepface import DeepFace
 import threading
 import matplotlib.pyplot as plt
 import requests
+
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+# modelo para recibir el ID del usuario:
+app = FastAPI()
+
+class UserID(BaseModel):
+    user_id: int
+
+user_id_global = None
+
+@app.post("/process_id")
+async def process_id(user: UserID):
+    user_id = user.user_id
+    global user_id_global
+    user_id_global = user.user_id
+    return user_id_global
+
 
 carpeta = "Fotos.Emociones"
 count = 0
@@ -103,22 +125,24 @@ def HacerInforme():
     plt.close('all')  # Cerrar las figuras activas
     #pasarle el informe a la base de datos
      # Llamo a la API para guardar el informe en la base de datos
-    url = "http://localhost:3000/informe"  # URL backend
-    headers = {'Content-Type': 'application/json'}
     
-    payload = {
-        "usuario": "Prit",  #falta cambiar a variable
+    if user_id_global!= None:
+     url = "http://localhost:3000/informe"  # URL backend
+     headers = {'Content-Type': 'application/json'}
+    
+     payload = {
+        "usuario": user_id_global,  #falta cambiar a variable
         "texto": informe_texto  
-    }
+     }
 
-    try:
-        response = requests.get(url, json=payload, headers=headers)
+     try:
+        response = requests.get(url, json=payload, headers=headers) # hay que ver si hay que cambiar el .get por un .post
         if response.status_code == 200:
-            print("Informe enviado y guardado correctamente en la base de datos.")
+             print("Informe enviado y guardado correctamente en la base de datos.")
         else:
-            print(f"Error al enviar el informe: {response.status_code}, {response.text}")
-    except Exception as e:
-        print(f"Error en la solicitud HTTP para guardar el informe: {e}")
+             print(f"Error al enviar el informe: {response.status_code}, {response.text}")
+     except Exception as e:
+         print(f"Error en la solicitud HTTP para guardar el informe: {e}")
 
     # Reinicio las emociones para el próximo informe
     emociones_totales.clear()
