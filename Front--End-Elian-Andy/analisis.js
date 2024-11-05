@@ -1,18 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
     const mostrarInformes = document.getElementById("mostrarInformes");
-
     const codigoIngreso = prompt("Por favor, ingrese el código de ingreso:");
     if (codigoIngreso !== "1234") {
         alert("Código incorrecto. Acceso denegado.");
         return; 
     }
-    
     mostrarInformes.style.display = "block";
 
     mostrarInformes.addEventListener("click", function (event) {
         event.preventDefault();
-
         const token = localStorage.getItem("token");
+        console.log("Token en el frontend:", token);
+
         if (!token) {
             alert("No se encontró el token. Debe iniciar sesión primero.");
             return;
@@ -22,20 +21,28 @@ document.addEventListener("DOMContentLoaded", function () {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}` 
+                "Authorization": `Bearer ${token}`
             }
         })
         .then(response => {
-            console.log("response", response)
+            console.log("Response status:", response.status);
             if (!response.ok) {
-                throw new Error("Error al traer los informes",response);
+                return response.text().then(text => {
+                    try {
+                        const errorData = JSON.parse(text); 
+                        console.error("Error en la solicitud:", errorData);
+                        throw new Error(`Error ${response.status}: ${errorData.message || response.statusText}`);
+                    } catch (e) {
+                        console.error("Error en la solicitud:", text);
+                        throw new Error(`Error ${response.status}: ${text}`);
+                    }
+                });
             }
             return response.json();
         })
         .then(data => {
             const informesContainer = document.getElementById("informesContainer");
             informesContainer.innerHTML = ""; 
-
             data.forEach(informe => {
                 const informeElement = document.createElement("p");
                 informeElement.textContent = informe.texto; 
@@ -44,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => {
             alert(error.message);
-            console.error('Error:', error);
+            console.error("Error en la solicitud:", error);
         });
     });
 });

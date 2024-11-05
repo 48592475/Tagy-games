@@ -30,7 +30,9 @@ const crearInforme = async (usuario, texto) => {
     await client.end(); 
 };
 const obtenerInformes = async () => {
-    const resultados = await db.query("SELECT texto FROM informe"); 
+    const client = new Client(config);
+    await client.connect();
+    const resultados = await client.query("SELECT texto FROM informe"); 
     return resultados.rows; 
 };
 

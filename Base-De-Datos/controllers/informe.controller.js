@@ -3,10 +3,6 @@ import informeService from "../services/informe.service.js";
 export const guardarInforme = async (req, res) => {
     console.log(req.body);
     const { usuario, texto } = req.body; 
-    if (!usuario || !texto) {
-        return res.status(400).json({ message: "Hay campos sin completar" });
-    }
-
     try {
         const usuarioExistente = await informeService.getUsuarioByUsuarios(usuario);
         console.log(usuario, usuarioExistente)
