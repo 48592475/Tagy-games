@@ -1,18 +1,16 @@
 .information-childs {
     width: 900px;
-
 }
 
 #img1 {
-    margin-left: -40px; 
+    margin-left: -40px;
 }
 
-#img2{
+#img2 {
     padding-right: 180px;
     margin-top: 620px;
     rotate: 180deg;
     position: relative;
-    rotate: 180deg;
 }
 
 .container-form {
@@ -26,15 +24,13 @@
     cursor: pointer;
     width: 591px;
     height: 79px;
-    top: 624px;
-    left: 634px;
     border-radius: 45px;
     background-color: #BF1D79;
     font-size: 60px;
-    font-style: inter;
+    font-family: "Inter", sans-serif;
     color: #FFFFFF;
     text-align: center;
-    border-color: #BF1D79;
+    border: none;
 }
 
 body {
@@ -52,3 +48,34 @@ h3 {
     color: #a51767;
 }
 
+@media (max-width: 1536px) and (max-height: 864px) {
+    .information-childs {
+        width: 850px;
+    }
+
+    #img1 {
+        margin-left: -20px;
+    }
+
+    #img2 {
+        margin-top: 600px;
+        padding-right: 160px;
+    }
+
+    .container-form {
+        margin-left: 50px;
+    }
+
+    .btn {
+        width: 550px;
+        font-size: 55px;
+    }
+
+    h1 {
+        font-size: 85px;
+    }
+
+    h3 {
+        font-size: 28px;
+    }
+}
