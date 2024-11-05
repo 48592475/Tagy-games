@@ -3,14 +3,14 @@
 
 }
 
-#foto {
-    margin-left: 200px;
+#img1 {
+    margin-left: -40px; 
 }
 
 #img2{
-    margin-top: 790px;
+    padding-right: 160px;
+    margin-top: 620px;
     rotate: 180deg;
-    margin-left: 100px;
     position: relative;
     rotate: 180deg;
 }
@@ -19,17 +19,18 @@
     display: flex;
     align-items: center;
     text-align: center;
+    margin-left: 100px;
 }
 
 .btn {
     cursor: pointer;
-    width: 611px;
-    height: 99px;
-    top: 644px;
-    left: 654px;
+    width: 591px;
+    height: 79px;
+    top: 624px;
+    left: 634px;
     border-radius: 45px;
     background-color: #BF1D79;
-    font-size: 80px;
+    font-size: 60px;
     font-style: inter;
     color: #FFFFFF;
     text-align: center;
@@ -38,17 +39,16 @@
 
 body {
     display: flex;
-    position: relative;
+    overflow: hidden;
 }
 
 h1 {
-    font-size: 110px;
+    font-size: 90px;
     color: #a51767;
 }
 
 h3 {
-    font-size: 50px;
+    font-size: 30px;
     color: #a51767;
 }
-
 
