@@ -4,7 +4,6 @@ body {
     align-items: center;
     background: linear-gradient(180deg, #E07BB5 0%, #AC5B89 50%, #5A0D39 100%);
     padding-bottom: 200px;
-    overflow: hidden;
 }
 
 h1 {

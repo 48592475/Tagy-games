@@ -12,6 +12,16 @@ body{
 
 .book{
     margin: 100px;
-    
+}
+
+@media (max-width: 1536px) and (max-height: 864px) {
+    .information-childs {
+        width: 700px; 
+    }
+
+    .book {
+        margin-left: 250px;
+        margin-top: 250px;
+        }
 }
 
