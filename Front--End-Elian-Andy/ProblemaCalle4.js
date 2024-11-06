@@ -57,4 +57,27 @@ function toggleTextBox(id) {
         }, 10); 
     }
 }
+async function llamarAPIEmocion(playRelajante, playAlegre) {
+    try {
+        const query = `playRelajante=${playRelajante}&playAlegre=${playAlegre}`;
+        const response = await fetch(`http://localhost:3000/cancion?${query}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        });
+        
+        const data = await response.json();
+        console.log(data); 
 
+        if (response.ok) {
+            if (data.cancion) {
+                console.log(`Emoción: ${data.emocion}, Canción: ${data.cancion.titulo}`);
+            } else {
+                console.error('Canción no definida en la respuesta', data);
+            }
+        } else {
+            console.error('Error en la API:', data.message);
+        }
+    } catch (error) {
+        console.error('Error al llamar a la API:', error);
+    }
+}
