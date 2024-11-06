@@ -55,15 +55,17 @@ h3 {
 
     #img1 {
         margin-left: -30px; 
+
     }
 
     #img2 {
-        padding-right: 0px; 
-        margin-top: 500px; 
+        padding-right: 130px;
+        margin-left: -10px; 
+        margin-top: 560px; 
     }
 
     .container-form {
-        margin-left: 10px; 
+        margin-left: 100px; 
     }
 
     .btn {
