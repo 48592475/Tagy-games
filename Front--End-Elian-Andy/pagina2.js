@@ -55,9 +55,12 @@ function handleLoginSuccess(userId) {
     // Log para ver el nombre de usuario
     console.log(USERNAME);
 
-    // Realiza la solicitud GET con el nombre de usuario como parámetro de consulta
-    fetch(`http://127.0.0.1:8000/process_user?username=${USERNAME}`, {  // URL del backend FastAPI
-        method: "GET",
+    fetch("http://127.0.0.1:8000/process_user", {  // URL del backend FastAPI
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username: USERNAME }) // Envía el username en el cuerpo
     })
     .then(response => {
         if (!response.ok) {

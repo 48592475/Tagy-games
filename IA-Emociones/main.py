@@ -6,15 +6,11 @@
 # pip install requests
 # pip install fastapi uvicorn
 # para correr poner: python -m uvicorn main:app --host 127.0.0.1 --port 8000 --reload
-# creo que esto va antes de correr: cd .\IA-Emociones\
-import cv2
-import numpy as np
-import os
-import time
-from deepface import DeepFace
-import threading
-import matplotlib.pyplot as plt
-import requests
+#  esto va antes de correr: cd .\IA-Emociones\
+
+
+
+# fast api
 
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -27,14 +23,23 @@ class UserRequest(BaseModel):
 
 user_global = None
 
-@app.get("/process_user")
+@app.post("/process_user")
 async def process_user(username: str):
     global user_global
     user_global = username
     return {"status": "User processed", "username": user_global}
 
+# abrir subproceso
+import cv2
+import numpy as np
+import os
+import time
+from deepface import DeepFace
+import threading
+import matplotlib.pyplot as plt
+import requests
 
-
+activado = True
 carpeta = "Fotos.Emociones"
 count = 0
 
@@ -126,7 +131,7 @@ def HacerInforme():
     #pasarle el informe a la base de datos
      # Llamo a la API para guardar el informe en la base de datos
     
-    if user_global!= None:
+    if user_global is not None:
      url = "http://localhost:3000/informe"  # URL backend
      headers = {'Content-Type': 'application/json'}
     
@@ -136,7 +141,7 @@ def HacerInforme():
      }
 
      try:
-        response = requests.get(url, json=payload, headers=headers) # hay que ver si hay que cambiar el .get por un .post
+        response = requests.post(url, json=payload, headers=headers) # hay que ver si hay que cambiar el .get por un .post
         if response.status_code == 200:
              print("Informe enviado y guardado correctamente en la base de datos.")
         else:
@@ -283,7 +288,7 @@ if face_cascade.empty():
     print("Error: No se puede cargar el clasificador de cascada")
     exit()
 
-while True:
+while activado:
     ret, frame = cap.read()
     if not ret:
         print("Error: No se puede recibir frame ")
@@ -316,6 +321,7 @@ while True:
 
     if cv2.waitKey(1) == ord('q'):  # Para cerrar la cámara, presiona 'q'
         break
-
-cap.release()
-cv2.destroyAllWindows()
+    activado = False
+if activado == False:
+  cap.release()
+  cv2.destroyAllWindows()
