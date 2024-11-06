@@ -18,23 +18,23 @@ document.addEventListener("DOMContentLoaded", function () {
             pregunta: pregunta,
             contraseña: contraseña
         };
-        const token = localStorage.getItem('token');
+
         fetch("http://localhost:3000/auth/olvidastecontra", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(infoPersona)
         })
         .then(response => {
+            console.log('Response:', response);
             if (!response.ok) {  
-                throw new Error("Error al actualizar la contraseña"); 
+                throw new Error("Error al actualizar la contraseña. Estado: " + response.status); 
             }
             return response.json(); 
         })
         .then(data => {
-            console.log(data);
+            console.log('Data:', data);
             alert("Actualización de contraseña exitosa");
             window.location.href = "./pagina2.html";
         })

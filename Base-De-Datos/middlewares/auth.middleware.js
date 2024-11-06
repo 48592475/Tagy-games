@@ -15,8 +15,7 @@ export const verifyToken = async (req, res, next) => {
 
         console.log("Decoded token:", decoded);
 
-        // Verificar si el usuario existe en la base de datos
-        const user = await UsuariosService.obtenerUsuarioPorId(decoded.id); // Cambia esto según tu servicio
+        const user = await UsuariosService.obtenerUsuarioPorId(decoded.id); 
         if (!user) {
             return res.status(404).json({ message: "Usuario no encontrado, verifique sus credenciales." });
         }

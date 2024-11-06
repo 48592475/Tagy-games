@@ -9,7 +9,7 @@ import { verifyToken } from '../middlewares/auth.middleware.js';
 
 router.post("/registrar", authController.registrar); 
 router.post("/iniciodesesion", authController.iniciodesesion);
-router.post("/olvidastecontra", verifyToken, authController.olvidastecontra);
+router.post("/olvidastecontra", authController.olvidastecontra);
 
 export default router;
 
