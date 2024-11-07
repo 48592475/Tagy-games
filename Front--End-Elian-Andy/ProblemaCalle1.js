@@ -28,6 +28,12 @@ async function llamarAPIEmocion(playRelajante, playAlegre) {
         if (response.ok) {
             if (data.cancion) {
                 console.log(`Emoción: ${data.emocion}, Canción: ${data.cancion.titulo}`);
+                
+                // Seleccionar el elemento de audio y actualizar su fuente
+                const audioElement = document.getElementById('audioPlayer');
+                audioElement.src = data.cancion.alegres || data.cancion.relajantes;
+                audioElement.play();
+     
             } else {
                 console.error('Canción no definida en la respuesta', data);
             }
@@ -42,6 +48,7 @@ async function llamarAPIEmocion(playRelajante, playAlegre) {
 document.addEventListener('DOMContentLoaded', function() {
     llamarAPIEmocion(true, false);
 });
+
 
 document.getElementById('botonTextoProblema1').addEventListener('click', function() {
     toggleTextBox('textBox1');
