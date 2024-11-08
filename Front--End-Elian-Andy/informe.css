@@ -1,0 +1,52 @@
+/* Fondo con degradado fijo */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg, #E07BB5 0%, #AC5B89 50%, #5A0D39 100%);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    flex-direction: column;
+    color: #fff;
+}
+
+/* Estilo del botón */
+#mostrarInformes {
+    background-color: #fff;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#mostrarInformes:hover {
+    background-color: #504545;
+    transform: scale(1.05);
+}
+
+/* Contenedor para los informes */
+#informesContainer {
+    display: none; /* Inicialmente oculto */
+    margin-top: 20px;
+    max-width: 800px;    /* Máximo ancho en pantallas grandes */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semi-transparente */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    color: #333;
+}
+
+/* Estilo del texto dentro del contenedor de informes */
+#informesContainer p {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+}
