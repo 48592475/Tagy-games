@@ -18,9 +18,9 @@ import threading
 import matplotlib.pyplot as plt
 import requests
 
-
-# importacionesfast api
+# importaciones fast api
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 # modelo para recibir el ID del usuario:
@@ -29,41 +29,102 @@ app = FastAPI()
 class UserRequest(BaseModel):
     username: str
 
+#variables globales
 user_global = None
-
-@app.post("/process_user")
-async def process_user(request: UserRequest):
-    global user_global
-    user_global = request.username
-    return {"status": "User processed", "username": user_global}
-
-# abrir subproceso
-
 activado = True
 carpeta = "Fotos.Emociones"
 count = 0
-
 PlayRelajante = False
-PlayAlegre = False      #booleanos para activar la musica
-
+PlayAlegre = False
+EscuchandoMusica = False
+emociones_contador = {}
+emociones_totales = {}
 EmocionAnt = None
 EmocionDesp = None
 
-EscuchandoMusica = False
-# Inicializa un diccionario para contar las emociones
-emociones_contador = {}
-emociones_totales ={}
+faces = None
+frame = None
 
-# Verificar si la carpeta existe, si no, crearla
-if not os.path.exists(carpeta):
-    os.makedirs(carpeta)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+@app.post("/process_user")
+async def process_user(request: UserRequest):
+    print(request)
+    global user_global
+    user_global = request.username
+    #inicio el subproceso al recibir el usuario
+    threading.Thread(target=Subproceso_principal).start()
+    return {"status": "User processed", "username": user_global}
+
+# abrir subproceso
+def Subproceso_principal():
+    global activado, count, emociones_contador, emociones_totales, carpeta, PlayAlegre, PlayRelajante, EmocionAnt, EmocionDesp, EscuchandoMusica
+
+    # Verificar si la carpeta existe, si no, crearla
+    if not os.path.exists(carpeta):
+        os.makedirs(carpeta)
+
+    # Abrir la cámara
+    cap = cv2.VideoCapture(0)  
+    if not cap.isOpened():
+        print("Error: No se puede abrir la cámara")
+        exit()
+
+    # Importo el reconocedor de caras
+    cascade_path = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
+    face_cascade = cv2.CascadeClassifier(cascade_path)
+    # Bucle principal
+    inicio = time.time()
+    if face_cascade.empty():
+        print("Error: No se puede cargar el clasificador de cascada")
+        exit()
+
+    TimerInformes()  #función que a los 20 segundos llama a hacer un informe
+
+    while activado:
+        ret, frame = cap.read()
+        if not ret:
+            print("Error: No se puede recibir frame ")
+            break
 
 
-# Abrir la cámara
-cap = cv2.VideoCapture(0)  
-if not cap.isOpened():
-    print("Error: No se puede abrir la cámara")
-    exit()
+        if frame is None:
+            print("Error: Frame está vacío")
+            break
+
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=6, minSize=(50, 50))
+
+        for (x, y, w, h) in faces:  # Dibujo un rectángulo alrededor de las caras detectadas
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (103, 46, 1), 3)
+
+        # Verifica si han pasado 3 segundos
+        tiempo_actual = time.time()
+        tiempo_transcurrido = tiempo_actual - inicio
+
+        if tiempo_transcurrido >= 3:  # Si pasaron 3 segundos desde la última foto
+            nombre = 'Foto_auto_1.jpg'  # Nombre fijo para la foto
+            foto_tomada = TomarFoto(carpeta, nombre, faces, frame)
+
+            if foto_tomada is not None:
+                AnalizarFotos()  # Analiza la foto tomada solo si se detectó una cara
+
+            inicio = time.time()  # Reiniciar el contador de tiempo
+
+        cv2.imshow('frame', frame)
+
+        if cv2.waitKey(1) == ord('q'):  # Para cerrar la cámara, presiona 'q'
+            break
+        activado = False
+    if activado == False:
+     cap.release()
+     cv2.destroyAllWindows()
+
 
 def detener_musica():
     global EscuchandoMusica, EmocionDesp, PlayAlegre, PlayRelajante
@@ -78,7 +139,7 @@ def detener_musica():
     if foto_tomada is not None:
         # Analiza la emoción de la foto tomada
         analisis = DeepFace.analyze(img_path=foto_tomada, actions=["emotion"], enforce_detection=False)
-        
+       
         if 'dominant_emotion' in analisis[0]:
             face_confidence = analisis[0].get('face_confidence', 0)
             # Verifica que la confianza en la detección de la cara sea mayor a 0.3
@@ -90,10 +151,10 @@ def detener_musica():
                 EmocionDesp = "No detectada" # la foto no es precisa para determinar una emocion
         else:
             print("No se pudo detectar una emoción después de la música.")
-    
+   
     # Comparo la emoción antes y después de la música
     RendimientoMusica(EmocionAnt, EmocionDesp)
-    
+   
     return()
 
 def RendimientoMusica(EmocionAnt, EmocionDesp):
@@ -105,7 +166,10 @@ def RendimientoMusica(EmocionAnt, EmocionDesp):
      print(f"Emoción antes: {EmocionAnt}, Emoción después: {EmocionDesp}")
      EmocionAnt = None #actualizo para que despues funcione
      EmocionDesp = None #actualizo para que despues funcione
-
+ 
+def TimerInformes():
+ timer = threading.Timer(20.0, HacerInforme)
+ timer.start()
 
 def HacerInforme():
     global emociones_totales
@@ -130,11 +194,11 @@ def HacerInforme():
     plt.close('all')  # Cerrar las figuras activas
     #pasarle el informe a la base de datos
      # Llamo a la API para guardar el informe en la base de datos
-    
+   
     if user_global is not None:
      url = "http://localhost:3000/informe"  # URL backend
      headers = {'Content-Type': 'application/json'}
-    
+   
      payload = {
         "usuario": user_global,  #falta cambiar a variable
         "texto": informe_texto  
@@ -151,18 +215,16 @@ def HacerInforme():
 
     # Reinicio las emociones para el próximo informe
     emociones_totales.clear()
+    TimerInformes() #llamo el timer para que luego de 20 segundos se vuelva a hacer un informe
 
-timer = threading.Timer(20.0, HacerInforme) # cada 20 segundos llamo a la funcion de hacer informe
-timer.start()
 def ManejarPlaylist(emocion_dominante):
     global EscuchandoMusica, PlayAlegre, PlayRelajante, EmocionAnt
 
-    
     EmocionAnt = emocion_dominante
     print("Emoción antes de reproducir música:", EmocionAnt)
 
     if not EscuchandoMusica:
-    
+   
         if emocion_dominante in ["disgust", "angry"]:
             print("Iniciando playlist relajante.")
             PlayRelajante = True
@@ -174,7 +236,7 @@ def ManejarPlaylist(emocion_dominante):
         if PlayRelajante:
             url = "http://localhost:3000/emocion"
             tipo = "playRelajante"
-            data = {"tipo": tipo} 
+            data = {"tipo": tipo}
             response = requests.post( url,json=data)  #le mando playRelajante
             if response.status_code == 200:
               print("Playlist relajante activada:", response.json())
@@ -186,7 +248,7 @@ def ManejarPlaylist(emocion_dominante):
         if PlayAlegre:
           url = "http://localhost:3000/emocion"
           tipo = "playAlegre"   #le mando playAlegre
-          data = {"tipo": tipo} 
+          data = {"tipo": tipo}
           response = requests.post( url, json=data)
           if response.status_code == 200:
              print("Playlist alegre activada:", response.json())
@@ -194,14 +256,12 @@ def ManejarPlaylist(emocion_dominante):
              print("Error al activar la playlist alegre:", response.text)
 
           PlayAlegre = False  #reinicio
-                
+               
         EscuchandoMusica = True
         emociones_contador.clear()
-
-      
+     
         timer = threading.Timer(60.0, detener_musica)
         timer.start()
-
 
 # Función para analizar emociones de la foto
 def AnalizarFotos():
@@ -229,7 +289,7 @@ def AnalizarFotos():
                         emociones_contador[emocion_dominante] += 1
                     else:
                         emociones_contador[emocion_dominante] = 1
-                        
+                       
                     if emociones_contador[emocion_dominante] == 2:  #si detecto dos veces la misma emocion
                      print(f"La emoción '{emocion_dominante}' ha sido detectada por segunda vez.")
                      if emocion_dominante in ["disgust", "angry"] and not EscuchandoMusica:
@@ -246,14 +306,14 @@ def AnalizarFotos():
                          ManejarPlaylist(emocion_dominante)
                          emociones_contador.clear()
                          return
-                            
+                           
             else:
                 print("La confianza en la detección de la cara es demasiado baja.")
         else:
             print("No se detectó una cara en la foto.")
     except Exception as e:
         print(f"Ocurrió un error: {e}")
-        
+       
 # Función para tomar una foto y sobreescribir si es necesario
 def TomarFoto(carpeta, nombre, faces, frame):
     if len(faces) > 0:  # Si hay caras detectadas
@@ -261,67 +321,17 @@ def TomarFoto(carpeta, nombre, faces, frame):
             roi = frame[y:y+h, x:x+w]
             roi_resized = cv2.resize(roi, (600, 600))
             ubicacion = os.path.join(carpeta, nombre)
-            
+           
             # Elimina la foto existente antes de guardar la nueva
             if os.path.exists(ubicacion):
                 os.remove(ubicacion)
-            
+           
             # Guarda la nueva foto
             cv2.imwrite(ubicacion, roi_resized)
-            
+           
             # Imprime la ruta completa para verificar
             print(f"Se guardó en la carpeta: {os.path.abspath(ubicacion)} con el nombre {nombre}")
             return ubicacion  # Devuelve la ubicación de la foto tomada
     else:
         print("No se detectaron caras.")
         return None  # Devuelve None si no se detectan caras
-    
-    
-# Importo el reconocedor de caras
-cascade_path = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
-face_cascade = cv2.CascadeClassifier(cascade_path)
-
-# Bucle principal
-inicio = time.time()
-
-if face_cascade.empty():
-    print("Error: No se puede cargar el clasificador de cascada")
-    exit()
-
-while activado:
-    ret, frame = cap.read()
-    if not ret:
-        print("Error: No se puede recibir frame ")
-        break
-
-    if frame is None:
-        print("Error: Frame está vacío")
-        break
-
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=6, minSize=(50, 50))
-
-    for (x, y, w, h) in faces:  # Dibujo un rectángulo alrededor de las caras detectadas
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (103, 46, 1), 3)
-
-    # Verifica si han pasado 3 segundos
-    tiempo_actual = time.time()
-    tiempo_transcurrido = tiempo_actual - inicio
-
-    if tiempo_transcurrido >= 3:  # Si pasaron 3 segundos desde la última foto
-        nombre = 'Foto_auto_1.jpg'  # Nombre fijo para la foto
-        foto_tomada = TomarFoto(carpeta, nombre, faces, frame)
-
-        if foto_tomada is not None:
-            AnalizarFotos()  # Analiza la foto tomada solo si se detectó una cara
-
-        inicio = time.time()  # Reiniciar el contador de tiempo
-
-    cv2.imshow('frame', frame)
-
-    if cv2.waitKey(1) == ord('q'):  # Para cerrar la cámara, presiona 'q'
-        break
-    activado = False
-if activado == False:
-  cap.release()
-  cv2.destroyAllWindows()

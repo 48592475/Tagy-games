@@ -36,8 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
             if (token) {
                 localStorage.setItem("token", token);
                 alert("Inicio de sesión exitoso");
-                window.location.href = "./pagina4.html"; 
+
                 handleLoginSuccess(usuario);
+
+                window.location.href = "./pagina4.html"; 
+                
             } else {
                 throw new Error("No se recibió token");
             }
