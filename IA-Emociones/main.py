@@ -8,28 +8,7 @@
 # para correr poner: python -m uvicorn main:app --host 127.0.0.1 --port 8000 --reload
 #  esto va antes de correr: cd .\IA-Emociones\
 
-
-
-# fast api
-
-from fastapi import FastAPI
-from pydantic import BaseModel
-
-# modelo para recibir el ID del usuario:
-app = FastAPI()
-
-class UserRequest(BaseModel):
-    user_id: int
-
-user_global = None
-
-@app.post("/process_user")
-async def process_user(username: str):
-    global user_global
-    user_global = username
-    return {"status": "User processed", "username": user_global}
-
-# abrir subproceso
+# importaciones principales
 import cv2
 import numpy as np
 import os
@@ -38,6 +17,27 @@ from deepface import DeepFace
 import threading
 import matplotlib.pyplot as plt
 import requests
+
+
+# importacionesfast api
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+# modelo para recibir el ID del usuario:
+app = FastAPI()
+
+class UserRequest(BaseModel):
+    username: str
+
+user_global = None
+
+@app.post("/process_user")
+async def process_user(request: UserRequest):
+    global user_global
+    user_global = request.username
+    return {"status": "User processed", "username": user_global}
+
+# abrir subproceso
 
 activado = True
 carpeta = "Fotos.Emociones"

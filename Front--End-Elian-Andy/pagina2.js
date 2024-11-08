@@ -49,8 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 // Función para enviar el nombre de usuario a la IA
-function handleLoginSuccess(userId) {
-    let USERNAME = userId; // Asigna el userId como el nombre de usuario
+function handleLoginSuccess(usuario) {
+    let USERNAME = usuario; // Asigna el usuario como el nombre de usuario
 
     // Log para ver el nombre de usuario
     console.log(USERNAME);
