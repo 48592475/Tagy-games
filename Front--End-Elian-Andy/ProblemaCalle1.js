@@ -13,57 +13,51 @@ function toggleTextBox(id) {
     }
 }
 
-async function llamarAPIEmocion(playRelajante, playAlegre) {
-    try {
-        const query = `playRelajante=${playRelajante}&playAlegre=${playAlegre}`;
-        const response = await fetch(`http://localhost:3000/cancion?${query}`, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' }
-        });
+const videoElement = document.getElementById('videoPlayer');
+videoElement.volume = 0.5;
 
-        const data = await response.json();
-        console.log('Datos recibidos:', data);
+document.addEventListener('DOMContentLoaded', function () {
+    const consentimientoContainer = document.getElementById('consentimientoContainer');
+    const botonConsentimiento = document.getElementById('botonConsentimiento');
+    const videoElement = document.getElementById('videoPlayer');
+    const videoSource = document.getElementById('videoSource');
 
-        if (response.ok) {
-            if (data.cancion) {
-                console.log(`Emoción: ${data.emocion}, Canción: ${data.cancion.titulo}`);
+    botonConsentimiento.addEventListener('click', async function () {
+        try {
+            // Oculta el botón de consentimiento
+            consentimientoContainer.style.display = 'none';
+            videoElement.style.display = 'block'; // Muestra el video
 
-                const videoElement = document.getElementById('videoPlayer');
-                const videoSource = document.getElementById('videoSource'); 
+            // Llama a la API para obtener la URL del video
+            const query = `playRelajante=${false}&playAlegre=${true}`;
+            const response = await fetch(`http://localhost:3000/cancion?${query}`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            });
 
-                const videoUrl = playAlegre ? data.cancion.alegres : data.cancion.relajantes;
+            const data = await response.json();
+            console.log('Datos recibidos:', data);
+
+            if (response.ok && data.cancion) {
+                const videoUrl = data.cancion.alegres || data.cancion.relajantes;
                 console.log('URL seleccionada:', videoUrl);
 
                 if (videoUrl) {
                     videoSource.src = videoUrl;
-                    videoElement.load(); 
-
-                    videoElement.muted = true;
-
-                    await videoElement.play().catch(error => {
-                        console.error('No se pudo reproducir automáticamente:', error);
-                    });
-
-                    setTimeout(() => {
-                        videoElement.muted = false; 
-                    }, 500);  
+                    videoElement.load(); // Cargar el video
+                    await videoElement.play().catch(error => console.error('Error en reproducción:', error));
                 } else {
-                    console.error('URL del video no disponible para la emoción especificada');
+                    console.error('URL del video no disponible');
                 }
             } else {
-                console.error('Canción no definida en la respuesta', data);
+                console.error('Error en la API:', response.status, data.message);
             }
-        } else {
-            console.error('Error en la API:', data.message);
+        } catch (error) {
+            console.error('Error al llamar a la API:', error);
         }
-    } catch (error) {
-        console.error('Error al llamar a la API:', error);
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    llamarAPIEmocion(false, true); 
+    });
 });
+
 
 document.getElementById('botonTextoProblema1').addEventListener('click', function() {
     toggleTextBox('textBox1');

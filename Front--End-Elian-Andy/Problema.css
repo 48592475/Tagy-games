@@ -153,7 +153,13 @@ body {
     display: none;
 }
 
-
+#videoPlayer {
+    display: none; /* Oculta el video completamente */
+    width: 0;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+}
 
 .text-box {
     position: fixed;
