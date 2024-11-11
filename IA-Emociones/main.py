@@ -23,6 +23,13 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
+
+# Abrir la cámara
+cap = cv2.VideoCapture(0)  
+if not cap.isOpened():
+ print("Error: No se puede abrir la cámara")    
+ exit()
+
 # modelo para recibir el ID del usuario:
 app = FastAPI()
 
@@ -57,23 +64,17 @@ async def process_user(request: UserRequest):
     print(request)
     global user_global
     user_global = request.username
-    #inicio el subproceso al recibir el usuario
-    threading.Thread(target=Subproceso_principal).start()
+    #inicio el subproceso al recibir el usuario, pasandole la cámara como argumento
+    threading.Thread(target=Subproceso_principal, args=(cap,)).start()
     return {"status": "User processed", "username": user_global}
 
 # abrir subproceso
-def Subproceso_principal():
+def Subproceso_principal(cap):
     global activado, count, emociones_contador, emociones_totales, carpeta, PlayAlegre, PlayRelajante, EmocionAnt, EmocionDesp, EscuchandoMusica
 
     # Verificar si la carpeta existe, si no, crearla
     if not os.path.exists(carpeta):
         os.makedirs(carpeta)
-
-    # Abrir la cámara
-    cap = cv2.VideoCapture(0)  
-    if not cap.isOpened():
-        print("Error: No se puede abrir la cámara")
-        exit()
 
     # Importo el reconocedor de caras
     cascade_path = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
@@ -85,46 +86,46 @@ def Subproceso_principal():
         exit()
 
     TimerInformes()  #función que a los 20 segundos llama a hacer un informe
+    try:
+        while activado:
+            ret, frame = cap.read()
+            if not ret:
+                print("Error: No se puede recibir frame")
+                break
 
-    while activado:
-        ret, frame = cap.read()
-        if not ret:
-            print("Error: No se puede recibir frame ")
-            break
+            if frame is None:
+                print("Error: Frame está vacío")
+                break
 
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=6, minSize=(50, 50))
 
-        if frame is None:
-            print("Error: Frame está vacío")
-            break
+            for (x, y, w, h) in faces:
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (103, 46, 1), 3)
 
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=6, minSize=(50, 50))
+            tiempo_actual = time.time()
+            tiempo_transcurrido = tiempo_actual - inicio
 
-        for (x, y, w, h) in faces:  # Dibujo un rectángulo alrededor de las caras detectadas
-            cv2.rectangle(frame, (x, y), (x + w, y + h), (103, 46, 1), 3)
+            if tiempo_transcurrido >= 3:
+                nombre = 'Foto_auto_1.jpg'
+                foto_tomada = TomarFoto(carpeta, nombre, faces, frame)
 
-        # Verifica si han pasado 3 segundos
-        tiempo_actual = time.time()
-        tiempo_transcurrido = tiempo_actual - inicio
+                if foto_tomada is not None:
+                    AnalizarFotos()
 
-        if tiempo_transcurrido >= 3:  # Si pasaron 3 segundos desde la última foto
-            nombre = 'Foto_auto_1.jpg'  # Nombre fijo para la foto
-            foto_tomada = TomarFoto(carpeta, nombre, faces, frame)
+                inicio = time.time()
 
-            if foto_tomada is not None:
-                AnalizarFotos()  # Analiza la foto tomada solo si se detectó una cara
+            cv2.imshow('frame', frame)
 
-            inicio = time.time()  # Reiniciar el contador de tiempo
+            if cv2.waitKey(1) == ord('q'):
+                activado = False
+                break
 
-        cv2.imshow('frame', frame)
-
-        if cv2.waitKey(1) == ord('q'):  # Para cerrar la cámara, presiona 'q'
-            activado = False
-            break
+    finally:
+        # Este bloque se ejecutará cuando termine el bucle o si hay un error
+        cap.release()  # Libera la cámara
+        cv2.destroyAllWindows()  # Cierra las ventanas de OpenCV
             
-    if activado == False:
-     cap.release()
-     cv2.destroyAllWindows()
 
 
 def detener_musica():
