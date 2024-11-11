@@ -105,6 +105,7 @@ body {
     height: auto;
 }
 
+
 .botonImagenSolucion1, .botonImagenSolucion2, .botonImagenSolucion3 {
     display: flex;
     margin: 0 auto;
