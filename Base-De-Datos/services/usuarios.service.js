@@ -53,7 +53,6 @@ const actualizarContraseña = async (usuario, contraseña) => {
     }
 };
 
-// Nuevo método para obtener usuario por ID
 const obtenerUsuarioPorId = async (id) => {
     const client = new Client(config);
     await client.connect();
