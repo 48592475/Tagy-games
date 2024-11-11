@@ -9,6 +9,17 @@
     <link rel="stylesheet" href="Problema.css">
 </head>
 <body>
+
+
+    <div id="consentimientoContainer" style="text-align: center; padding: 20px;">
+        <button id="botonConsentimiento">Reproducir Video</button>
+    </div>
+    <video id="videoPlayer" controls style="display: none;">
+        <source id="videoSource" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+    </video>
+    
+        
     <div class="contenedor-principal">
         <div class="situacion">
             <div class="elementos-principales">
@@ -18,7 +29,7 @@
                             <img src="Imagenes/lectura.png" alt="lectura" class="icono-boton">
                         </a>
                         <div id="textBox2" class="text-box hidden">
-                            Este es el texto de lectura correspondiente al problema.
+                            Quiere ir al baño, pero no quiere pedir permiso
                         </div>
                     </div>
                 </div>
@@ -35,11 +46,12 @@
                     </div>
                     <div class="contenedor-icono">
                         <a class="botonTextoProblemaCalle1" id="botonTextoProblema1" href="javascript:void(0);">
-                            <div id="textBox1" class="text-box hidden">
-                                Este es el texto correspondiente al problema.
-                            </div>    
                             <img src="Imagenes/texto.png" alt="Audio" class="icono-boton">
                         </a>
+                            <div id="textBox1" class="text-box hidden">
+                                Un chico se encuentra en momento de clases, y mientras su profesora explica tiene ganas de ir al baño
+                                ¿Qué hace?
+                            </div>    
                     </div>
                 </div>
             </div>
@@ -53,7 +65,7 @@
                             <img src="Imagenes/lectura.png" alt="Audio" class="icono-boton">
                         </a>
                         <div id="textBox3" class="text-box hidden">
-                            Este es el texto de lectura de la solución 1.
+                            Le pide ir al baño
                         </div>
                     </div>
                 </div>
@@ -70,11 +82,11 @@
                     </div>
                     <div class="contenedor-icono">
                         <a class="botonTextoSolucion1" id="botonTextoSolucion1" href="javascript:void(0);">
-                            <div id="textBox4" class="text-box hidden">
-                                Este es el texto de la solución 1.
-                            </div>    
                             <img src="Imagenes/texto.png" alt="texto" class="icono-boton">
                         </a>
+                            <div id="textBox4" class="text-box hidden">
+                                Levanta la mano y le solicita ir al baño 
+                            </div>    
                     </div>
                 </div>
             </div>
@@ -86,7 +98,7 @@
                             <img src="Imagenes/lectura.png" alt="lectura" class="icono-boton">
                         </a>
                         <div id="textBox5" class="text-box hidden">
-                            Este es el texto de lectura de la solución 2.
+                            No le pide
                         </div>
                     </div>
                 </div>
@@ -106,7 +118,7 @@
                             <img src="Imagenes/texto.png" alt="Audio" class="icono-boton">
                         </a>
                         <div id="textBox6" class="text-box hidden">
-                            Este es el texto de la solución 2.
+                            No le pide, y se queda en la clase prestando atención
                         </div>
                     </div>
                 </div>
@@ -119,7 +131,7 @@
                             <img src="Imagenes/lectura.png" alt="Audio" class="icono-boton">
                         </a>
                         <div id="textBox7" class="text-box hidden">
-                            Este es el texto de lectura de la solución 3.
+                            Le dice a la amiga que le diga por él
                         </div>
                     </div>
                 </div>
@@ -139,8 +151,7 @@
                             <img src="Imagenes/texto.png" alt="Audio" class="icono-boton">
                         </a>
                         <div id="textBox8" class="text-box hidden">
-                            Este es el texto de la solución 3.
-                        </div>
+                        Le pide a su compañera que levante la mano, para que le diga a la profesora de que tiene ganas de ir al baño su amigo.                        </div>
                     </div>
                 </div>
             </div>

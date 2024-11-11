@@ -65,7 +65,7 @@ body {
     align-items: center;
     flex-direction: row;
     padding: 10px;
-    max-width: 260px;
+    max-width: 350px;
     flex-grow: 1;
     margin-bottom: 15px; 
 }
@@ -154,7 +154,7 @@ body {
 }
 
 #videoPlayer {
-    display: none; /* Oculta el video completamente */
+    display: none;
     width: 0;
     height: 0;
     opacity: 0;
