@@ -45,7 +45,7 @@ const actualizarContraseña = async (usuario, contraseña) => {
             WHERE usuario = $1
         `;
         await client.query(queryUpdate, [usuario, contraseña]);
-        return true; // No es necesario comprobar la longitud aquí ya que el UPDATE no devuelve filas
+        return true; 
     } catch (error) {
         throw error;
     } finally {
@@ -53,4 +53,21 @@ const actualizarContraseña = async (usuario, contraseña) => {
     }
 };
 
-export default { getUsuarioByUsuarios, createUsuario, actualizarContraseña };
+// Nuevo método para obtener usuario por ID
+const obtenerUsuarioPorId = async (id) => {
+    const client = new Client(config);
+    await client.connect();
+    try {
+        const { rows } = await client.query(
+            "SELECT * FROM usuario WHERE id = $1",
+            [id]
+        );
+        return rows.length > 0 ? rows[0] : null;
+    } catch (error) {
+        throw error;
+    } finally {
+        await client.end();
+    }
+};
+
+export default { getUsuarioByUsuarios, createUsuario, actualizarContraseña, obtenerUsuarioPorId };

@@ -6,7 +6,7 @@ import {verifyToken } from "../middlewares/auth.middleware.js";
 
 
 
-router.get("/informe", informeController.obtenerInforme); 
+router.get("/informe", verifyToken, informeController.obtenerInforme); 
 router.post("/informe", informeController.guardarInforme); 
 
 export default router;
