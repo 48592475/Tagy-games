@@ -119,8 +119,9 @@ def Subproceso_principal():
         cv2.imshow('frame', frame)
 
         if cv2.waitKey(1) == ord('q'):  # Para cerrar la cámara, presiona 'q'
+            activado = False
             break
-        activado = False
+            
     if activado == False:
      cap.release()
      cv2.destroyAllWindows()
