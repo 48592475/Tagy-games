@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => {
             console.log('Response:', response);
             if (!response.ok) {  
-                throw new Error("Error al actualizar la contraseña. Estado: " + response.status); 
+                throw new Error("Error al actualizar la contraseña. Porfavor verifique que sus credenciales conincidan"); 
             }
             return response.json(); 
         })
