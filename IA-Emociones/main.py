@@ -86,51 +86,56 @@ async def process_user(request: UserRequest):
 def Subproceso_principal(cap):
     global activado, count, emociones_contador, emociones_totales, carpeta, PlayAlegre, PlayRelajante, EmocionAnt, EmocionDesp, EscuchandoMusica
 
-    # Bucle principal
-    inicio = time.time()
-    
-    TimerInformes()  #función que a los 20 segundos llama a hacer un informe
     try:
-        while activado:
-            ret, frame = cap.read()
-            if not ret:
-                print("Error: No se puede recibir frame")
-                break
+        # Bucle principal
+        inicio = time.time()
+        
+        #TimerInformes()  #función que a los 20 segundos llama a hacer un informe
+        try:
+            while activado:
+                ret, frame = cap.read()
+                if not ret:
+                    print("Error: No se puede recibir frame")
+                    break
 
-            if frame is None:
-                print("Error: Frame está vacío")
-                break
+                if frame is None:
+                    print("Error: Frame está vacío")
+                    break
 
-            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=6, minSize=(50, 50))
+                gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+                faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=6, minSize=(50, 50))
 
-            for (x, y, w, h) in faces:
-                cv2.rectangle(frame, (x, y), (x + w, y + h), (103, 46, 1), 3)
+                for (x, y, w, h) in faces:
+                    cv2.rectangle(frame, (x, y), (x + w, y + h), (103, 46, 1), 3)
 
-            tiempo_actual = time.time()
-            tiempo_transcurrido = tiempo_actual - inicio
+                tiempo_actual = time.time()
+                tiempo_transcurrido = tiempo_actual - inicio
 
-            if tiempo_transcurrido >= 3:
-                nombre = 'Foto_auto_1.jpg'
-                foto_tomada = TomarFoto(carpeta, nombre, faces, frame)
+                if tiempo_transcurrido >= 3:
+                    nombre = 'Foto_auto_1.jpg'
+                    foto_tomada = TomarFoto(carpeta, nombre, faces, frame)
 
-                if foto_tomada is not None:
-                    AnalizarFotos()
+                    if foto_tomada is not None:
+                        AnalizarFotos()
 
-                inicio = time.time()
+                    inicio = time.time()
+                
+                TimerInformes()  #función que a los 20 segundos llama a hacer un informe
+                #cv2.imshow('frame', frame)
+                key = cv2.waitKey(1) & 0xFF
+                if key == ord('q'):
+                    print("cerrando")
+                    activado = False
+                    break
+        except Exception as e:
+            print(e)
+        finally:
+            # Este bloque se ejecutará cuando termine el bucle o si hay un error
+            cap.release()  # Libera la cámara
+            #cv2.destroyAllWindows()  # Cierra las ventanas de OpenCV
+    except Exception as e:
+        print(e)
 
-            #cv2.imshow('frame', frame)
-            key = cv2.waitKey(1) & 0xFF
-            if key == ord('q'):
-                print("cerrando")
-                activado = False
-                break
-
-    finally:
-        # Este bloque se ejecutará cuando termine el bucle o si hay un error
-        cap.release()  # Libera la cámara
-        cv2.destroyAllWindows()  # Cierra las ventanas de OpenCV
-            
 
 
 def detener_musica():
@@ -204,7 +209,7 @@ def HacerInforme():
     plt.title('Emociones y cuantas veces fueron detectadas')
     #plt.show()
     plt.savefig('informe_emociones.png')  # guardo como png el informe
-    plt.close('all')  # Cerrar las figuras activas
+    #plt.close('all')  # Cerrar las figuras activas
     #pasarle el informe a la base de datos
      # Llamo a la API para guardar el informe en la base de datos
    
@@ -229,7 +234,7 @@ def HacerInforme():
     # Reinicio las emociones para el próximo informe
     emociones_totales.clear()
     temporizador_activo = False  # Reseteo el temporizador
-    TimerInformes() #llamo el timer para que luego de 20 segundos se vuelva a hacer un informe
+    #TimerInformes() #llamo el timer para que luego de 20 segundos se vuelva a hacer un informe
 
 def ManejarPlaylist(emocion_dominante):
     global EscuchandoMusica, PlayAlegre, PlayRelajante, EmocionAnt
