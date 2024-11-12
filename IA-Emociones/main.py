@@ -30,6 +30,8 @@ if not cap.isOpened():
  print("Error: No se puede abrir la cámara")    
  exit()
 
+temporizador_activo = False  #variable global para solucionar problemas con timers
+
 # modelo para recibir el ID del usuario:
 app = FastAPI()
 
@@ -52,6 +54,18 @@ EmocionDesp = None
 faces = None
 frame = None
 
+# Verificar si la carpeta existe, si no, crearla
+if not os.path.exists(carpeta):
+    os.makedirs(carpeta)
+
+# Importo el reconocedor de caras
+cascade_path = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
+face_cascade = cv2.CascadeClassifier(cascade_path)
+
+if face_cascade.empty():
+        print("Error: No se puede cargar el clasificador de cascada")
+        exit()
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -72,19 +86,9 @@ async def process_user(request: UserRequest):
 def Subproceso_principal(cap):
     global activado, count, emociones_contador, emociones_totales, carpeta, PlayAlegre, PlayRelajante, EmocionAnt, EmocionDesp, EscuchandoMusica
 
-    # Verificar si la carpeta existe, si no, crearla
-    if not os.path.exists(carpeta):
-        os.makedirs(carpeta)
-
-    # Importo el reconocedor de caras
-    cascade_path = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
-    face_cascade = cv2.CascadeClassifier(cascade_path)
     # Bucle principal
     inicio = time.time()
-    if face_cascade.empty():
-        print("Error: No se puede cargar el clasificador de cascada")
-        exit()
-
+    
     TimerInformes()  #función que a los 20 segundos llama a hacer un informe
     try:
         while activado:
@@ -115,9 +119,10 @@ def Subproceso_principal(cap):
 
                 inicio = time.time()
 
-            cv2.imshow('frame', frame)
-
-            if cv2.waitKey(1) == ord('q'):
+            #cv2.imshow('frame', frame)
+            key = cv2.waitKey(1) & 0xFF
+            if key == ord('q'):
+                print("cerrando")
                 activado = False
                 break
 
@@ -129,35 +134,38 @@ def Subproceso_principal(cap):
 
 
 def detener_musica():
-    global EscuchandoMusica, EmocionDesp, PlayAlegre, PlayRelajante
-    EscuchandoMusica = False
-    print("Deteniendo la música después de 60 segundos.")
-    PlayRelajante = False
-    PlayAlegre = False
-    #conectar con back o front para que detengan la musica
-    # Saco una nueva foto para ver la emocion al terminar la musica
-    nombre = 'Foto_auto_1.jpg'
-    foto_tomada = TomarFoto(carpeta, nombre, faces, frame)  # saco la foto
-    if foto_tomada is not None:
-        # Analiza la emoción de la foto tomada
-        analisis = DeepFace.analyze(img_path=foto_tomada, actions=["emotion"], enforce_detection=False)
-       
-        if 'dominant_emotion' in analisis[0]:
-            face_confidence = analisis[0].get('face_confidence', 0)
-            # Verifica que la confianza en la detección de la cara sea mayor a 0.3
-            if face_confidence > 0.3: # si hay la suficiente confianza
-                EmocionDesp = analisis[0]['dominant_emotion']
-                print(f"Emoción después de la música: {EmocionDesp}, Confianza en la detección de la cara: {face_confidence:.2f}")
+    global EscuchandoMusica, EmocionDesp, PlayAlegre, PlayRelajante, temporizador_activo
+    if not temporizador_activo:  # Solo permitir que se ejecute si no hay otro temporizador activo
+        EscuchandoMusica = False
+        print("Deteniendo la música después de 60 segundos.")
+        PlayRelajante = False
+        PlayAlegre = False
+        #conectar con back o front para que detengan la musica
+        # Saco una nueva foto para ver la emocion al terminar la musica
+        nombre = 'Foto_auto_1.jpg'
+        foto_tomada = TomarFoto(carpeta, nombre, faces, frame)  # saco la foto
+        if foto_tomada is not None:
+            # Analiza la emoción de la foto tomada
+            analisis = DeepFace.analyze(img_path=foto_tomada, actions=["emotion"], enforce_detection=False)
+        
+            if 'dominant_emotion' in analisis[0]:
+                face_confidence = analisis[0].get('face_confidence', 0)
+                # Verifica que la confianza en la detección de la cara sea mayor a 0.3
+                if face_confidence > 0.3: # si hay la suficiente confianza
+                    EmocionDesp = analisis[0]['dominant_emotion']
+                    print(f"Emoción después de la música: {EmocionDesp}, Confianza en la detección de la cara: {face_confidence:.2f}")
+                else:
+                    print(f"Confianza en la detección de la cara demasiado baja: {face_confidence:.2f}")
+                    EmocionDesp = "No detectada" # la foto no es precisa para determinar una emocion
             else:
-                print(f"Confianza en la detección de la cara demasiado baja: {face_confidence:.2f}")
-                EmocionDesp = "No detectada" # la foto no es precisa para determinar una emocion
-        else:
-            print("No se pudo detectar una emoción después de la música.")
-   
-    # Comparo la emoción antes y después de la música
-    RendimientoMusica(EmocionAnt, EmocionDesp)
-   
-    return()
+                print("No se pudo detectar una emoción después de la música.")
+    
+        # Comparo la emoción antes y después de la música
+        RendimientoMusica(EmocionAnt, EmocionDesp)
+        
+        # Marcar como que el temporizador ya está activo
+        temporizador_activo = True
+        return()
 
 def RendimientoMusica(EmocionAnt, EmocionDesp):
     if EmocionAnt is None or EmocionDesp is None:
@@ -170,11 +178,14 @@ def RendimientoMusica(EmocionAnt, EmocionDesp):
      EmocionDesp = None #actualizo para que despues funcione
  
 def TimerInformes():
- timer = threading.Timer(20.0, HacerInforme)
- timer.start()
+ global temporizador_activo
+ if not temporizador_activo:  # Solo iniciar si no hay temporizador activo
+     timer_Informe = threading.Timer(20.0, HacerInforme)
+     timer_Informe.start()
+     temporizador_activo = True
 
 def HacerInforme():
-    global emociones_totales
+    global emociones_totales, temporizador_activo
     if not emociones_totales:
         print("No hay datos de emociones para generar un informe.")
         return
@@ -217,6 +228,7 @@ def HacerInforme():
 
     # Reinicio las emociones para el próximo informe
     emociones_totales.clear()
+    temporizador_activo = False  # Reseteo el temporizador
     TimerInformes() #llamo el timer para que luego de 20 segundos se vuelva a hacer un informe
 
 def ManejarPlaylist(emocion_dominante):
@@ -243,7 +255,7 @@ def ManejarPlaylist(emocion_dominante):
             if response.status_code == 200:
               print("Playlist relajante activada:", response.json())
             else:
-                 print("Error al activar la playlist relajante:", response.text)
+                print("Error al activar la playlist relajante:", response.text)
 
             PlayRelajante = False #reinicio
 
@@ -255,7 +267,7 @@ def ManejarPlaylist(emocion_dominante):
           if response.status_code == 200:
              print("Playlist alegre activada:", response.json())
           else:
-             print("Error al activar la playlist alegre:", response.text)
+              print("Error al activar la playlist alegre:", response.text)
 
           PlayAlegre = False  #reinicio
                
@@ -318,7 +330,7 @@ def AnalizarFotos():
        
 # Función para tomar una foto y sobreescribir si es necesario
 def TomarFoto(carpeta, nombre, faces, frame):
-    if len(faces) > 0:  # Si hay caras detectadas
+    if faces is not None and len(faces) > 0:  # Si hay caras detectadas
         for (x, y, w, h) in faces:
             roi = frame[y:y+h, x:x+w]
             roi_resized = cv2.resize(roi, (600, 600))
