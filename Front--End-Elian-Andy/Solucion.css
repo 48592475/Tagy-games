@@ -65,6 +65,10 @@ body {
     z-index: 1000;
     text-align: center;
     transition: all 0.3s ease-in-out;
+    font-family: 'Comic Sans MS', sans-serif; 
+    font-size: 22px; 
+    text-transform: uppercase; 
+    font-weight: bold; 
 }
 
 .text-box.expanded {
