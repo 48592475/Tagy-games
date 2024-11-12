@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .notebook {
+    width: 800px;
+    height: 650px;
+    background: url('Imagenes/LibroCalle.png') no-repeat center center;
+    background-size: contain; 
+    padding: 20px;
+    position: relative;
+    text-align: center;
+  }
+  
+  
+  .notebook h1 {
+    font-size: 24px;
+    color: white;
+    margin-bottom: 20px;
+  }
+  
+  .buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+  }
+  
+  .button-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn {
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .number {
+    font-size: 16px;
+    color: black;
+    margin-top: 10px;
+  }
+  

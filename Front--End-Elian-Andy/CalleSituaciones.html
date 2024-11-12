@@ -1,19 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./Imagenes/Logo.png" type="image/x-icon">
-    <title>TODAS LAS SITUACIONES DE CALLE</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layout Calle</title>
+  <link rel="stylesheet" href="CalleSituaciones.css">
 </head>
 <body>
-    <!-- Enlaces para cada situación de calle -->
-    <a class="SituacionCalle1" href="ProblemaCalle1.html" onclick="reproducirVideo('URL_DEL_VIDEO_1')">Calle1</a>
-    <a class="SituacionCalle1" href="ProblemaCalle2.html" onclick="reproducirVideo('URL_DEL_VIDEO_2')">Calle2</a>
-    <a class="SituacionCalle1" href="ProblemaCalle3.html" onclick="reproducirVideo('URL_DEL_VIDEO_3')">Calle3</a>
-    <a class="SituacionCalle1" href="ProblemaCalle4.html" onclick="reproducirVideo('URL_DEL_VIDEO_4')">Calle4</a>
-
-    <script src="CallesSituaciones.js"></script>
+  <div class="container">
+    <div class="notebook">
+      <div class="buttons">
+        <div class="button-item">
+          <button class="btn" id="btn1">
+            <img src="/path/to/your/image1.png" alt="Imagen 1">
+          </button>
+          <span class="number">1</span>
+        </div>
+        <div class="button-item">
+          <button class="btn" id="btn2">
+            <img src="/path/to/your/image2.png" alt="Imagen 2">
+          </button>
+          <span class="number">2</span>
+        </div>
+        <div class="button-item">
+          <button class="btn" id="btn3">
+            <img src="/path/to/your/image3.png" alt="Imagen 3">
+          </button>
+          <span class="number">3</span>
+        </div>
+        <div class="button-item">
+          <button class="btn" id="btn4">
+            <img src="/path/to/your/image4.png" alt="Imagen 4">
+          </button>
+          <span class="number">4</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
