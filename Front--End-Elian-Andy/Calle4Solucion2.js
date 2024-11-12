@@ -13,10 +13,10 @@ function toggleTextBox(id) {
     }
 }
 
-document.getElementById('botontextoSolucion1calle1').addEventListener('click', function() {
+document.getElementById('botontextosolucion1calle1').addEventListener('click', function() {
     toggleTextBox('textBox9');
 });
 
-document.getElementById('botonlecturaSolucion1calle1').addEventListener('click', function() {
+document.getElementById('botonlecturasolucion1calle1').addEventListener('click', function() {
     toggleTextBox('textBox10');
 });
