@@ -1,44 +1,46 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; 
-    margin: 0;
-}
+@media (max-width: 1536px) and (max-height: 864px) {
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; 
+        margin: 0;
+    }
 
-.Formulario {
-    position: relative; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+    .Formulario {
+        position: relative; 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
-.Formulario img {
-    width: 100%; 
-    height: auto;
-}
+    .Formulario img {
+        width: 100%; 
+        height: auto;
+    }
 
-.SituacionCalle1 {
-    position: absolute;
-    background-color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: #000;
-    text-decoration: none;
-    font-weight: bold;
-}
+    .SituacionCalle1 {
+        position: absolute;
+        background-color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        color: #000;
+        text-decoration: none;
+        font-weight: bold;
+    }
 
-.SituacionCalle1:nth-child(2) {
-    margin-right: 520px;
-    margin-bottom: 370px;
-}
+    .SituacionCalle1:nth-child(2) {
+        margin-right: 520px;
+        margin-bottom: 370px;
+    }
 
-.SituacionCalle1:nth-child(3) {
-    margin-left: 450px;
-    margin-bottom: 350px;
-}
+    .SituacionCalle1:nth-child(3) {
+        margin-left: 450px;
+        margin-bottom: 350px;
+    }
 
-.SituacionCalle1:nth-child(4) {
-    margin-bottom: 100px;
+    .SituacionCalle1:nth-child(4) {
+        margin-bottom: 100px;
+    }
 }
