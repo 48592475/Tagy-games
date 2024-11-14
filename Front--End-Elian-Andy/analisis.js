@@ -1,16 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
-    mostrarInformes.style.display = "block";
+    const mostrarInformes = document.getElementById("mostrarInformes");
+    const informesContainer = document.getElementById("informesContainer");
+    const token = localStorage.getItem("token");
+    console.log("Token en el frontend:", token);
 
-    mostrarInformes.addEventListener("click", function (event) {
-        event.preventDefault();
-        const token = localStorage.getItem("token");
-        console.log("Token en el frontend:", token);
+    if (!token) {
+        alert("No se encontró el token. Debe iniciar sesión primero.");
+        mostrarInformes.disabled = true; // Desactiva el botón
+        return;
+    }
 
-        if (!token) {
-            alert("No se encontró el token. Debe iniciar sesión primero.");
-            return;
-        }
-
+    mostrarInformes.addEventListener("click", function () {
         fetch("http://localhost:3000/informe", {
             method: "GET",
             headers: {
@@ -19,32 +19,23 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         })
         .then(response => {
-            console.log("Response status:", response.status);
             if (!response.ok) {
-                return response.text().then(text => {
-                    try {
-                        const errorData = JSON.parse(text); 
-                        console.error("Error en la solicitud:", errorData);
-                        throw new Error(`Error ${response.status}: ${errorData.message || response.statusText}`);
-                    } catch (e) {
-                        console.error("Error en la solicitud:", text);
-                        throw new Error(`Error ${response.status}: ${text}`);
-                    }
-                });
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
             }
             return response.json();
         })
         .then(data => {
-            const informesContainer = document.getElementById("informesContainer");
-            informesContainer.innerHTML = ""; 
+            informesContainer.innerHTML = ""; // Limpia el contenedor
             data.forEach(informe => {
-                const informeElement = document.createElement("p");
-                informeElement.textContent = informe.texto; 
-                informesContainer.appendChild(informeElement);
+                // Crea un div para cada informe
+                const informeDiv = document.createElement("div");
+                informeDiv.classList.add("informe-box"); // Añade clase para estilo
+                informeDiv.textContent = informe.texto; // Agrega el texto del informe
+                informesContainer.appendChild(informeDiv);
             });
         })
         .catch(error => {
-            alert(error.message);
+            alert("Error en la solicitud: " + error.message);
             console.error("Error en la solicitud:", error);
         });
     });

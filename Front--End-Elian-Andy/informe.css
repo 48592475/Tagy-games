@@ -31,7 +31,25 @@ body {
     background-color: #504545;
     transform: scale(1.05);
 }
+#informesContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
 
+.informe-box {
+    width: 80%;
+    max-width: 400px;
+    height: calc(65vh / 3 - 70px); /* Ajusta para que quepan tres informes verticalmente */
+    border: 2px solid #ccc;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow-y: auto; /* Permite desplazar si el texto es largo */
+}
 /* Contenedor para los informes */
 #informesContainer {
     display: none; /* Inicialmente oculto */

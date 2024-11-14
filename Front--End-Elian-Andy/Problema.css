@@ -109,6 +109,7 @@ body {
     display: flex;
     margin: 0 auto;
     justify-content: center;    
+    cursor: pointer;
 }
 
 .icono-boton {
@@ -183,4 +184,16 @@ body {
 
 .text-box.expanded {
     display: block;
+}
+.botonAudioSolucion2 {
+    cursor: pointer;
+}
+.botonAudioSolucion1 {
+    cursor: pointer;
+}
+.botonAudioProblemaCalle1 {
+    cursor: pointer;
+}
+.botonAudioSolucion3 {
+    cursor: pointer;
 }

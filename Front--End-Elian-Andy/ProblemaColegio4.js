@@ -17,9 +17,17 @@ function toggleTextBox(id) {
         }, 10); 
     }
 }
-
 const videoElement = document.getElementById('videoPlayer');
 videoElement.volume = 0.5;
+document.querySelectorAll('[data-audio]').forEach(botonAudio => {
+    botonAudio.addEventListener('click', function(event) {
+        event.preventDefault(); 
+        const audioUrl = botonAudio.getAttribute('data-audio');
+        const audio = new Audio(audioUrl);
+        audio.play().catch(error => console.error('Error al reproducir el audio:', error));
+    });
+});
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const consentimientoContainer = document.getElementById('consentimientoContainer');
