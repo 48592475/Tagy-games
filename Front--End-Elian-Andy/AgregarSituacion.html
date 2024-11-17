@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./Imagenes/Logo.png" type="image/x-icon">
+    <title>Agregar Situación</title>
+    <link rel="stylesheet" href="StyleAgregarSituacion.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Agregar Nueva Situación</h1>
+        <form id="agregarSituacionForm">
+            <section>
+                <h2>Situación</h2>
+                <div class="input-group">
+                    <label for="imagenSituacion">Imagen:</label>
+                    <input type="file" id="imagenSituacion" accept="image/*">
+                    <img id="previewImagenSituacion" class="preview-img" alt="Vista previa" />
+                </div>
+                <div class="input-group">
+                    <label for="textoSituacion">Texto:</label>
+                    <textarea id="textoSituacion" placeholder="Escribe el texto de la situación"></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="textoFacilSituacion">Texto Fácil:</label>
+                    <textarea id="textoFacilSituacion" placeholder="Escribe el texto fácil"></textarea>
+                </div>
+                <div class="input-group">
+                    <label>Audio:</label>
+                    <button type="button" id="grabarAudioSituacion">Grabar</button>
+                    <audio id="previewAudioSituacion" controls></audio>
+                </div>
+            </section>
+
+            <section>
+                <h2>Soluciones</h2>
+                <div id="solucionesContainer">
+                    <!-- Repetible para cada solución -->
+                    <div class="solucion">
+                        <h3>Solución A</h3>
+                        <div class="input-group">
+                            <label for="imagenSolucionA">Imagen:</label>
+                            <input type="file" id="imagenSolucionA" accept="image/*">
+                            <img id="previewImagenSolucionA" class="preview-img" alt="Vista previa" />
+                        </div>
+                        <div class="input-group">
+                            <label for="textoSolucionA">Texto:</label>
+                            <textarea id="textoSolucionA" placeholder="Escribe el texto de la solución"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="textoFacilSolucionA">Texto Fácil:</label>
+                            <textarea id="textoFacilSolucionA" placeholder="Escribe el texto fácil"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>Audio:</label>
+                            <button type="button" id="grabarAudioSolucionA">Grabar</button>
+                            <audio id="previewAudioSolucionA" controls></audio>
+                        </div>
+                    </div>
+                    <!-- Repetir para Solución B y C -->
+                </div>
+            </section>
+
+            <button type="submit">Guardar Situación</button>
+        </form>
+    </div>
+    <script src="ScriptAgregarSituacion.js"></script>
+</body>
+</html>
