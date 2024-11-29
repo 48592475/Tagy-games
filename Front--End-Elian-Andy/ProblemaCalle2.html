@@ -1,160 +1,49 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./Imagenes/Logo.png" type="image/x-icon">
     <title>Tagy Games</title>
-
-    <link rel="stylesheet" href="Problema.css">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div id="consentimientoContainer" style="text-align: center; padding: 20px;">
-        <button id="botonConsentimiento">Reproducir Video</button>
-    </div>
-    <video id="videoPlayer" controls style="display: none;">
-        <source id="videoSource" type="video/mp4">
-        Tu navegador no soporta el elemento de video.
-    </video>
-    <div class="contenedor-principal">
-        <div class="situacion">
-            <div class="elementos-principales">
-                <div class="grupo-iconos">
-                    <div class="contenedor-icono">
-                        <a class="botonLecturaProblemaCalle1" id="botonLecturaProblema1" href="javascript:void(0);">
-                            <img src="Imagenes/lectura.png" alt="lectura" class="icono-boton">
-                        </a>
-                        <div id="textBox2" class="text-box hidden">
-                            Está lloviendo y quiero salir a caminar.¿Como voy?
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="imagen-principal">
-                    <a class="botonImagenProblemaCalle1" href=""></a>
-                    <img src="Imagenes/imagenProblema2calle2.png" alt="Audio" class="icono-boton">
-                </div>
-                <div class="grupo-iconos">
-                    <div class="contenedor-icono">
-                        <a class="botonAudioProblemaCalle1" id="botonAudioProblemaCalle1" data-audio="/Front--End-Elian-Andy/Audios/Situacion 2 calle.m4a">
-                            <img src="Imagenes/audio.png" alt="Audio" class="icono-boton">
-                        </a>
-                    </div>
-                    <div class="contenedor-icono">
-                        <a class="botonTextoProblemaCalle1" id="botonTextoProblema1" href="javascript:void(0);">
-                            <div id="textBox1" class="text-box hidden">
-                                Es un dia muy lluvioso y con viento, pero quiero salir. ¿Como voy?
-                            </div>    
-                            <img src="Imagenes/texto.png" alt="Audio" class="icono-boton">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="posibles-respuestas">
-            <div class="respuesta">
-                <div class="grupo-izquierda">
-                    <div class="contenedor-icono">
-                        <a class="botonLecturaSolucion1" id="botonLecturaSolucion1" href="javascript:void(0);">
-                            <img src="Imagenes/lectura.png" alt="Audio" class="icono-boton">
-                        </a>
-                        <div id="textBox3" class="text-box hidden">
-                            Salis cubierto asi no te pasa nada.
-                        </div>
-                    </div>
-                </div>
-                <div class="imagen-principal">
-                    <a class="botonImagenSolucion1" href="Calle2Solucion1.html">
-                        <img src="Imagenes/imagen1calle2.png" alt="imagen" class="icono-boton">
-                    </a>
-                </div>
-                <div class="grupo-derecha">
-                    <div class="contenedor-icono">
-                        <a class="botonAudioSolucion1" id="botonAudioSolucion1" data-audio="/Front--End-Elian-Andy//Audios/Opcion A (1).m4a">
-                            <img src="Imagenes/audio.png" alt="Audio" class="icono-boton">
-                        </a>
-                    </div>
-                    <div class="contenedor-icono">
-                        <a class="botonTextoSolucion1" id="botonTextoSolucion1" href="javascript:void(0);">
-                            <div id="textBox4" class="text-box hidden">
-                                Salgo con paraguas y con rompe viento asi no me mojo.
-                            </div>    
-                            <img src="Imagenes/texto.png" alt="texto" class="icono-boton">
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="respuesta">
-                <div class="grupo-izquierda">
-                    <div class="contenedor-icono">
-                        <a class="botonLecturaSolucion2" id="botonLecturaSolucion2" href="javascript:void(0);">
-                            <img src="Imagenes/lectura.png" alt="lectura" class="icono-boton">
-                        </a>
-                        <div id="textBox5" class="text-box hidden">
-                            Salis sin proteccion y te mojas.
-                        </div>
-                    </div>
-                </div>
-                <div class="imagen-principal">
-                    <a class="botonImagenSolucion2" href="Calle2Solucion2.html">
-                        <img src="Imagenes/imagen2calle2.png" alt="Imagen" class="icono-boton">
-                    </a>
-                </div>
-                <div class="grupo-derecha">
-                    <div class="contenedor-icono">
-                        <a class="botonAudioSolucion2" id="botonAudioSolucion2" data-audio="/Front--End-Elian-Andy/Audios/Opcion B (1).m4a">
-                            <img src="Imagenes/audio.png" alt="Audio" class="icono-boton">
-                        </a>
-                    </div>
-                    <div class="contenedor-icono">
-                        <a class="botonTextoSolucion2" id="botonTextoSolucion2" href="javascript:void(0);">
-                            <img src="Imagenes/texto.png" alt="Audio" class="icono-boton">
-                        </a>
-                        <div id="textBox6" class="text-box hidden">
-                            Salgo sin paraguas y sin rompeviento, totalmente descubierto.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="respuesta">
-                <div class="grupo-izquierda">
-                    <div class="contenedor-icono">
-                        <a class="botonLecturaSolucion3" id="botonLecturaSolucion3" href="javascript:void(0);">
-                            <img src="Imagenes/lectura.png" alt="Audio" class="icono-boton">
-                        </a>
-                        <div id="textBox7" class="text-box hidden">
-                            Te quedas en tu casa relajandote.
-                        </div>
-                    </div>
-                </div>
-                <div class="imagen-principal">
-                    <a class="botonImagenSolucion3" href="Calle2Solucion3.html">
-                        <img src="Imagenes/imagen3calle2.png" alt="Audio" class="icono-boton">
-                    </a>
-                </div>
-                <div class="grupo-derecha">
-                    <div class="contenedor-icono">
-                        <a class="botonAudioSolucion3" id="botonAudioSolucion3" data-audio="/Front--End-Elian-Andy/Audios/Opcion C (1).m4a">
-                            <img src="Imagenes/audio.png" alt="Audio" class="icono-boton">
-                        </a>
-                    </div>
-                    <div class="contenedor-icono">
-                        <a class="botonTextoSolucion3" id="botonTextoSolucion3" href="javascript:void(0);">
-                            <img src="Imagenes/texto.png" alt="Audio" class="icono-boton">
-                        </a>
-                        <div id="textBox8" class="text-box hidden">
-                            Mejor me quedo en casa, porque llueve y prefiero no mojarme.
+    <div class="container">
+        <!-- Imagen decorativa -->
+        <img src="./Group 5.png" id="gruop5" alt="Decoración">
+        
+        <!-- Formulario principal -->
+        <div class="Fondo-formulario">
+            <div class="formulario">        
+                <div class="form-information">    
+                    <div class="information-childs">  
+                        <h1>LOGIN</h1>
+                        <form>
+                            <div class="username">
+                                <input type="text" placeholder="Ingrese su usuario" id="UsuarioInicio">
+                            </div>
+                            <div class="username">
+                                <input type="password" placeholder="Ingresa su contraseña" id="ContraseñaInicio">
+                            </div>
+                            <button type="button" class="butom" id="buttonLogin">ENTRAR</button>
+                        </form>
+                        <a class="butomm" href="Pagina5.html" id="Olvidaste">¿Olvidaste la contraseña?</a>
+                        <div class="container-form">
+                            <div class="form-information">
+                                <div class="info-childs">
+                                    <h3 id="nocuenta">¿No tienes cuenta?</h3>
+                                    <a class="button" href="Pagina3.html" id="Crear">Crear cuenta</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="ProblemaCalle2.js"></script>
+    <script src="pagina2.js"></script>
 </body>
+
 </html>
