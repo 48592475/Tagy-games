@@ -1,9 +1,11 @@
 .information-childs {
     width: 900px;
+    display: flex;
 }
 
 #img1 {
     margin-left: -40px;
+    display: flex;
 }
 
 #img2 {
@@ -11,6 +13,7 @@
     margin-top: 620px;
     rotate: 180deg;
     position: relative;
+    display: flex;
 }
 
 .container-form {
@@ -31,6 +34,7 @@
     color: #FFFFFF;
     text-align: center;
     border: none;
+    display: flex;
 }
 
 body {
@@ -41,11 +45,13 @@ body {
 h1 {
     font-size: 90px;
     color: #a51767;
+    display: flex;
 }
 
 h3 {
     font-size: 30px;
     color: #a51767;
+    display: flex;
 }
 
 @media (max-width: 1536px) and (max-height: 864px) {
@@ -55,13 +61,14 @@ h3 {
 
     #img1 {
         margin-left: -30px; 
-
+        display: flex;
     }
 
     #img2 {
         padding-right: 100px;
         margin-left: -10px; 
         margin-top: 450px; 
+        display: flex;
     }
 
     .container-form {
@@ -72,14 +79,17 @@ h3 {
         width: 400px; 
         font-size: 40px; 
         height: 60px; 
+        display: flex;
     }
 
     h1 {
         font-size: 60px; 
+        display: flex;
     }
 
     h3 {
         font-size: 30px; 
+        display: flex;
     }
     
     * {
