@@ -1,26 +1,73 @@
-.information-childs {
-    width: 900px;
-    display: flex;
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-#img1 {
-    margin-left: -40px;
+/* Body styling */
+body {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4; /* Fondo neutral */
+    font-family: "Inter", sans-serif;
+    overflow: hidden;
 }
 
-#img2 {
-    padding-right: 180px;
-    margin-top: 620px;
-    rotate: 180deg;
+/* Main container */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Espaciado entre los elementos */
     position: relative;
-    display: flex;
 }
 
-.container-form {
+/* Decorative images */
+.img1, .img2 {
+    width: 420px;
+    height: 335px;
+}
+
+.img1 {
+    transform: rotate(0deg); /* Sin rotar */
+}
+
+.img2 {
+    transform: rotate(180deg); /* Rotada */
+    margin-top: 20px; /* Espaciado entre contenido y decoración inferior */
+}
+
+/* Content section */
+.content {
     display: flex;
+    flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-left: 100px;
+    gap: 20px;
+}
+
+.logo {
+    width: 250px;
+    height: 130px;
+}
+
+/* Headings */
+h1 {
+    font-size: 90px;
+    color: #a51767;
+}
+
+h3 {
+    font-size: 30px;
+    color: #a51767;
+}
+
+/* Button */
+.btn-link {
+    text-decoration: none;
 }
 
 .btn {
@@ -30,69 +77,40 @@
     border-radius: 45px;
     background-color: #BF1D79;
     font-size: 60px;
-    font-family: "Inter", sans-serif;
     color: #FFFFFF;
-    text-align: center;
     border: none;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-body {
-    display: flex;
-    overflow: hidden;
+.btn:hover {
+    background-color: #a51767;
 }
 
-h1 {
-    font-size: 90px;
-    color: #a51767;
-    display: flex;
-}
-
-h3 {
-    font-size: 30px;
-    color: #a51767;
-    display: flex;
-}
-
-@media (max-width: 1536px) and (max-height: 864px) {
-    .information-childs {
-        width: 700px; 
+/* Responsive Design */
+@media (max-width: 768px) {
+    .img1, .img2 {
+        width: 300px;
+        height: 250px;
     }
 
-    #img1 {
-        margin-left: -30px; 
-        display: flex;
-    }
-
-    #img2 {
-        padding-right: 100px;
-        margin-left: -10px; 
-        margin-top: 450px; 
-        display: flex;
-    }
-
-    .container-form {
-        margin-left: 120px; 
-    }
-
-    .btn {
-        width: 400px; 
-        font-size: 40px; 
-        height: 60px; 
-        display: flex;
+    .logo {
+        width: 200px;
+        height: 100px;
     }
 
     h1 {
-        font-size: 60px; 
-        display: flex;
+        font-size: 60px;
     }
 
     h3 {
-        font-size: 30px; 
-        display: flex;
+        font-size: 20px;
     }
-    
-    * {
-        margin-left : -27px;
+
+    .btn {
+        width: 400px;
+        height: 60px;
+        font-size: 40px;
     }
 }
