@@ -1,7 +1,7 @@
 # instalaciones necesarias (se hacen por consola):
 # pip install opencv-python
 # pip install deepface --user
-# pip install tf-keras --user
+# pip install tensorflow --user                          antes era: pip install tf-keras --user  , pero no hace falta instalar keras por separado ya que tensorflow lo incluye, probar en compu de ort.
 # pip install matplotlib --user
 # pip install requests
 # pip install fastapi uvicorn
